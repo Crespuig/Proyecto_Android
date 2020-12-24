@@ -1,16 +1,16 @@
-package com.example.proyecto_android.ui.home;
+package com.example.proyecto_android.model;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class InicioViewModel extends ViewModel {
+public class MapaViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public InicioViewModel() {
+    public MapaViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Inicio Fragment");
+        mText.setValue("Mapa fragment");
     }
 
     public LiveData<String> getText() {

@@ -1,4 +1,4 @@
-package com.example.proyecto_android;
+package com.example.proyecto_android.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,8 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.example.proyecto_android.R;
 
 public class InicioActivity extends AppCompatActivity {
 
