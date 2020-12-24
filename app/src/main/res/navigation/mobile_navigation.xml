@@ -9,17 +9,17 @@
         android:id="@+id/nav_home"
         android:name="com.example.proyecto_android.fragments.InicioFragment"
         android:label="@string/menu_inicio"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_inicio" />
 
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.proyecto_android.fragments.ListaFragment"
         android:label="@string/menu_lista"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_lista" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.proyecto_android.fragments.MapaFragment"
         android:label="@string/menu_mapa"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_mapa" />
 </navigation>
