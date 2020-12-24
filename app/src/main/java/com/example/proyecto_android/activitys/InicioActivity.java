@@ -24,10 +24,10 @@ public class InicioActivity extends AppCompatActivity {
         Animation animacion1 = AnimationUtils.loadAnimation(this, R.anim.desplazamiento_arriba);
         Animation animacion2 = AnimationUtils.loadAnimation(this, R.anim.desplazamiento_abajo);
 
-        //TextView deTextView = findViewById(R.id.vankioTextView);
+        ImageView logoImageLetras = findViewById(R.id.logoImageLetras);
         ImageView logoImageView = findViewById(R.id.logoImageView);
 
-        //deTextView.setAnimation(animacion2);
+        logoImageLetras.setAnimation(animacion2);
         logoImageView.setAnimation(animacion1);
 
         new Handler().postDelayed(new Runnable() {

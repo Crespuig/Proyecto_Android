@@ -23,7 +23,7 @@ public class ListaFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel = ViewModelProviders.of(this).get(ListaViewModel.class);
         View root = inflater.inflate(R.layout.fragment_lista, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
+        final TextView textView = root.findViewById(R.id.lista_monumentos);
         galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
