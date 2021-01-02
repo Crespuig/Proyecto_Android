@@ -2,16 +2,62 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.proyecto_android.fragments.ListaFragment">
 
-    <TextView
-        android:id="@+id/lista_monumentos"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewCiutat"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="240dp"
+        app:cardCornerRadius="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageCardViewCiutat"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/ciutatdelesarts" />
+
+        <TextView
+            android:id="@+id/textCardViewCiutat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="10dp"
+            android:text="Ciutat de les arts i les ciències" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewCiutat">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageCardViewCatedral"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/catedral_valencia" />
+
+        <TextView
+            android:id="@+id/textCardViewCatedral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="10dp"
+            android:text="Catedral de València" />
+
+    </androidx.cardview.widget.CardView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
