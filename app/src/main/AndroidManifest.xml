@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activitys.LoginActivity"></activity>
-        <activity android:name=".activitys.InicioActivity">
+        <activity
+            android:name=".activitys.LoginActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".activitys.InicioActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +24,8 @@
         <activity
             android:name=".activitys.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>

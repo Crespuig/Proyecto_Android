@@ -11,10 +11,10 @@
         android:background="@color/colorPrimary"
         android:padding="8dp"
         android:gravity="center"
-        android:src="@drawable/ic_baseline_monetization"/>
+        />
     
     <TextView
-        android:id="@+id/textDialogoMovimientos"
+        android:id="@+id/textDialogoMonumentos"
         android:layout_margin="42dp"
         android:gravity="center"
         android:textSize="24sp"
