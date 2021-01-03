@@ -1,34 +1,86 @@
 package com.example.proyecto_android.fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.adapters.ListaMonumentosAdapter;
 import com.example.proyecto_android.model.InicioViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class InicioFragment extends Fragment {
+public class InicioFragment extends Fragment /*implements AdapterView.OnItemClickListener*/ {
 
     private InicioViewModel homeViewModel;
+    private ImageButton btnLista;
+    ConstraintLayout constraintLayout;
+    ListaFragment listaFragment;
+    InicioFragment inicioFragment;
 
+    @SuppressLint("ResourceType")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(InicioViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_inicio, container, false);
+        View view = inflater.inflate(R.layout.fragment_inicio, container, false);
         //final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+
+        constraintLayout = (ConstraintLayout) view.findViewById(R.layout.fragment_inicio);
+        btnLista = view.findViewById(R.id.btnLista);
+
+
+        return view;
+    }
+
+    public void cambiaFragment(int id, Fragment fragment) {
+        //Sustituye un fragment por otro
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(id, fragment)
+                //.addToBackStack(fragment.getTag())
+                .commit();
+    }
+
+
+    /*@Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        btnLista.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                //textView.setText(s);
+            public void onClick(View view) {
+                cambiaFragment(R.id.contenedor, listaFragment);
             }
         });
-        return root;
+
+    }*/
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        FragmentTransaction transaction = null;
+        switch (item.getItemId()){
+            case R.id.btnLista:
+                transaction.replace(R.id.contenedor, listaFragment);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
+
 }
