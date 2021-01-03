@@ -16,4 +16,8 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="botonAcceder" parent="@style/Widget.AppCompat.Button">
+        <item name="android:background">@drawable/boton_acceder</item>
+    </style>
+
 </resources>

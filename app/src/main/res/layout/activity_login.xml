@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.proyecto_android.activitys.LoginActivity"
-    android:background="@drawable/imagen_login3">
+    android:background="@drawable/imagen_login">
 
     <EditText
         android:id="@+id/passworAnterior"
@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.698" />
+        app:layout_constraintVertical_bias="0.099" />
 
     <EditText
         android:id="@+id/passwordNuevo"
@@ -41,12 +41,12 @@
 
     <Button
         android:id="@+id/btnAcceder"
+        style="@style/botonAcceder"
         android:layout_width="260dp"
         android:layout_height="54dp"
+        android:background="@drawable/ovalo"
         android:backgroundTint="@color/colorPrimary"
-        android:gravity="center_horizontal"
         android:text="Acceder"
-        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,7 +54,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.994" />
+        app:layout_constraintVertical_bias="0.516"/>
 
     <TextView
         android:id="@+id/olvidar"
