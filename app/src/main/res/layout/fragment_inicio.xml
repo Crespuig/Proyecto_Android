@@ -6,18 +6,164 @@
     android:layout_height="match_parent"
     tools:context="com.example.proyecto_android.fragments.InicioFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <ImageButton
+        android:id="@+id/btnLista"
+        android:layout_width="118dp"
+        android:layout_height="123dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnlista"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_horizontal" />
+        app:layout_constraintVertical_bias="0.495" />
+
+    <ImageButton
+        android:id="@+id/btnClima"
+        android:layout_width="118dp"
+        android:layout_height="123dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnclima"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.322" />
+
+    <ImageButton
+        android:id="@+id/btnFav"
+        android:layout_width="118dp"
+        android:layout_height="123dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnfav"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.696"
+        app:layout_constraintStart_toEndOf="@+id/btnClima"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.322" />
+
+    <ImageButton
+        android:id="@+id/btnTransporte"
+        android:layout_width="118dp"
+        android:layout_height="123dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btntransporte"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.256" />
+
+    <ImageButton
+        android:id="@+id/btnEstadisticas"
+        android:layout_width="118dp"
+        android:layout_height="123dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnestadisticas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.696"
+        app:layout_constraintStart_toEndOf="@+id/btnTransporte"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.256" />
+
+    <ImageButton
+        android:id="@+id/btnMapa"
+        android:layout_width="118dp"
+        android:layout_height="123dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnmapa"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.696"
+        app:layout_constraintStart_toEndOf="@+id/btnLista"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.495" />
+
+    <TextView
+        android:id="@+id/textBtnLista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="4dp"
+        android:text="LISTA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLista" />
+
+    <TextView
+        android:id="@+id/textBtnMapa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginRight="116dp"
+        android:text="MAPA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMapa" />
+
+    <TextView
+        android:id="@+id/textBtnClima"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:text="CLIMA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnClima" />
+
+    <TextView
+        android:id="@+id/textBtnFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="96dp"
+        android:layout_marginRight="96dp"
+        android:text="FAVORITOS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFav" />
+
+    <TextView
+        android:id="@+id/textBtnTransporte"
+        android:layout_width="96dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
+        android:text="TRANSPORTE"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTransporte" />
+
+    <TextView
+        android:id="@+id/textBtnEstadisticas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="84dp"
+        android:layout_marginRight="84dp"
+        android:text="ESTADÏSTICAS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEstadisticas" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

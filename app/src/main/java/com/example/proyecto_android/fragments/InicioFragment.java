@@ -19,16 +19,14 @@ public class InicioFragment extends Fragment {
 
     private InicioViewModel homeViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(InicioViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        homeViewModel = ViewModelProviders.of(this).get(InicioViewModel.class);
         View root = inflater.inflate(R.layout.fragment_inicio, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
+        //final TextView textView = root.findViewById(R.id.text_home);
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                //textView.setText(s);
             }
         });
         return root;
