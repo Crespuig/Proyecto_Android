@@ -5,37 +5,13 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context="com.example.proyecto_android.fragments.ListaFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewCiutat"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        app:cardCornerRadius="5dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardBackgroundColor="#E2E2E2"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        android:layout_height="match_parent"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageCardViewCiutat"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/ciutatdelesarts" />
-
-        <TextView
-            android:id="@+id/textCardViewCiutat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="10dp"
-            android:text="Ciutat de les arts i les ciències" />
-
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
