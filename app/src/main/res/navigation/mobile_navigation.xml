@@ -22,4 +22,9 @@
         android:name="com.example.proyecto_android.fragments.MapaFragment"
         android:label="@string/menu_mapa"
         tools:layout="@layout/fragment_mapa" />
+    <activity
+        android:id="@+id/inicioActivity"
+        android:name="com.example.proyecto_android.activitys.InicioActivity"
+        android:label="activity_inicio"
+        tools:layout="@layout/activity_inicio" />
 </navigation>
