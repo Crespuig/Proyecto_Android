@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.proyecto_android.R;
@@ -36,6 +37,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         usuario.setText("11111111A");
         password.setText("1234");
+
+        TextView olvidar = (TextView) findViewById(R.id.olvidar);
+        olvidar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "Los datos no coinciden con ningún usuario", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
