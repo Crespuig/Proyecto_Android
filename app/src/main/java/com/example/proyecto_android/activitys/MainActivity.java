@@ -3,8 +3,10 @@ package com.example.proyecto_android.activitys;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.model.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -21,10 +23,19 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    Usuario u;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*u = (Usuario) getIntent().getSerializableExtra("usuario");
+        TextView nombreUsuario = (TextView) findViewById(R.id.nombreUsuario);
+        nombreUsuario.setText(u.getNombre());
+        TextView emailusuario = (TextView) findViewById(R.id.emailUsuario);
+        emailusuario.setText(u.getEmail());*/
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -46,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
     }
 
     @Override
