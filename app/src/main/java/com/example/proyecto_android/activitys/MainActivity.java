@@ -1,21 +1,28 @@
 package com.example.proyecto_android.activitys;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.fragments.ListaFragment;
+import com.example.proyecto_android.model.ListaViewModel;
 import com.example.proyecto_android.model.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -24,16 +31,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private AppBarConfiguration mAppBarConfiguration;
 
     Usuario usuario;
+    private Button btnLista;
+    ConstraintLayout fragmentInicio;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+        fragmentInicio = (ConstraintLayout) this.findViewById(R.id.fragmentInicio);
 
         /*u = (Usuario) getIntent().getSerializableExtra("usuario");
         TextView nombreUsuario = (TextView) findViewById(R.id.nombreUsuario);
@@ -63,8 +75,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        btnLista = (Button) findViewById(R.id.btnLista);
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -98,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+
+    }
+
+    @Override
+    public void onClick(android.view.View view) {
 
     }
 }

@@ -32,7 +32,6 @@ public class InicioFragment extends Fragment /*implements AdapterView.OnItemClic
     private ImageButton btnLista;
     ConstraintLayout constraintLayout;
     ListaFragment listaFragment;
-    InicioFragment inicioFragment;
 
     @SuppressLint("ResourceType")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,8 +39,15 @@ public class InicioFragment extends Fragment /*implements AdapterView.OnItemClic
         View view = inflater.inflate(R.layout.fragment_inicio, container, false);
         //final TextView textView = root.findViewById(R.id.text_home);
 
-        constraintLayout = (ConstraintLayout) view.findViewById(R.layout.fragment_inicio);
+        constraintLayout = (ConstraintLayout) view.findViewById(R.id.fragmentInicio);
         btnLista = view.findViewById(R.id.btnLista);
+        btnLista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cambiaFragment(R.id.contenedor, new ListaFragment());
+                constraintLayout.setVisibility(View.GONE);
+            }
+        });
 
 
         return view;
