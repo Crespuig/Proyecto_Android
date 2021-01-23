@@ -1,9 +1,12 @@
 package com.example.proyecto_android.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.proyecto_android.R;
 import com.example.proyecto_android.model.Usuario;
@@ -11,6 +14,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    Usuario u;
+    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,5 +78,26 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void cambiaFragment(int id, Fragment fragment){
+        //Sustituye un fragment por otro
+        getSupportFragmentManager().beginTransaction()
+                .replace(id, fragment)
+                //.addToBackStack(fragment.getTag())
+                .commit();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_configuracion:
+                Intent intent4 = new Intent(this, PreferenceActivity.class);
+                intent4.putExtra("usuario", usuario);
+                startActivityForResult(intent4, 0);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 }

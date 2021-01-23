@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fuentes">
+        <item>Liberation Serif</item>
+        <item>Casual</item>
+        <item>Cursive</item>
+        <item>Angeline vintage</item>
+        <item>Dollie srcipt</item>
+    </string-array>
+    <string-array name="codigoFuentes">
+        <item>LSE</item>
+        <item>CAS</item>
+        <item>CUR</item>
+        <item>ANV</item>
+        <item>DOS</item>
+    </string-array>
+</resources>

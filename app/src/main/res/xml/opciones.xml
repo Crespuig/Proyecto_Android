@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:dialogTitle="Indicar idioma que se quiere usar"
+        android:entries="@array/idioma"
+        android:entryValues="@array/codigoIdioma"
+        android:icon="@drawable/ic_baseline_language_24"
+        android:key="idioma"
+        android:summary="Elige el idioma que quieras usar"
+        android:title="Idioma" />
+    <ListPreference
+        android:dialogTitle="Indicar origen de datos"
+        android:entries="@array/origen_datos"
+        android:entryValues="@array/codigoOrigenDatos"
+        android:icon="@drawable/ic_baseline_data_usage_24"
+        android:key="origenDatos"
+        android:summary="Origen de datos usado actualmente"
+        android:title="Origen de datos" />
+    <CheckBoxPreference
+        android:id="@+id/musica"
+        android:defaultValue="false"
+        android:icon="@drawable/ic_baseline_music_note_24"
+        android:key="musica"
+        android:summary="Escuchar la música mientras se ejecuta la aplicación"
+        android:title="Música" />
+
+    <EditTextPreference
+        android:dialogTitle="Nick por defecto"
+        android:icon="@drawable/ic_baseline_supervised_user_circle_24"
+        android:key="nick"
+        android:summary="Introduzca su nick por defecto"
+        android:title="Nick por defecto" />
+    <ListPreference
+        android:dialogTitle="Fuentes"
+        android:entries="@array/fuentes"
+        android:entryValues="@array/codigoFuentes"
+        android:key="fuente"
+        android:summary="Selecciona la fuente que quieras utilizar"
+        android:title="Fuente"
+        android:icon="@drawable/ic_baseline_font_download_24"
+        />
+    <ListPreference
+        android:dialogTitle="Colores"
+        android:entries="@array/colores"
+        android:entryValues="@array/codigoColores"
+        android:key="color"
+        android:summary="Selecciona el color de los botones"
+        android:title="Color de  los botones"
+        android:icon="@drawable/ic_baseline_color_lens_24"/>
+
+
+</PreferenceScreen>
+
+

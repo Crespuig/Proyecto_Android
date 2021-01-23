@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="colores">
+        <item>Por defecto</item>
+        <item>Azul</item>
+        <item>Gris</item>
+        <item>Negro</item>
+        <item>Rojo</item>
+    </string-array>
+    <string-array name="codigoColores">
+        <item>#FFFFFF</item>
+        <item>#2196F3</item>
+        <item>#607D8B</item>
+        <item>#000000</item>
+        <item>#F44336</item>
+    </string-array>
+</resources>
