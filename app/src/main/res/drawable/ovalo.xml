@@ -4,8 +4,9 @@
     >
 
     <size
-        android:width="300dp"
-        android:height="100dp"
+        android:width="150dp"
+        android:height="50dp"
+
         >
 
     </size>
@@ -18,7 +19,6 @@
 
     <stroke
         android:width="10px"
-        android:color="@color/colorPrimary"
         >
 
     </stroke>

@@ -63,18 +63,6 @@ public class InicioFragment extends Fragment /*implements AdapterView.OnItemClic
                 .commit();
     }
 
-
-    /*@Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        btnLista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cambiaFragment(R.id.contenedor, listaFragment);
-            }
-        });
-
-    }*/
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         FragmentTransaction transaction = null;

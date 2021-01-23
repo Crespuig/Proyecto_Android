@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -18,14 +21,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyecto_android.R;
 import com.example.proyecto_android.adapters.ListaMonumentosAdapter;
+import com.example.proyecto_android.bbdd.MiAppOperacional;
+import com.example.proyecto_android.dialogos.DialogoListaMonumentos;
 import com.example.proyecto_android.model.ListaViewModel;
 import com.example.proyecto_android.model.Monumento;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaFragment extends Fragment {
 
+
+public class ListaFragment extends Fragment {
+    private ListView listaMonumentos;
+    private MiAppOperacional mappo;
     ListaFragment context = this;
     private ListaViewModel listaViewModel;
 
@@ -57,6 +67,17 @@ public class ListaFragment extends Fragment {
 
         listaViewModel = ViewModelProviders.of(this).get(ListaViewModel.class);
 
+
+        FloatingActionButton btnCalcularRuta = view.findViewById(R.id.btnCalcularRuta);
+        btnCalcularRuta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+
         return view;
     }
 
@@ -69,5 +90,10 @@ public class ListaFragment extends Fragment {
             add(new Monumento("Mercado Central", R.drawable.mercado_central));
             add(new Monumento("Torre de Serrà", R.drawable.torre_serranos));
         }};
+    }
+
+    public void mostrarDetalle(/*Monumento m*/){
+
+
     }
 }

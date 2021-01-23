@@ -1,5 +1,7 @@
 package com.example.proyecto_android.model;
 
+import android.widget.AdapterView;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -16,4 +18,6 @@ public class ListaViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
+
+
 }
