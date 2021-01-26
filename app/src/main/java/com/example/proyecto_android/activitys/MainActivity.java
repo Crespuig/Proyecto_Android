@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.example.proyecto_android.R;
 
@@ -36,11 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*u = (Usuario) getIntent().getSerializableExtra("usuario");
-        TextView nombreUsuario = (TextView) findViewById(R.id.nombreUsuario);
-        nombreUsuario.setText(u.getNombre());
-        TextView emailusuario = (TextView) findViewById(R.id.emailUsuario);
-        emailusuario.setText(u.getEmail());*/
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,6 +53,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        View view = navigationView.getHeaderView(0);
+        TextView nombreUsuario = (TextView) view.findViewById(R.id.nombreUsuario);
+        nombreUsuario.setText(usuario.getNombre());
+        TextView emailusuario = (TextView) view.findViewById(R.id.emailUsuario);
+        emailusuario.setText(usuario.getEmail());
 
 
     }
