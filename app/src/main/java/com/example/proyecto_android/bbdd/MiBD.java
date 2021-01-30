@@ -20,13 +20,8 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     //Instrucción SQL para crear la tabla de USuarios
     private String sqlCreacionUsuarios = "CREATE TABLE usuarios ( id INTEGER PRIMARY KEY AUTOINCREMENT, nif STRING, nombre STRING, " +
             "apellidos STRING, claveSeguridad STRING, email STRING);";
-
-    //Instruccion SQL para crear la tabla de Cuentas
-    /*private String sqlCreacionCuentas = "CREATE TABLE cuentas ( id INTEGER PRIMARY KEY AUTOINCREMENT, banco STRING, sucursal STRING, " +
-            "dc STRING, numerocuenta STRING, saldoactual FLOAT, idcliente INTEGER);" ;
-    //Instruccion SQL para crear la tabla de movimientos
-    private String sqlCreacionMovimientos = "CREATE TABLE movimientos ( id INTEGER PRIMARY KEY AUTOINCREMENT, tipo INTEGER, fechaoperacion LONG," +
-            " descripcion STRING, importe FLOAT, idcuentaorigen INTEGER, idcuentadestino INTEGER);";*/
+    private String sqlCreacionMonumentos = "CREATE TABLE monumentos ( idNotes INTEGER PRIMARY KEY, nombre STRING, numPol INTEGER, " +
+            "codVia INTEGER, telefono INTEGER, ruta INTEGER, coordenadas FLOAT);";
 
 
     private static MiBD instance = null;
@@ -64,18 +59,18 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     /**
      * Constructor de clase
      * */
-    protected MiBD(Context context) {
+    public MiBD(Context context) {
         super( context, database, null, version );
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(sqlCreacionUsuarios);
-        /*db.execSQL(sqlCreacionCuentas);
-        db.execSQL(sqlCreacionMovimientos);*/
+        db.execSQL(sqlCreacionMonumentos);
 
         insercionDatos(db);
         Log.i("SQLite", "Se crea la base de datos " + database + " version " + version);
+        //upgrade_12(db);
     }
 
     @Override
@@ -84,17 +79,28 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
         if ( newVersion > oldVersion )
         {
             //elimina tabla
-            db.execSQL( "DROP TABLE IF EXISTS usuaios" );
-            /*db.execSQL( "DROP TABLE IF EXISTS cuentas" );
-            db.execSQL( "DROP TABLE IF EXISTS movimientos" );*/
-            //y luego creamos la nueva tabla
+            db.execSQL( "DROP TABLE IF EXISTS usuarios" );
+            db.execSQL("DROP TABLE IF EXISTS monumentos");
             db.execSQL(sqlCreacionUsuarios);
-            /*db.execSQL(sqlCreacionCuentas);
-            db.execSQL(sqlCreacionMovimientos);*/
+            db.execSQL(sqlCreacionMonumentos);
+
 
             insercionDatos(db);
             Log.i("SQLite", "Se actualiza versión de la base de datos, New version= " + newVersion  );
         }
+
+        /*if (oldVersion < 12) {
+            upgrade_12(db);
+        }*/
+    }
+
+    public void upgrade_12(SQLiteDatabase db){
+        db.execSQL("INSERT INTO monumentos(idNotes, nombre, codVia, telefono, ruta, coordenadas) VALUES (004165, " +
+                "'PALACIO DE LOS MARQUESES DE MALFERIT,O, DE LOS CONDES DE BRIZUELA', " +
+                "12660, " +
+                "0, " +
+                "5, " +
+                "725514.652338833780959);");
     }
 
     /*public void insercionMovimiento(Movimiento m){
@@ -115,8 +121,16 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     }*/
 
     private void insercionDatos(SQLiteDatabase db){
-        // Insertamos los clientes
+        // Insertamos los usuarios
         db.execSQL("INSERT INTO usuarios(id, nif, nombre, apellidos, claveSeguridad, email) VALUES (1, '11111111A', 'Héctor', 'Crespo', '1234', 'hector@hector.es');");
+
+        //insertamos los monumentos
+        db.execSQL("INSERT INTO monumentos(idNotes, nombre, codVia, telefono, ruta, coordenadas) VALUES (004165, " +
+                "'PALACIO DE LOS MARQUESES DE MALFERIT,O, DE LOS CONDES DE BRIZUELA', " +
+                "12660, " +
+                "0, " +
+                "5, " +
+                "725514.652338833780959);");
 
     }
 

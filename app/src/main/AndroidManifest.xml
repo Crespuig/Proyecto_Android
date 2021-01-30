@@ -9,9 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activitys.GestionMonumentosActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".activitys.MonumentosActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".activitys.LoginActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activitys.InicioActivity"
             android:windowSoftInputMode="adjustPan">
@@ -25,12 +29,12 @@
             android:name=".activitys.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activitys.PreferenceActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

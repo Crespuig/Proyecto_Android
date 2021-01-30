@@ -12,4 +12,26 @@
     <string name="menu_mapa">Mapa</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_crear">Nuevo</string>
+    <string name="label_nombre">Nombre monumento:</string>
+    <string name="label_numPol">NumPol:</string>
+    <string name="label_codVia">CodVia:</string>
+    <string name="label_telefono">Teléfono:</string>
+    <string name="label_ruta">Ruta:</string>
+    <string name="label_coodenada">Coordenadas:</string>
+    <string name="boton_cancelar">Cancelar</string>
+    <string name="boton_guardar">Guardar</string>
+    <string name="monumento_crear_titulo">Nuevo monumento</string>
+    <string name="monumento_editar_titulo">Editar monumento</string>
+    <string name="monumento_crear_confirmacion">Confirmación</string>
+    <string name="monumento_editar_confirmacion">Monumento modificado</string>
+    <string name="menu_eliminar">Eliminar</string>
+    <string name="menu_editar">Editar</string>
+    <string name="menu_guardar">Guardar</string>
+    <string name="menu_cancelar">Cancelar</string>
+    <string name="monumento_eliminar_titulo">Eliminar monumento</string>
+    <string name="monumento_eliminar_mensaje">¿Seguro que quieres elliminar el monumento?</string>
+    <string name="monumento_eliminar_confirmacion">Monumento eliminado</string>
+    <string name="action_gestion_monumentos">Gestionar monumentos</string>
+    <string name="titulo">Visita\'m</string>
 </resources>

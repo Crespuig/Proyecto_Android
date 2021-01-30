@@ -2,14 +2,20 @@ package com.example.proyecto_android.activitys;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.proyecto_android.R;
 
+import com.example.proyecto_android.adapters.GestionMonumentoAdapter;
+import com.example.proyecto_android.dao.MonumentoDAO;
 import com.example.proyecto_android.model.Usuario;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -25,7 +31,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -37,7 +43,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+        /*u = (Usuario) getIntent().getSerializableExtra("usuario");
+        TextView nombreUsuario = (TextView) findViewById(R.id.nombreUsuario);
+        nombreUsuario.setText(u.getNombre());
+        TextView emailusuario = (TextView) findViewById(R.id.emailUsuario);
+        emailusuario.setText(u.getEmail());*/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,12 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-        View view = navigationView.getHeaderView(0);
-        TextView nombreUsuario = (TextView) view.findViewById(R.id.nombreUsuario);
-        nombreUsuario.setText(usuario.getNombre());
-        TextView emailusuario = (TextView) view.findViewById(R.id.emailUsuario);
-        emailusuario.setText(usuario.getEmail());
 
 
     }
@@ -94,6 +98,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent4 = new Intent(this, PreferenceActivity.class);
                 intent4.putExtra("usuario", usuario);
                 startActivityForResult(intent4, 0);
+            case R.id.action_gestion_monumentos:
+                Intent intent5 = new Intent(this, MonumentosActivity.class);
+                intent5.putExtra("usuario", usuario);
+                startActivityForResult(intent5, 0);
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -101,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(android.view.View view) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
     }
 }
