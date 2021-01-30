@@ -35,7 +35,7 @@ public class GestionMonumentoAdapter extends CursorAdapter {
         // Como hemos inflado simple_dropdown_item_1line solo tenemos un TextView que lo obtenemos
         TextView tv = (TextView) view;
         // Obtenemos el indice de la columna
-        int i = cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_MONUMENTOS_IDNOTES);
+        int i = cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_NOMBRE);
         // Asignamos el valor
         tv.setText(cursor.getString(i));
     }

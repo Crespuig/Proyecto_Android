@@ -12,7 +12,7 @@ public class MonumentoDAO  {
 
     public static final String C_TABLA = "monumentos";
 
-    public static final String C_COLUMNA_MONUMENTOS_IDNOTES = "idNotes";
+    public static final String C_COLUMNA_MONUMENTOS_IDNOTES = "_id";
     public static final String C_COLUMNA_NOMBRE = "nombre";
     public static final String C_COLUMNA_NUMPOL = "numPol";
     public static final String C_COLUMNA_CODVIA = "codVia";
@@ -29,6 +29,9 @@ public class MonumentoDAO  {
 
     public MonumentoDAO(Context context) {
         this.contexto = context;
+    }
+
+    public MonumentoDAO() {
     }
 
     public MonumentoDAO abrir() {
@@ -68,13 +71,13 @@ public class MonumentoDAO  {
         if (reg.containsKey(C_COLUMNA_MONUMENTOS_IDNOTES)) {
             long id = reg.getAsLong(C_COLUMNA_MONUMENTOS_IDNOTES);
             reg.remove(C_COLUMNA_MONUMENTOS_IDNOTES);
-            result = db.update(C_TABLA, reg, "idNotes=" + id, null);
+            result = db.update(C_TABLA, reg, "_id=" + id, null);
         }
         return result;
     }
 
-    public void delete(long idNotes){
-        String condicion = C_COLUMNA_MONUMENTOS_IDNOTES + "=" + idNotes;
+    public void delete(long _id){
+        String condicion = C_COLUMNA_MONUMENTOS_IDNOTES + "=" + _id;
         MiBD.getDB().delete("monumentos", condicion, null);
     }
 

@@ -20,7 +20,7 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     //Instrucción SQL para crear la tabla de USuarios
     private String sqlCreacionUsuarios = "CREATE TABLE usuarios ( id INTEGER PRIMARY KEY AUTOINCREMENT, nif STRING, nombre STRING, " +
             "apellidos STRING, claveSeguridad STRING, email STRING);";
-    private String sqlCreacionMonumentos = "CREATE TABLE monumentos ( idNotes INTEGER PRIMARY KEY, nombre STRING, numPol INTEGER, " +
+    private String sqlCreacionMonumentos = "CREATE TABLE monumentos ( _id INTEGER PRIMARY KEY, nombre STRING, numPol INTEGER, " +
             "codVia INTEGER, telefono INTEGER, ruta INTEGER, coordenadas FLOAT);";
 
 
@@ -125,8 +125,9 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
         db.execSQL("INSERT INTO usuarios(id, nif, nombre, apellidos, claveSeguridad, email) VALUES (1, '11111111A', 'Héctor', 'Crespo', '1234', 'hector@hector.es');");
 
         //insertamos los monumentos
-        db.execSQL("INSERT INTO monumentos(idNotes, nombre, codVia, telefono, ruta, coordenadas) VALUES (004165, " +
+        db.execSQL("INSERT INTO monumentos(_id, nombre, numPol, codVia, telefono, ruta, coordenadas) VALUES (004165, " +
                 "'PALACIO DE LOS MARQUESES DE MALFERIT,O, DE LOS CONDES DE BRIZUELA', " +
+                "22, " +
                 "12660, " +
                 "0, " +
                 "5, " +
