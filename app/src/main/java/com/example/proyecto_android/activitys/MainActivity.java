@@ -1,6 +1,8 @@
 package com.example.proyecto_android.activitys;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -43,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*u = (Usuario) getIntent().getSerializableExtra("usuario");
-        TextView nombreUsuario = (TextView) findViewById(R.id.nombreUsuario);
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+        /*TextView nombreUsuario = (TextView) findViewById(R.id.nombreUsuario);
         nombreUsuario.setText(u.getNombre());
         TextView emailusuario = (TextView) findViewById(R.id.emailUsuario);
         emailusuario.setText(u.getEmail());*/
@@ -99,9 +101,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 intent4.putExtra("usuario", usuario);
                 startActivityForResult(intent4, 0);
             case R.id.action_gestion_monumentos:
-                Intent intent5 = new Intent(this, MonumentosActivity.class);
-                intent5.putExtra("usuario", usuario);
-                startActivityForResult(intent5, 0);
+                    Intent intent5 = new Intent(this, MonumentosActivity.class);
+                    intent5.putExtra("usuario", usuario);
+                    startActivityForResult(intent5, 0);
             default:
                 return super.onOptionsItemSelected(item);
         }

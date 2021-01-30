@@ -11,6 +11,7 @@ public class Usuario implements Serializable{
     private String apellidos;
     private String claveSeguridad;
     private String email;
+    private boolean admin;
 
     public Usuario(int id, String nif, String nombre, String apellidos, String claveSeguridad, String email) {
         this.id = id;
@@ -18,6 +19,16 @@ public class Usuario implements Serializable{
         this.apellidos = apellidos;
         this.claveSeguridad = claveSeguridad;
         this.email = email;
+    }
+
+    public Usuario(int id, String nif, String nombre, String apellidos, String claveSeguridad, String email, boolean admin) {
+        this.id = id;
+        this.nif = nif;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.claveSeguridad = claveSeguridad;
+        this.email = email;
+        this.admin = admin;
     }
 
     public String getNif() {
@@ -68,7 +79,13 @@ public class Usuario implements Serializable{
         this.id = id;
     }
 
+    public boolean isAdmin() {
+        return admin;
+    }
 
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 
     public Usuario(){
         super();
@@ -83,6 +100,7 @@ public class Usuario implements Serializable{
                 ", apellidos='" + apellidos + '\'' +
                 ", claveSeguridad='" + claveSeguridad + '\'' +
                 ", email='" + email + '\'' +
+                ", admin=" + admin +
                 '}';
     }
 }

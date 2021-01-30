@@ -16,7 +16,7 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     //nombre de la base de datos
     private static final String database = "Visita'mApp";
     //versión de la base de datos
-    private static final int version = 11;
+    private static final int version = 12;
     //Instrucción SQL para crear la tabla de USuarios
     private String sqlCreacionUsuarios = "CREATE TABLE usuarios ( id INTEGER PRIMARY KEY AUTOINCREMENT, nif STRING, nombre STRING, " +
             "apellidos STRING, claveSeguridad STRING, email STRING);";
@@ -70,7 +70,7 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
 
         insercionDatos(db);
         Log.i("SQLite", "Se crea la base de datos " + database + " version " + version);
-        //upgrade_12(db);
+        upgrade_12(db);
     }
 
     @Override
@@ -89,18 +89,16 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
             Log.i("SQLite", "Se actualiza versión de la base de datos, New version= " + newVersion  );
         }
 
-        /*if (oldVersion < 12) {
+        if (oldVersion < 12) {
             upgrade_12(db);
-        }*/
+        }
     }
 
     public void upgrade_12(SQLiteDatabase db){
-        db.execSQL("INSERT INTO monumentos(idNotes, nombre, codVia, telefono, ruta, coordenadas) VALUES (004165, " +
-                "'PALACIO DE LOS MARQUESES DE MALFERIT,O, DE LOS CONDES DE BRIZUELA', " +
-                "12660, " +
-                "0, " +
-                "5, " +
-                "725514.652338833780959);");
+        db.execSQL("ALTER TABLE usuarios ADD is_admin BOOLEAN NOT NULL DEFAULT 'false'");
+        Log.i(this.getClass().toString(), "Actualización versión 12 finalizada");
+
+        db.execSQL("INSERT INTO usuarios(id, nif, nombre, apellidos, claveSeguridad, email, is_admin) VALUES (0, '0', 'Héctor', 'Crespo', '1234', 'hector.pi@tia.es', 'true');");
     }
 
     /*public void insercionMovimiento(Movimiento m){
