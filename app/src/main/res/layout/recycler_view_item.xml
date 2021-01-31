@@ -38,6 +38,20 @@
         android:layout_marginRight="5dp"
         android:layout_marginBottom="10dp"/>
 
+    <ImageButton
+        android:id="@+id/buttonFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:background="@android:color/transparent"
+        android:padding="10dp"
+        app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+        tools:ignore="VectorDrawableCompat"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        />
+
 </androidx.cardview.widget.CardView>
 
 
