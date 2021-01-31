@@ -34,4 +34,9 @@
     <string name="monumento_eliminar_confirmacion">Monumento eliminado</string>
     <string name="action_gestion_monumentos">Gestionar monumentos</string>
     <string name="titulo">Visita\'m</string>
+    <string name="menu_favoritos">Favoritos</string>
+    <string name="menu_clima">Clima</string>
+    <string name="menu_transporte">Transporte</string>
+    <string name="menu_estadiscitas">Estadísticas</string>
+    <string name="menu_configuracion">Configuración</string>
 </resources>

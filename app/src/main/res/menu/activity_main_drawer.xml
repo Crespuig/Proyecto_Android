@@ -9,16 +9,37 @@
             android:icon="@drawable/ic_baseline_home"
             android:title="@string/menu_inicio" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_lista"
             android:icon="@drawable/ic_baseline_list"
             android:title="@string/menu_lista" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_mapa"
             android:icon="@drawable/ic_baseline_map"
             android:title="@string/menu_mapa" />
         <item
-            android:id="@+id/inicioActivity"
-            android:icon="@drawable/ic_baseline_map"
-            android:title="@string/menu_mapa" />
+            android:id="@+id/nav_favoritos"
+            android:icon="@drawable/ic_baseline_favorite_24"
+            android:title="@string/menu_favoritos" />
+        <item
+            android:id="@+id/nav_clima"
+            android:icon="@drawable/ic_baseline_wb_sunny_24"
+            android:title="@string/menu_clima" />
+        <item
+            android:id="@+id/nav_transporte"
+            android:icon="@drawable/ic_baseline_tram_24"
+            android:title="@string/menu_transporte" />
+        <item
+            android:id="@+id/nav_estadisticas"
+            android:icon="@drawable/ic_baseline_timeline_24"
+            android:title="@string/menu_estadiscitas" />
+    </group>
+
+    <group>
+        <menu>
+            <item
+                android:id="@+id/menu_opcion01"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:title="@string/menu_configuracion" />
+        </menu>
     </group>
 </menu>
