@@ -14,9 +14,9 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
 
     private static SQLiteDatabase db;
     //nombre de la base de datos
-    private static final String database = "Visita'mApp";
+    private static final String database = "VisitamApp";
     //versión de la base de datos
-    private static final int version = 12;
+    private static final int version = 13;
     //Instrucción SQL para crear la tabla de USuarios
     private String sqlCreacionUsuarios = "CREATE TABLE usuarios ( id INTEGER PRIMARY KEY AUTOINCREMENT, nif STRING, nombre STRING, " +
             "apellidos STRING, claveSeguridad STRING, email STRING);";
