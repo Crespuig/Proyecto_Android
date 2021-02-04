@@ -3,6 +3,7 @@ package com.example.proyecto_android.activitys;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.content.ClipData;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -17,8 +18,12 @@ import android.widget.Toast;
 import com.example.proyecto_android.R;
 
 import com.example.proyecto_android.adapters.GestionMonumentoAdapter;
+import com.example.proyecto_android.bbdd.MiBD;
 import com.example.proyecto_android.dao.MonumentoDAO;
+import com.example.proyecto_android.model.JsonToObject;
+import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
+import com.example.proyecto_android.model.Utils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -32,6 +37,11 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
@@ -66,6 +76,51 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        try {
+            String jsonString = Utils.leerJson(this, "opendata1259927732622104222.JSON");
+            ArrayList<Monumento> monumentos = JsonToObject.jsonToMonumetList(jsonString);
+            for (Monumento m: monumentos){
+                MonumentoDAO monumentoDAO = new MonumentoDAO(this);
+                ContentValues reg = new ContentValues();
+                reg.put(MonumentoDAO.C_COLUMNA_MONUMENTOS_IDNOTES, m.getIdNotes());
+                reg.put(MonumentoDAO.C_COLUMNA_NOMBRE, m.getName());
+                reg.put(MonumentoDAO.C_COLUMNA_NUMPOL,m.getNumPol());
+                reg.put(MonumentoDAO.C_COLUMNA_CODVIA, m.getCodVia());
+                reg.put(MonumentoDAO.C_COLUMNA_TELEFONO, m.getTelefono());
+                reg.put(MonumentoDAO.C_COLUMNA_RUTA, m.getRuta());
+                reg.put(MonumentoDAO.C_COLUMNA_LATITUD, m.getLatitud());
+                reg.put(MonumentoDAO.C_COLUMNA_LONGITUD, m.getLongitud());
+
+                monumentoDAO.insert(reg);
+            }
+            String jsonImg = Utils.leerJson(this, "monument_imgs.json");
+            ArrayList<Monumento> imgMonumentos = JsonToObject.jsonToImageMonumentsList(jsonImg);
+            for (Monumento m: imgMonumentos){
+                MonumentoDAO monumentoDAO = new MonumentoDAO(this);
+                Cursor c = monumentoDAO.getRegistro(m.getIdNotes());
+                String nombre = c.getString(1);
+                String numPol = c.getString(2);
+                int codVia = c.getInt(3);
+                String telefono = c.getString(4);
+                int ruta = c.getInt(5);
+                float latitud = c.getFloat(6);
+                float longitud = c.getFloat(7);
+                ContentValues reg = new ContentValues();
+                reg.put(MonumentoDAO.C_COLUMNA_MONUMENTOS_IDNOTES, m.getIdNotes());
+                reg.put(MonumentoDAO.C_COLUMNA_NOMBRE,nombre);
+                reg.put(MonumentoDAO.C_COLUMNA_NUMPOL,numPol);
+                reg.put(MonumentoDAO.C_COLUMNA_CODVIA, codVia);
+                reg.put(MonumentoDAO.C_COLUMNA_TELEFONO, telefono);
+                reg.put(MonumentoDAO.C_COLUMNA_RUTA, ruta);
+                reg.put(MonumentoDAO.C_COLUMNA_LATITUD, latitud);
+                reg.put(MonumentoDAO.C_COLUMNA_LONGITUD, longitud);
+                reg.put(MonumentoDAO.C_COLUMNA_IMAGEN, m.getImagen());
+
+                monumentoDAO.update(reg);
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 

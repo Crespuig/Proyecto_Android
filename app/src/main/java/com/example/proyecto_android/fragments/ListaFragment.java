@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.proyecto_android.R;
 import com.example.proyecto_android.adapters.ListaMonumentosAdapter;
 import com.example.proyecto_android.bbdd.MiAppOperacional;
+import com.example.proyecto_android.bbdd.MiBD;
 import com.example.proyecto_android.dialogos.DialogoListaMonumentos;
 import com.example.proyecto_android.model.ListaViewModel;
 import com.example.proyecto_android.model.Monumento;
@@ -82,14 +83,7 @@ public class ListaFragment extends Fragment {
     }
 
     private List<Monumento> getAllMonumentos(){
-        return new ArrayList<Monumento>(){{
-            add(new Monumento("Ciutat de les arts i les ciències", R.drawable.ciutatdelesarts));
-            add(new Monumento("Catedral de València", R.drawable.catedral_valencia));
-            add(new Monumento("Iglesia Santos Juanes", R.drawable.iglesia_santos_juanes));
-            add(new Monumento("Lonja Seda", R.drawable.lonja_seda));
-            add(new Monumento("Mercado Central", R.drawable.mercado_central));
-            add(new Monumento("Torre de Serrà", R.drawable.torre_serranos));
-        }};
+        return MiBD.getInstance(getContext()).recuperarMonumentos();
     }
 
     public void mostrarDetalle(/*Monumento m*/){

@@ -39,4 +39,7 @@
     <string name="menu_transporte">Transporte</string>
     <string name="menu_estadiscitas">Estadísticas</string>
     <string name="menu_configuracion">Configuración</string>
+    <string name="label_latitud">Latitud:</string>
+    <string name="label_longitud">Longitud:</string>
+    <string name="label_img">Imagen:</string>
 </resources>

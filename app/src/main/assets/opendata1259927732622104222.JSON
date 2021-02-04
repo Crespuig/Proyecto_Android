@@ -7,14 +7,14 @@
     }
   },
   "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "nombre": "PALACIO DE LOS MARQUESES DE MALFERIT,O, DE LOS CONDES DE BRIZUELA",
-        "numpol": "22",
-        "idnotes": "004165",
-        "codvia": "12660",
-        "telefono": "0",
+      {
+        "type": "Feature",
+        "properties": {
+          "nombre": "PALACIO DE LOS MARQUESES DE MALFERIT,O, DE LOS CONDES DE BRIZUELA",
+          "numpol": "22",
+          "idnotes": "004165",
+          "codvia": "12660",
+          "telefono": "0",
         "ruta": "5"
       },
       "geometry": {

@@ -18,14 +18,17 @@ public class MonumentoDAO  {
     public static final String C_COLUMNA_CODVIA = "codVia";
     public static final String C_COLUMNA_TELEFONO = "telefono";
     public static final String C_COLUMNA_RUTA = "ruta";
-    public static final String C_COLUMNA_COORDENADAS = "coordenadas";
+    public static final String C_COLUMNA_LATITUD = "latitud";
+    public static final String C_COLUMNA_LONGITUD = "longitud";
+    public static final String C_COLUMNA_IMAGEN = "imagen";
+
 
     private Context contexto;
     private MiBD miBD;
     private SQLiteDatabase db;
 
     private String[] columnas = new String[]{C_COLUMNA_MONUMENTOS_IDNOTES, C_COLUMNA_NOMBRE, C_COLUMNA_NUMPOL,
-            C_COLUMNA_CODVIA, C_COLUMNA_TELEFONO, C_COLUMNA_RUTA, C_COLUMNA_COORDENADAS};
+            C_COLUMNA_CODVIA, C_COLUMNA_TELEFONO, C_COLUMNA_RUTA, C_COLUMNA_LATITUD, C_COLUMNA_LONGITUD, C_COLUMNA_IMAGEN};
 
     public MonumentoDAO(Context context) {
         this.contexto = context;
@@ -50,6 +53,8 @@ public class MonumentoDAO  {
     }
 
     public Cursor getRegistro(long id){
+        if (db == null)
+            abrir();
         String condicion = C_COLUMNA_MONUMENTOS_IDNOTES + "=" + id;
         Cursor c = db.query( true, C_TABLA, columnas, condicion, null, null, null, null, null);
         if (c != null) {
@@ -72,6 +77,7 @@ public class MonumentoDAO  {
             long id = reg.getAsLong(C_COLUMNA_MONUMENTOS_IDNOTES);
             reg.remove(C_COLUMNA_MONUMENTOS_IDNOTES);
             result = db.update(C_TABLA, reg, "_id=" + id, null);
+            db.close();
         }
         return result;
     }

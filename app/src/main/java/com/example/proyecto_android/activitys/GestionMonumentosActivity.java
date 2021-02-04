@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +34,9 @@ public class GestionMonumentosActivity extends AppCompatActivity {
     private EditText codVia;
     private EditText telefono;
     private EditText ruta;
-    private EditText coordenadas;
+    private EditText latitud;
+    private EditText longitud;
+    private EditText img;
 
     private Button boton_guardar;
     private Button boton_cancelar;
@@ -53,7 +56,7 @@ public class GestionMonumentosActivity extends AppCompatActivity {
         codVia = (EditText) findViewById(R.id.codVia);
         telefono = (EditText) findViewById(R.id.telefono);
         ruta = (EditText) findViewById(R.id.ruta);
-        coordenadas = (EditText) findViewById(R.id.coordenada);
+        img = (EditText) findViewById(R.id.img);
 
         boton_guardar = (Button) findViewById(R.id.boton_guardar);
         boton_cancelar = (Button) findViewById(R.id.boton_cancelar);
@@ -108,7 +111,7 @@ public class GestionMonumentosActivity extends AppCompatActivity {
         codVia.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_CODVIA)));
         telefono.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_TELEFONO)));
         ruta.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_RUTA)));
-        coordenadas.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_COORDENADAS)));
+        //coordenadas.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_COORDENADAS)));
 
     }
 
@@ -118,7 +121,7 @@ public class GestionMonumentosActivity extends AppCompatActivity {
         codVia.setEnabled(opcion);
         telefono.setEnabled(opcion);
         ruta.setEnabled(opcion);
-        coordenadas.setEnabled(opcion);
+        img.setEnabled(opcion);
     }
 
     private void guardar() {
@@ -133,7 +136,7 @@ public class GestionMonumentosActivity extends AppCompatActivity {
         reg.put(MonumentoDAO.C_COLUMNA_CODVIA, codVia.getText().toString());
         reg.put(MonumentoDAO.C_COLUMNA_TELEFONO, telefono.getText().toString());
         reg.put(MonumentoDAO.C_COLUMNA_RUTA, ruta.getText().toString());
-        reg.put(MonumentoDAO.C_COLUMNA_COORDENADAS, coordenadas.getText().toString());
+        reg.put(MonumentoDAO.C_COLUMNA_IMAGEN, img.getText().toString());
 
         if (modo == Constantes.C_CREAR) {
             monumentoDAO.insert(reg);

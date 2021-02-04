@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 
 public class Utils {
 
-    public static String leerJson(MostrarMonumentoActivity context, String fileName) throws IOException {
+    public static String leerJson(Context context, String fileName) throws IOException {
         BufferedReader reader = null;
         reader = new BufferedReader(new InputStreamReader(context.getAssets().open(fileName), "UTF-8"));
 

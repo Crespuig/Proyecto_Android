@@ -2,41 +2,29 @@ package com.example.proyecto_android.model;
 
 public class Monumento {
 
-    public int idNotes;
-    public String name;
-    public int numPol;
-    public int codVia;
-    public int telefono;
-    public int ruta;
-    public float coordenadas;
-    public int imagen;
+    private int idNotes;
+    private String name;
+    private String numPol;
+    private int codVia;
+    private String telefono;
+    private int ruta;
+    private float latitud;
+    private float longitud;
+    private String imagen;
 
     public Monumento() {
     }
 
-    public Monumento(String name, int imagen) {
-        this.name = name;
-        this.imagen = imagen;
-    }
 
-    public Monumento(int idNotes, String name, int numPol, int codVia, int telefono, int ruta, float coordenadas) {
+    public Monumento(int idNotes, String name, String numPol, int codVia, String telefono, int ruta, float latitud, float longitud, String imagen) {
         this.idNotes = idNotes;
         this.name = name;
         this.numPol = numPol;
         this.codVia = codVia;
         this.telefono = telefono;
         this.ruta = ruta;
-        this.coordenadas = coordenadas;
-    }
-
-    public Monumento(int idNotes, String name, int numPol, int codVia, int telefono, int ruta, float coordenadas, int imagen) {
-        this.idNotes = idNotes;
-        this.name = name;
-        this.numPol = numPol;
-        this.codVia = codVia;
-        this.telefono = telefono;
-        this.ruta = ruta;
-        this.coordenadas = coordenadas;
+        this.latitud = latitud;
+        this.longitud = longitud;
         this.imagen = imagen;
     }
 
@@ -48,11 +36,27 @@ public class Monumento {
         this.name = name;
     }
 
-    public int getImagen() {
+    public float getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(float latitud) {
+        this.latitud = latitud;
+    }
+
+    public float getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(float longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(int imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 
@@ -64,11 +68,11 @@ public class Monumento {
         this.idNotes = idNotes;
     }
 
-    public int getNumPol() {
+    public String getNumPol() {
         return numPol;
     }
 
-    public void setNumPol(int numPol) {
+    public void setNumPol(String numPol) {
         this.numPol = numPol;
     }
 
@@ -80,11 +84,11 @@ public class Monumento {
         this.codVia = codVia;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -96,25 +100,18 @@ public class Monumento {
         this.ruta = ruta;
     }
 
-    public float getCoordenadas() {
-        return coordenadas;
-    }
-
-    public void setCoordenadas(float coordenadas) {
-        this.coordenadas = coordenadas;
-    }
-
     @Override
     public String toString() {
         return "Monumento{" +
                 "idNotes=" + idNotes +
                 ", name='" + name + '\'' +
-                ", numPol=" + numPol +
+                ", numPol='" + numPol + '\'' +
                 ", codVia=" + codVia +
-                ", telefono=" + telefono +
+                ", telefono='" + telefono + '\'' +
                 ", ruta=" + ruta +
-                ", coordenadas=" + coordenadas +
-                ", imagen=" + imagen +
+                ", latitud=" + latitud +
+                ", longitud=" + longitud +
+                ", imagen='" + imagen + '\'' +
                 '}';
     }
 }
