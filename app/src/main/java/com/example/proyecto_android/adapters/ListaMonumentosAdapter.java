@@ -43,8 +43,11 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
         public void bind(final Monumento monumento, final OnItemClickListener listener){
             textViewName.setText(monumento.getName());
             Picasso.with(context).load(monumento.getImagen()).fit().into(imageViewMonumento);
-            /*int resId = context.getResources().getIdentifier(monumento.getImagen(), "drawable", context.getPackageName());
-            imageViewMonumento.setImageResource(resId);*/
+            if(monumento.getImagen() != null){
+                int resId = context.getResources().getIdentifier(monumento.getImagen(), "drawable", context.getPackageName());
+                imageViewMonumento.setImageResource(resId);
+            }
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
