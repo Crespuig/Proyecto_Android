@@ -24,8 +24,13 @@ import com.example.proyecto_android.model.JsonToObject;
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
 import com.example.proyecto_android.model.Utils;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -42,8 +47,11 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -54,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
         /*TextView nombreUsuario = (TextView) findViewById(R.id.nombreUsuario);
@@ -163,6 +173,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+
+
+    public void cerrarSesion(View view){
+        AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText(MainActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
     }
 
     @Override

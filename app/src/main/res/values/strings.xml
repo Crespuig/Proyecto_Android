@@ -42,4 +42,8 @@
     <string name="label_latitud">Latitud:</string>
     <string name="label_longitud">Longitud:</string>
     <string name="label_img">Imagen:</string>
+
+    <string name="facebook_application_id" translatable="false">322503412532826</string>
+    <string name="facebook_login_protocol_schema" translatable="false">fb322503412532826</string>
+
 </resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activitys.RegistroActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrarse"
+        android:gravity="center_horizontal"
+        android:textSize="28sp"/>
+
+    <EditText
+        android:id="@+id/registerEmail"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:hint="email"
+        android:inputType="textEmailAddress"/>
+<!--
+    <EditText
+        android:id="@+id/registerNombre"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:hint="Nombre"/>
+
+    <EditText
+        android:id="@+id/registerApellidos"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:hint="Apellidos"/>
+        -->
+
+    <EditText
+        android:id="@+id/registerPassword"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:hint="Contraseña"
+        android:inputType="textPassword"/>
+
+    <EditText
+        android:id="@+id/repeatPassword"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:hint="Repite contraseña"
+        android:inputType="textPassword"/>
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Registrarse"/>
+
+    <Button
+        android:id="@+id/registerGoLoginButton"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Ya tengo una cuenta"/>
+
+</LinearLayout>

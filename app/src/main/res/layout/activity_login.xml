@@ -8,11 +8,11 @@
     android:background="@drawable/imagen_login">
 
     <EditText
-        android:id="@+id/passworAnterior"
+        android:id="@+id/loginEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Usuario"
+        android:hint="Email"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textIsSelectable="false"
@@ -24,19 +24,19 @@
         app:layout_constraintVertical_bias="0.099" />
 
     <EditText
-        android:id="@+id/passwordNuevo"
+        android:id="@+id/loginPaswword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Contraseña"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passworAnterior"
+        app:layout_constraintTop_toBottomOf="@+id/loginEmail"
         app:layout_constraintVertical_bias="0.029" />
 
     <Button
@@ -67,8 +67,30 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:text="¿Olvidaste tu contraseña?"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordNuevo"
+        app:layout_constraintTop_toBottomOf="@+id/loginPaswword"
         android:layout_marginLeft="148dp"
         android:textColor="#FFFFFF"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btnRegistrarse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="REGISTRARSE"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

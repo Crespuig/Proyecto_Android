@@ -7,9 +7,75 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:680600859879:android:75e0e96c831679b62bde42",
+        "android_client_info": {
+          "package_name": "com.company.Proyecto_Android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680600859879-ikn19uq12ge9788rhl6st76ujgot7n83.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.Proyecto_Android",
+            "certificate_hash": "2861757dc22d1ed3a99516dff7f7cb004a777d09"
+          }
+        },
+        {
+          "client_id": "680600859879-cnuu0sdpd5c2ldvlkcuucna54impd10a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZGt8i4nUBNcUFzyW7ckN4TDZbzvnLJ7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680600859879-cnuu0sdpd5c2ldvlkcuucna54impd10a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:680600859879:android:55403b828434f7ab2bde42",
         "android_client_info": {
           "package_name": "com.example.proyecto_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680600859879-cnuu0sdpd5c2ldvlkcuucna54impd10a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZGt8i4nUBNcUFzyW7ckN4TDZbzvnLJ7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680600859879-cnuu0sdpd5c2ldvlkcuucna54impd10a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680600859879:android:e372bf8d62e889fb2bde42",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_android.activitys"
         }
       },
       "oauth_client": [
