@@ -1,6 +1,7 @@
 package com.example.proyecto_android.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.proyecto_android.R;
 import com.example.proyecto_android.dao.VisitamService;
 import com.example.proyecto_android.model.Monumento;
+import com.firebase.ui.auth.AuthUI;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
 import java.security.Provider;
@@ -51,7 +55,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
         public void bind(final Monumento monumento, final OnItemClickListener listener){
 
 
-            textViewName.setText(monumento.getName());
+            //textViewName.setText(monumento.getName());
             Picasso.with(context).load(monumento.getImagen()).fit().into(imageViewMonumento);
             if(monumento.getImagen() != null){
                 int resId = context.getResources().getIdentifier(monumento.getImagen(), "drawable", context.getPackageName());
@@ -92,9 +96,13 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
     }
 
     private void getMonumentos(){
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
         Retrofit retrofit = new Retrofit.Builder().
                 baseUrl("http://mapas.valencia.es/").
-                addConverterFactory(GsonConverterFactory.create()).
+                addConverterFactory(GsonConverterFactory.create(gson)).
                 build();
 
         service = retrofit.create(VisitamService.class);
@@ -107,7 +115,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
                     return;
                 }
 
-                List<Monumento> list = response.body();
+                List<Monumento> monumentos = response.body();
                 for(Monumento monumento : monumentos){
                     String content = "";
                     content += monumento.getName();
@@ -119,6 +127,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
             @Override
             public void onFailure(Call<List<Monumento>> call, Throwable t) {
                 textViewName.setText(t.getMessage());
+                Log.i("******************", t.toString());
             }
         });
     }
