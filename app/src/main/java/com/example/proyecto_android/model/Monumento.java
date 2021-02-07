@@ -1,15 +1,36 @@
 package com.example.proyecto_android.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Monumento {
 
+    @SerializedName("idnotes")
+    @Expose
     private int idNotes;
+    @SerializedName("nombre")
+    @Expose
     private String name;
+    @SerializedName("numpol")
+    @Expose
     private String numPol;
+    @SerializedName("codvia")
+    @Expose
     private int codVia;
+    @SerializedName("telefono")
+    @Expose
     private String telefono;
+    @SerializedName("ruta")
+    @Expose
     private int ruta;
+    @SerializedName("latitud")
+    @Expose
     private float latitud;
+    @SerializedName("longitud")
+    @Expose
     private float longitud;
+    @SerializedName("img")
+    @Expose
     private String imagen;
 
     public Monumento() {
