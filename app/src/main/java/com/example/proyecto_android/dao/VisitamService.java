@@ -10,7 +10,7 @@ import retrofit2.http.Path;
 
 public interface VisitamService {
 
-    @GET("lanzadera/opendata/Monumentos-turisticos/JSON")
-    Call<List<Monumento>> listRepos(@Path("user") String user);
+    @GET("{idnotes}/Monumentos-turisticos/JSON")
+    Call<Monumento> getMonumento(@Path("idnotes") int idNotes);
 
 }

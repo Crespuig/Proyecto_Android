@@ -11,17 +11,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.dao.VisitamService;
 import com.example.proyecto_android.model.Monumento;
 import com.squareup.picasso.Picasso;
 
+import java.security.Provider;
 import java.util.List;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentosAdapter.ViewHolder> {
 
     private List<Monumento> monumentos;
     private int layout;
     private OnItemClickListener itemClickListener;
-
+    VisitamService service;
     private Context context;
 
     public ListaMonumentosAdapter(List<Monumento> monumentos, int layout, OnItemClickListener itemClickListener) {
@@ -41,6 +46,13 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
         }
 
         public void bind(final Monumento monumento, final OnItemClickListener listener){
+            Retrofit retrofit = new Retrofit.Builder().
+                    baseUrl("http://mapas.valencia.es/lanzadera/opendata/").
+                    addConverterFactory(GsonConverterFactory.create()).
+                    build();
+
+            service = retrofit.create(VisitamService.class);
+
             textViewName.setText(monumento.getName());
             Picasso.with(context).load(monumento.getImagen()).fit().into(imageViewMonumento);
             if(monumento.getImagen() != null){
