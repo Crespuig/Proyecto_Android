@@ -33,7 +33,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
     private List<Monumento> monumentos;
     private int layout;
     private OnItemClickListener itemClickListener;
-    VisitamService service;
+
     private Context context;
     private TextView textViewName;
 
@@ -55,7 +55,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
         public void bind(final Monumento monumento, final OnItemClickListener listener){
 
 
-            //textViewName.setText(monumento.getName());
+            textViewName.setText(monumento.getName());
             Picasso.with(context).load(monumento.getImagen()).fit().into(imageViewMonumento);
             if(monumento.getImagen() != null){
                 int resId = context.getResources().getIdentifier(monumento.getImagen(), "drawable", context.getPackageName());
@@ -77,7 +77,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
         View view = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         context = parent.getContext();
-        getMonumentos();
+
         return viewHolder;
     }
 
@@ -95,40 +95,5 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
         void onItemClick(Monumento monumento, int position);
     }
 
-    private void getMonumentos(){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
 
-        Retrofit retrofit = new Retrofit.Builder().
-                baseUrl("http://mapas.valencia.es/").
-                addConverterFactory(GsonConverterFactory.create(gson)).
-                build();
-
-        service = retrofit.create(VisitamService.class);
-        Call<List<Monumento>> call = service.getMonumentos();
-        call.enqueue(new Callback<List<Monumento>>() {
-            @Override
-            public void onResponse(Call<List<Monumento>> call, Response<List<Monumento>> response) {
-                if (!response.isSuccessful()){
-                    textViewName.setText("Codigo: " + response.code());
-                    return;
-                }
-
-                List<Monumento> monumentos = response.body();
-                for(Monumento monumento : monumentos){
-                    String content = "";
-                    content += monumento.getName();
-
-                    textViewName.append(content);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Monumento>> call, Throwable t) {
-                textViewName.setText(t.getMessage());
-                Log.i("******************", t.toString());
-            }
-        });
-    }
 }

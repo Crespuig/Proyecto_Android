@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.proyecto_android.R;
 import com.example.proyecto_android.bbdd.MiAppOperacional;
+import com.example.proyecto_android.dao.UsuarioDAO;
 import com.example.proyecto_android.model.Usuario;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,14 +30,14 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity{
     FirebaseAuth mfirebaseAuth;
-    //FirebaseAuth.AuthStateListener mAuthStateListener;
+    FirebaseAuth.AuthStateListener mAuthStateListener;
     Button btnRegistrase;
     Button btnLogin;
     public static final int REQUEST_CODE = 54654;
 
     List<AuthUI.IdpConfig> provider = Arrays.asList(
-            new AuthUI.IdpConfig.FacebookBuilder().build(),
-            new AuthUI.IdpConfig.GoogleBuilder().build()
+            new AuthUI.IdpConfig.FacebookBuilder().build()
+            //new AuthUI.IdpConfig.GoogleBuilder().build()
     );
 
 
@@ -127,8 +128,15 @@ public class LoginActivity extends AppCompatActivity{
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
+
+                            UsuarioDAO usuarioDAO  = new UsuarioDAO();
+                            Usuario u = new Usuario();
+                            u.setEmail(usuario.getText().toString());
+                            usuarioDAO.add(u);
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            saveOnPreferences(usuario.getText().toString(), password.getText().toString());
+                            intent.putExtra("usuario", u);
+                            saveOnPreferences(u.getEmail(), password.getText().toString());
                             startActivity(intent);
                         }else{
                             Toast.makeText(LoginActivity.this, "Login fallido", Toast.LENGTH_SHORT).show();

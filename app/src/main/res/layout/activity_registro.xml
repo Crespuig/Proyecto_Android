@@ -59,4 +59,10 @@
         android:layout_height="56dp"
         android:text="Ya tengo una cuenta"/>
 
+    <Button
+        android:id="@+id/registerFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Acceder con Facebook"/>
+
 </LinearLayout>

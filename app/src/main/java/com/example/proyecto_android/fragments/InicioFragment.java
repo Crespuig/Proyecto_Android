@@ -59,7 +59,7 @@ public class InicioFragment extends Fragment /*implements AdapterView.OnItemClic
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(id, fragment)
-                //.addToBackStack(fragment.getTag())
+                .addToBackStack(fragment.getTag())
                 .commit();
     }
 

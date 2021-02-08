@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //Sustituye un fragment por otro
         getSupportFragmentManager().beginTransaction()
                 .replace(id, fragment)
-                //.addToBackStack(fragment.getTag())
+                .addToBackStack(fragment.getTag())
                 .commit();
     }
 
