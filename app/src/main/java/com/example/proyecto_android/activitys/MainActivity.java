@@ -75,16 +75,38 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        final NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_lista, R.id.nav_mapa, R.id.nav_favoritos, R.id.nav_clima, R.id.nav_transporte, R.id.nav_estadisticas, R.id.menu_opcion01)
+                R.id.nav_home, R.id.nav_lista, R.id.nav_mapa, R.id.nav_favoritos, R.id.nav_clima, R.id.nav_transporte, R.id.nav_estadisticas, R.id.menu_opcion01,
+                R.id.menu_opcion02)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment;
+                Bundle args = new Bundle();
+                switch (item.getItemId()){
+                    case R.id.menu_opcion02:
+                        AuthUI.getInstance().signOut(navigationView.getContext()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(MainActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
+                }
+                return true;
+            }
+        });
 
         try {
             String jsonString = Utils.leerJson(this, "opendata1259927732622104222.JSON");
@@ -174,7 +196,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
     }
-
 
 
     public void cerrarSesion(View view){

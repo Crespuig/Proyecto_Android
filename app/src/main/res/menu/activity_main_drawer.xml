@@ -34,12 +34,14 @@
             android:title="@string/menu_estadiscitas" />
     </group>
 
-    <group>
-        <menu>
-            <item
-                android:id="@+id/menu_opcion01"
-                android:icon="@drawable/ic_baseline_settings_24"
-                android:title="@string/menu_configuracion" />
-        </menu>
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/menu_opcion01"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="@string/menu_configuracion" />
+        <item
+            android:id="@+id/menu_opcion02"
+            android:icon="@drawable/ic_baseline_close"
+            android:title="@string/menu_cerrar_sesion" />
     </group>
 </menu>
