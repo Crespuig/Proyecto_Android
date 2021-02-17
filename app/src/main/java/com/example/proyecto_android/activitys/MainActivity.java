@@ -27,6 +27,7 @@ import com.example.proyecto_android.model.Utils;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.internal.NavigationMenuItemView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,8 +64,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
         /*TextView nombreUsuario = (TextView) findViewById(R.id.nombreUsuario);
         nombreUsuario.setText(u.getNombre());
@@ -86,6 +85,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        NavigationMenuItemView itemCerrarSesion = (NavigationMenuItemView) findViewById(R.id.menu_opcion02);
 
 
         try {
@@ -168,9 +169,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 intent4.putExtra("usuario", usuario);
                 startActivityForResult(intent4, 0);
             case R.id.action_gestion_monumentos:
-                    Intent intent5 = new Intent(this, MonumentosActivity.class);
-                    intent5.putExtra("usuario", usuario);
-                    startActivityForResult(intent5, 0);
+                Intent intent5 = new Intent(this, MonumentosActivity.class);
+                intent5.putExtra("usuario", usuario);
+                startActivityForResult(intent5, 0);
             default:
                 return super.onOptionsItemSelected(item);
         }

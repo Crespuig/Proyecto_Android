@@ -52,6 +52,11 @@
         android:name="com.example.proyecto_android.activitys.PreferenceActivity"
         android:label="@string/menu_configuracion"
         tools:layout="@layout/activity_preference" />
+    <activity
+        android:id="@+id/menu_opcion02"
+        android:name="com.example.proyecto_android.activitys.LoginActivity"
+        android:label="@string/menu_configuracion"
+        tools:layout="@layout/activity_login" />
 
 
 
