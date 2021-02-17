@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,13 +36,12 @@ public class LoginActivity extends AppCompatActivity{
     Button btnRegistrase;
     Button btnLogin;
     public static final int REQUEST_CODE = 54654;
+    CheckBox checkRegistro;
 
     List<AuthUI.IdpConfig> provider = Arrays.asList(
             new AuthUI.IdpConfig.FacebookBuilder().build()
             //new AuthUI.IdpConfig.GoogleBuilder().build()
     );
-
-
 
     EditText usuario;
     EditText password;
@@ -54,9 +55,54 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mfirebaseAuth = FirebaseAuth.getInstance();
-        btnRegistrase = findViewById(R.id.btnRegistrarse);
         btnLogin = findViewById(R.id.btnAcceder);
+
+        checkRegistro = (CheckBox) findViewById(R.id.checkRegistro);
+
+        checkRegistro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked){
+                    btnLogin.setText("Registrarme");
+                    btnLogin.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }else{
+                    mfirebaseAuth = FirebaseAuth.getInstance();
+
+                    usuario = (EditText)findViewById(R.id.loginEmail);
+                    password = (EditText)findViewById(R.id.loginPaswword);
+
+                    api = MiAppOperacional.getInstance(getApplicationContext());
+
+                    usuario.setText("manolo@cabesa.com");
+                    password.setText("123456");
+
+                    btnLogin.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String email = usuario.getText().toString();
+                            String pass = password.getText().toString();
+
+                            if (!email.isEmpty() && !pass.isEmpty()){
+                                login(email, pass);
+                            }else{
+                                Toast.makeText(LoginActivity.this, "Login fallido amigo", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+
+
+
         /*mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -75,40 +121,8 @@ public class LoginActivity extends AppCompatActivity{
             }
         };*/
 
-        usuario = (EditText)findViewById(R.id.loginEmail);
-        password = (EditText)findViewById(R.id.loginPaswword);
 
 
-        api = MiAppOperacional.getInstance(this);
-
-        /*btnAcceder = (Button)findViewById(R.id.btnAcceder);
-        btnAcceder.setOnClickListener(this);*/
-
-        usuario.setText("manolo@cabesa.com");
-        password.setText("123456");
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = usuario.getText().toString();
-                String pass = password.getText().toString();
-
-                if (!email.isEmpty() && !pass.isEmpty()){
-                    login(email, pass);
-                }else{
-                    Toast.makeText(LoginActivity.this, "Login fallido amigo", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });
-
-        btnRegistrase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
-                startActivity(intent);
-            }
-        });
 
         TextView olvidar = (TextView) findViewById(R.id.olvidar);
         olvidar.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +135,8 @@ public class LoginActivity extends AppCompatActivity{
         prefs = getSharedPreferences("preferenciasUsuario", Context.MODE_PRIVATE);
 
     }
+
+
 
     private void login(String email, String pass) {
         mfirebaseAuth.signInWithEmailAndPassword(email, pass)
