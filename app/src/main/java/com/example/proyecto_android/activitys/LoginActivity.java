@@ -30,7 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mfirebaseAuth;
     FirebaseAuth.AuthStateListener mAuthStateListener;
     Button btnRegistrase;
@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity{
     MiAppOperacional api;
     Button btnAcceder;
     private SharedPreferences prefs;
+    private TextView texRegistro;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -57,50 +58,39 @@ public class LoginActivity extends AppCompatActivity{
 
         btnLogin = findViewById(R.id.btnAcceder);
 
-        checkRegistro = (CheckBox) findViewById(R.id.checkRegistro);
+        texRegistro = findViewById(R.id.textRegistro);
 
-        checkRegistro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        texRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked){
-                    btnLogin.setText("Registrarme");
-                    btnLogin.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                }else{
-                    mfirebaseAuth = FirebaseAuth.getInstance();
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
+                startActivity(intent);
+            }
+        });
+        mfirebaseAuth = FirebaseAuth.getInstance();
 
-                    usuario = (EditText)findViewById(R.id.loginEmail);
-                    password = (EditText)findViewById(R.id.loginPaswword);
+        usuario = (EditText) findViewById(R.id.loginEmail);
+        password = (EditText) findViewById(R.id.loginPaswword);
 
-                    api = MiAppOperacional.getInstance(getApplicationContext());
+        api = MiAppOperacional.getInstance(getApplicationContext());
 
-                    usuario.setText("manolo@cabesa.com");
-                    password.setText("123456");
+        usuario.setText("manolo@cabesa.com");
+        password.setText("123456");
 
-                    btnLogin.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            String email = usuario.getText().toString();
-                            String pass = password.getText().toString();
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = usuario.getText().toString();
+                String pass = password.getText().toString();
 
-                            if (!email.isEmpty() && !pass.isEmpty()){
-                                login(email, pass);
-                            }else{
-                                Toast.makeText(LoginActivity.this, "Login fallido amigo", Toast.LENGTH_SHORT).show();
+                if (!email.isEmpty() && !pass.isEmpty()) {
+                    login(email, pass);
+                } else {
+                    Toast.makeText(LoginActivity.this, "Login fallido amigo", Toast.LENGTH_SHORT).show();
 
-                            }
-                        }
-                    });
                 }
             }
         });
-
-
 
 
         /*mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -122,20 +112,21 @@ public class LoginActivity extends AppCompatActivity{
         };*/
 
 
+    TextView olvidar = (TextView) findViewById(R.id.olvidar);
+        olvidar.setOnClickListener(new View.OnClickListener()
 
-
-        TextView olvidar = (TextView) findViewById(R.id.olvidar);
-        olvidar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "Los datos no coinciden con ningún usuario", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        prefs = getSharedPreferences("preferenciasUsuario", Context.MODE_PRIVATE);
-
+    {
+        @Override
+        public void onClick (View view){
+        Toast.makeText(LoginActivity.this, "Los datos no coinciden con ningún usuario", Toast.LENGTH_SHORT).show();
     }
+    });
 
+    prefs =
+
+    getSharedPreferences("preferenciasUsuario",Context.MODE_PRIVATE);
+
+}
 
 
     private void login(String email, String pass) {
@@ -143,18 +134,22 @@ public class LoginActivity extends AppCompatActivity{
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
-                            UsuarioDAO usuarioDAO  = new UsuarioDAO();
+
+                            UsuarioDAO usuarioDAO = new UsuarioDAO();
                             Usuario u = new Usuario();
                             u.setEmail(usuario.getText().toString());
-                            usuarioDAO.add(u);
+                            Usuario existeUsuario = (Usuario) usuarioDAO.search(u);
+                            if (existeUsuario == null){
+                                usuarioDAO.add(u);
+                            }
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("usuario", u);
                             saveOnPreferences(u.getEmail(), password.getText().toString());
                             startActivity(intent);
-                        }else{
+                        } else {
                             Toast.makeText(LoginActivity.this, "Login fallido", Toast.LENGTH_SHORT).show();
                         }
                     }

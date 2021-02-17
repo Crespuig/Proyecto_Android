@@ -18,12 +18,16 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     //nombre de la base de datos
     private static final String database = "VisitamApp";
     //versión de la base de datos
-    private static final int version = 16;
+    private static final int version = 17;
     //Instrucción SQL para crear la tabla de USuarios
     private String sqlCreacionUsuarios = "CREATE TABLE usuarios ( id INTEGER PRIMARY KEY AUTOINCREMENT, nif STRING, nombre STRING, " +
             "apellidos STRING, claveSeguridad STRING, email STRING);";
     private String sqlCreacionMonumentos = "CREATE TABLE monumentos ( _id INTEGER PRIMARY KEY, nombre STRING, numPol STRING, " +
             "codVia INTEGER, telefono STRING, ruta INTEGER, latitud FLOAT, longitud FLOAT, imagen STRING);";
+    private String sqlCreacionFavoritos = "CREATE TABLE favoritos ( _id INTEGER PRIMARY KEY AUTOINCREMENT,  idUsuario INTEGER, idMonumento INTEGER, " +
+            "CONSTRAINT fk_idUsuario FOREIGN KEY (idUsuario) REFERENCES usuarios(id)," +
+            "CONSTRAINT fk_idMonumento FOREIGN KEY (idMonumento) REFERENCES monumentos(_id)" +
+            ");";
 
 
     private static MiBD instance = null;
@@ -69,6 +73,7 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(sqlCreacionUsuarios);
         db.execSQL(sqlCreacionMonumentos);
+        db.execSQL(sqlCreacionFavoritos);
 
         insercionDatos(db);
         Log.i("SQLite", "Se crea la base de datos " + database + " version " + version);
@@ -83,8 +88,10 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
             //elimina tabla
             db.execSQL( "DROP TABLE IF EXISTS usuarios" );
             db.execSQL("DROP TABLE IF EXISTS monumentos");
+            db.execSQL("DROP TABLE IF EXISTS favoritos");
             db.execSQL(sqlCreacionUsuarios);
             db.execSQL(sqlCreacionMonumentos);
+            db.execSQL(sqlCreacionFavoritos);
 
 
             insercionDatos(db);

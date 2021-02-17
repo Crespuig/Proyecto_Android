@@ -42,8 +42,10 @@
     <Button
         android:id="@+id/btnAcceder"
         style="@style/botonAcceder"
-        android:layout_width="260dp"
+        android:layout_width="match_parent"
         android:layout_height="54dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
         android:background="@drawable/ovalo"
         android:backgroundTint="@color/colorPrimary"
         android:text="Acceder"
@@ -71,10 +73,13 @@
         android:layout_marginLeft="148dp"
         android:textColor="#FFFFFF"/>
 
-    <CheckBox
-        android:id="@+id/checkRegistro"
-        android:layout_width="123dp"
-        android:layout_height="42dp"
+    <TextView
+        android:id="@+id/textRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_marginRight="100dp"
+        android:layout_marginLeft="100dp"
         android:text="Registrarme"
         app:layout_constraintBottom_toTopOf="@+id/btnAcceder"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +87,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/olvidar"
         app:layout_constraintVertical_bias="0.836"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"/>
     <!--
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.example.proyecto_android.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.activitys.MainActivity;
 import com.example.proyecto_android.adapters.ListaMonumentosAdapter;
 import com.example.proyecto_android.bbdd.MiAppOperacional;
 import com.example.proyecto_android.bbdd.MiBD;
@@ -28,6 +30,7 @@ import com.example.proyecto_android.dao.VisitamService;
 import com.example.proyecto_android.dialogos.DialogoListaMonumentos;
 import com.example.proyecto_android.model.ListaViewModel;
 import com.example.proyecto_android.model.Monumento;
+import com.example.proyecto_android.model.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -68,10 +71,11 @@ public class ListaFragment extends Fragment {
        // getMonumentos();
         //mRecyclerView.setHasFixedSize(true);
         //mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new ListaMonumentosAdapter(monumentos, R.layout.recycler_view_item, new ListaMonumentosAdapter.OnItemClickListener() {
+        Usuario u = ((MainActivity)context.getActivity()).getUsuario();
+        mAdapter = new ListaMonumentosAdapter(monumentos, u,  R.layout.recycler_view_item, new ListaMonumentosAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Monumento monumento, int position) {
-                //Toast.makeText(context.getContext(), monumento + "-" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context.getContext(), monumento + "-" + position, Toast.LENGTH_SHORT).show();
             }
         });
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -115,12 +119,12 @@ public class ListaFragment extends Fragment {
 
                 List<Monumento> monumentos = response.body();
 
-                mAdapter = new ListaMonumentosAdapter(monumentos, R.layout.recycler_view_item, new ListaMonumentosAdapter.OnItemClickListener() {
+                /*mAdapter = new ListaMonumentosAdapter(monumentos, R.layout.recycler_view_item, new ListaMonumentosAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Monumento monumento, int position) {
                         //Toast.makeText(context.getContext(), monumento + "-" + position, Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
             }
 
             @Override

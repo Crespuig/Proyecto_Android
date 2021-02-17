@@ -39,7 +39,7 @@ public class InicioFragment extends Fragment /*implements AdapterView.OnItemClic
         View view = inflater.inflate(R.layout.fragment_inicio, container, false);
         //final TextView textView = root.findViewById(R.id.text_home);
 
-        constraintLayout = (ConstraintLayout) view.findViewById(R.id.fragmentInicio);
+       /* constraintLayout = (ConstraintLayout) view.findViewById(R.id.fragmentInicio);
         btnLista = view.findViewById(R.id.btnLista);
         btnLista.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,34 +47,16 @@ public class InicioFragment extends Fragment /*implements AdapterView.OnItemClic
                 cambiaFragment(R.id.contenedor, new ListaFragment());
                 constraintLayout.setVisibility(View.GONE);
             }
-        });
+        });*/
 
 
         return view;
     }
 
-    public void cambiaFragment(int id, Fragment fragment) {
-        //Sustituye un fragment por otro
-        getActivity()
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .replace(id, fragment)
-                .addToBackStack(fragment.getTag())
-                .commit();
-    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        FragmentTransaction transaction = null;
-        switch (item.getItemId()){
-            case R.id.btnLista:
-                transaction.replace(R.id.contenedor, listaFragment);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
+       return true;
     }
 
 }

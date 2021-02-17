@@ -19,6 +19,7 @@ public class UsuarioDAO implements PojoDAO{
         contentValues.put("apellidos", u.getApellidos());
         contentValues.put("claveSeguridad", u.getClaveSeguridad());
         contentValues.put("email", u.getEmail());
+        contentValues.put("is_admin", false);
         return MiBD.getDB().insert("usuarios", null, contentValues);
     }
 
@@ -53,8 +54,8 @@ public class UsuarioDAO implements PojoDAO{
     public Object search(Object obj) {
         Usuario c = (Usuario) obj;
         String condicion = "";
-        if(TextUtils.isEmpty(c.getNif())){
-            condicion = "id=" + String.valueOf(c.getId());
+        if(TextUtils.isEmpty((c.getEmail()))){
+            condicion = "email=" + String.valueOf((c.getEmail()));
         }else{
             condicion = "nif=" + "'" + c.getNif() + "'";
         }

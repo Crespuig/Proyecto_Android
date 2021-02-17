@@ -20,6 +20,8 @@ import com.example.proyecto_android.R;
 import com.example.proyecto_android.adapters.GestionMonumentoAdapter;
 import com.example.proyecto_android.bbdd.MiBD;
 import com.example.proyecto_android.dao.MonumentoDAO;
+import com.example.proyecto_android.dao.UsuarioDAO;
+import com.example.proyecto_android.fragments.ListaFragment;
 import com.example.proyecto_android.model.JsonToObject;
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
@@ -34,6 +36,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 
 import androidx.navigation.NavController;
@@ -51,12 +55,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, NavigationView.OnNavigationItemSelectedListener{
 
 
     private AppBarConfiguration mAppBarConfiguration;
-
+    private ListaFragment listaFragment;
     Usuario usuario;
+    private DrawerLayout drawer;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -64,7 +69,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        listaFragment = new ListaFragment();
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        usuario = (Usuario) usuarioDAO.search(usuario);
         /*TextView nombreUsuario = (TextView) findViewById(R.id.nombreUsuario);
         nombreUsuario.setText(u.getNombre());
         TextView emailusuario = (TextView) findViewById(R.id.emailUsuario);
@@ -73,11 +81,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.app_name, R.string.app_name);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
+        /*mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_lista, R.id.nav_mapa, R.id.nav_favoritos, R.id.nav_clima, R.id.nav_transporte, R.id.nav_estadisticas, R.id.menu_opcion01,
                 R.id.menu_opcion02)
                 .setDrawerLayout(drawer)
@@ -86,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        NavigationMenuItemView itemCerrarSesion = (NavigationMenuItemView) findViewById(R.id.menu_opcion02);
+        NavigationMenuItemView itemCerrarSesion = (NavigationMenuItemView) findViewById(R.id.menu_opcion02);*/
 
 
         try {
@@ -194,5 +208,37 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.nav_home:
+
+                break;
+            case R.id.nav_lista:
+                cambiaFragment(R.id.nav_host_fragment, listaFragment);
+                break;
+            case R.id.nav_mapa:
+
+                break;
+            case R.id.nav_favoritos:
+
+                break;
+            case R.id.menu_opcion01:
+
+                break;
+            case R.id.menu_opcion02:
+
+                break;
+
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 }

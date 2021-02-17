@@ -5,15 +5,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.dao.FavoritoDAO;
 import com.example.proyecto_android.dao.VisitamService;
+import com.example.proyecto_android.model.Favorito;
 import com.example.proyecto_android.model.Monumento;
+import com.example.proyecto_android.model.Usuario;
 import com.firebase.ui.auth.AuthUI;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,14 +36,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentosAdapter.ViewHolder> {
 
     private List<Monumento> monumentos;
+    private Usuario usuario;
     private int layout;
     private OnItemClickListener itemClickListener;
 
     private Context context;
     private TextView textViewName;
 
-    public ListaMonumentosAdapter(List<Monumento> monumentos, int layout, OnItemClickListener itemClickListener) {
+    public ListaMonumentosAdapter(List<Monumento> monumentos, Usuario usuario, int layout, OnItemClickListener itemClickListener) {
         this.monumentos = monumentos;
+        this.usuario = usuario;
         this.layout = layout;
         this.itemClickListener = itemClickListener;
     }
@@ -53,8 +60,6 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
         }
 
         public void bind(final Monumento monumento, final OnItemClickListener listener){
-
-
             textViewName.setText(monumento.getName());
             Picasso.with(context).load(monumento.getImagen()).fit().into(imageViewMonumento);
             if(monumento.getImagen() != null){
@@ -65,10 +70,35 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+
                     listener.onItemClick(monumento, getAdapterPosition());
                 }
             });
+
+            final ImageButton btnFav = itemView.findViewById(R.id.btnFav);
+            btnFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //int idUsuario = usuario.getId();
+                    int idMonumentos = monumento.getIdNotes();
+                    Favorito favorito = new Favorito();
+                    favorito.setIdUsuario(0);
+                    favorito.setIdMonumento(idMonumentos);
+
+                    FavoritoDAO favoritoDAO = new FavoritoDAO();
+                    Favorito existeFav = (Favorito) favoritoDAO.search(favorito);
+                    if (existeFav == null){
+                        //favoritoDAO.add(favorito);
+                        btnFav.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    }else{
+                        Toast.makeText(context, "El monumento ya está en tus favoritos.", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
         }
+
     }
 
     @NonNull
