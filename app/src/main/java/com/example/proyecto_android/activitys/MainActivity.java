@@ -22,6 +22,7 @@ import com.example.proyecto_android.bbdd.MiBD;
 import com.example.proyecto_android.dao.MonumentoDAO;
 import com.example.proyecto_android.dao.UsuarioDAO;
 import com.example.proyecto_android.fragments.ListaFragment;
+import com.example.proyecto_android.fragments.MapaFragment;
 import com.example.proyecto_android.model.JsonToObject;
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private AppBarConfiguration mAppBarConfiguration;
     private ListaFragment listaFragment;
+    private MapaFragment mapaFragment;
     Usuario usuario;
     private DrawerLayout drawer;
 
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
         listaFragment = new ListaFragment();
+        mapaFragment = new MapaFragment();
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         usuario = (Usuario) usuarioDAO.search(usuario);
@@ -115,8 +118,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 reg.put(MonumentoDAO.C_COLUMNA_CODVIA, m.getCodVia());
                 reg.put(MonumentoDAO.C_COLUMNA_TELEFONO, m.getTelefono());
                 reg.put(MonumentoDAO.C_COLUMNA_RUTA, m.getRuta());
-                reg.put(MonumentoDAO.C_COLUMNA_LATITUD, m.getLatitud());
-                reg.put(MonumentoDAO.C_COLUMNA_LONGITUD, m.getLongitud());
+                double lat = m.getLatitud() * Math.PI / 180.0;
+                reg.put(MonumentoDAO.C_COLUMNA_LATITUD,lat);
+                double lon = m.getLatitud() * Math.PI / 180.0;
+                reg.put(MonumentoDAO.C_COLUMNA_LONGITUD,lon);
 
                 monumentoDAO.insert(reg);
             }
@@ -148,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-
+        cambiaFragment(R.id.nav_host_fragment, listaFragment);
     }
 
 
@@ -221,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 cambiaFragment(R.id.nav_host_fragment, listaFragment);
                 break;
             case R.id.nav_mapa:
-
+                cambiaFragment(R.id.nav_host_fragment, mapaFragment);
                 break;
             case R.id.nav_favoritos:
 
