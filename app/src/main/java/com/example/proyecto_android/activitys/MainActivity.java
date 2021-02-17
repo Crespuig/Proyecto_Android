@@ -21,6 +21,7 @@ import com.example.proyecto_android.adapters.GestionMonumentoAdapter;
 import com.example.proyecto_android.bbdd.MiBD;
 import com.example.proyecto_android.dao.MonumentoDAO;
 import com.example.proyecto_android.dao.UsuarioDAO;
+import com.example.proyecto_android.fragments.FavoritosFragment;
 import com.example.proyecto_android.fragments.ListaFragment;
 import com.example.proyecto_android.fragments.MapaFragment;
 import com.example.proyecto_android.model.JsonToObject;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private AppBarConfiguration mAppBarConfiguration;
     private ListaFragment listaFragment;
     private MapaFragment mapaFragment;
+    private FavoritosFragment favoritosFragment;
     Usuario usuario;
     private DrawerLayout drawer;
 
@@ -73,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         listaFragment = new ListaFragment();
         mapaFragment = new MapaFragment();
+        favoritosFragment = new FavoritosFragment();
+
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         usuario = (Usuario) usuarioDAO.search(usuario);
@@ -229,13 +233,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 cambiaFragment(R.id.nav_host_fragment, mapaFragment);
                 break;
             case R.id.nav_favoritos:
-
+                cambiaFragment(R.id.nav_host_fragment, favoritosFragment);
                 break;
             case R.id.menu_opcion01:
-
+                //cambiaFragment(R.id.nav_host_fragment, mapaFragment);
                 break;
             case R.id.menu_opcion02:
-
+                //cambiaFragment(R.id.nav_host_fragment, mapaFragment);
                 break;
 
         }
