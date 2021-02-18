@@ -24,7 +24,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.bbdd.MiBD;
 import com.example.proyecto_android.model.MapaViewModel;
+import com.example.proyecto_android.model.Monumento;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -49,6 +51,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
     MapaFragment context = this;
     private GoogleMap mMap;
 
+    private List<Monumento> monumentoList;
+
     private Geocoder geocoder;
     private List<Address> addresses;
 
@@ -66,6 +70,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
 
         fab.setOnClickListener(this);
+
+        monumentoList = this.getAllMonumentos();
 
         return view;
     }
@@ -112,16 +118,20 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
             }
         });*/
 
-        LatLng palMarquesMalf = new LatLng(39.46975, -0.37739);
+        //for (Monumento m: monumentoList) {
+            LatLng pos = new LatLng(39.4723377,-0.3645571);
 
-        marker = new MarkerOptions();
-        marker.position(palMarquesMalf);
-        marker.title("Mi marcador");
-        marker.draggable(true);
-        marker.snippet("Esto es una caja de texto dond modificar los datos");
-        marker.icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on));
+            marker = new MarkerOptions();
+            marker.position(pos);
+            marker.title("Mi marcador");
+            marker.draggable(true);
+            marker.snippet("Esto es una caja de texto dond modificar los datos");
+            marker.icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on));
 
-        mMap.addMarker(marker);
+            mMap.addMarker(marker);
+        //}
+
+
 
         /*MarkerOptions mo = new MarkerOptions();
         mo.position(palMarquesMalf);
@@ -129,8 +139,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
         mMap.addMarker(mo);*/
 
         CameraPosition camera = new CameraPosition.Builder()
-                .target(palMarquesMalf)
-                .zoom(18)    // limite 21
+                .target(new LatLng(39.46975, -0.37739))
+                .zoom(12)    // limite 21
                 .bearing(0)  // 0 - 365º
                 .tilt(45)    // efecto 3D limite 90
                 .build();
@@ -261,5 +271,9 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
     @Override
     public void onProviderDisabled(@NonNull String provider) {
 
+    }
+
+    private List<Monumento> getAllMonumentos(){
+        return MiBD.getInstance(getContext()).recuperarMonumentos();
     }
 }
