@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
@@ -46,18 +48,21 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class ListaFragment extends Fragment {
+public class ListaFragment extends Fragment implements SearchView.OnQueryTextListener {
     private ListView listaMonumentos;
     private MiAppOperacional mappo;
     ListaFragment context = this;
     private ListaViewModel listaViewModel;
+
+    private SearchView searchView;
+
 
     private List<Monumento> monumentos;
     VisitamService service;
 
     private RecyclerView mRecyclerView;
     // Puede ser declarado como 'RecyclerView.Adapter' o como la clase adaptador 'ListaMonumentosAdapter'
-    private RecyclerView.Adapter mAdapter;
+    private ListaMonumentosAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +72,8 @@ public class ListaFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(context.getContext());
 
+        searchView = (SearchView) view.findViewById(R.id.searchViewLista);
+        initListener();
 
        // getMonumentos();
         //mRecyclerView.setHasFixedSize(true);
@@ -141,5 +148,20 @@ public class ListaFragment extends Fragment {
     public void mostrarDetalle(/*Monumento m*/){
 
 
+    }
+
+    private void initListener(){
+        searchView.setOnQueryTextListener(this);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        mAdapter.filter(s);
+        return false;
     }
 }
