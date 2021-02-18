@@ -236,10 +236,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 cambiaFragment(R.id.nav_host_fragment, favoritosFragment);
                 break;
             case R.id.menu_opcion01:
-                //cambiaFragment(R.id.nav_host_fragment, mapaFragment);
+                Intent intent4 = new Intent(this, PreferenceActivity.class);
+                intent4.putExtra("usuario", usuario);
+                startActivityForResult(intent4, 0);
                 break;
             case R.id.menu_opcion02:
-                //cambiaFragment(R.id.nav_host_fragment, mapaFragment);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText(MainActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
+                finish();
                 break;
 
         }
