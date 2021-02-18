@@ -9,6 +9,7 @@ import com.example.proyecto_android.model.Favorito;
 import com.example.proyecto_android.model.Usuario;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FavoritoDAO implements PojoDAO {
 
@@ -83,6 +84,35 @@ public class FavoritoDAO implements PojoDAO {
                 "_id", "idUsuario", "idMonumentos"
         };
         Cursor cursor = MiBD.getDB().query("favoritos", columnas, null, null, null, null, null);
+        //CuentaDAO cuentaDAO = new CuentaDAO();
+        if (cursor.moveToFirst()) {
+            //Recorremos el cursor hasta que no haya más registros
+            do {
+                Favorito nuevoFavorito = null;
+                nuevoFavorito = new Favorito();
+                nuevoFavorito.setIdFavoritos(cursor.getInt(0));
+                nuevoFavorito.setIdUsuario(cursor.getInt(1));
+                nuevoFavorito.setIdMonumento(cursor.getInt(2));
+
+                //c.setListaCuentas(MiBD.getInstance(null).getCuentaDAO().getCuentas(c));
+                listaFavoritos.add(nuevoFavorito);
+
+            } while (cursor.moveToNext());
+        }
+        return listaFavoritos;
+    }
+
+    public List<Favorito> getAllByUsuario(int idUsuario) {
+        ArrayList<Favorito> listaFavoritos = new ArrayList<Favorito>();
+        String condicion =  "";
+        if (idUsuario >= 1) {
+            condicion = "idUsuario=" + idUsuario;
+        }
+
+        String[] columnas = {
+                "_id", "idUsuario", "idMonumento"
+        };
+        Cursor cursor = MiBD.getDB().query("favoritos", columnas, condicion, null, null, null, null);
         //CuentaDAO cuentaDAO = new CuentaDAO();
         if (cursor.moveToFirst()) {
             //Recorremos el cursor hasta que no haya más registros

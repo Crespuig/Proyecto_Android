@@ -54,8 +54,8 @@ public class UsuarioDAO implements PojoDAO{
     public Object search(Object obj) {
         Usuario c = (Usuario) obj;
         String condicion = "";
-        if(TextUtils.isEmpty((c.getEmail()))){
-            condicion = "email=" + String.valueOf((c.getEmail()));
+        if(!TextUtils.isEmpty(c.getEmail())){
+            condicion = "email='" + c.getEmail() + "'";
         }else{
             condicion = "nif=" + "'" + c.getNif() + "'";
         }

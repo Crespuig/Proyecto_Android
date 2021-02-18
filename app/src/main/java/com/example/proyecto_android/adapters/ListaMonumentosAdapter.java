@@ -89,20 +89,21 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
             btnFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //int idUsuario = usuario.getId();
+                    int idUsuario = usuario.getId();
                     int idMonumentos = monumento.getIdNotes();
                     Favorito favorito = new Favorito();
-                    favorito.setIdUsuario(0);
+                    favorito.setIdUsuario(idUsuario);
                     favorito.setIdMonumento(idMonumentos);
 
                     FavoritoDAO favoritoDAO = new FavoritoDAO();
                     Favorito existeFav = (Favorito) favoritoDAO.search(favorito);
                     if (existeFav == null) {
-                        //favoritoDAO.add(favorito);
+                        favoritoDAO.add(favorito);
                         btnFav.setImageResource(R.drawable.ic_baseline_favorite_24);
                     } else {
                         Toast.makeText(context, "El monumento ya está en tus favoritos.", Toast.LENGTH_SHORT).show();
-
+                        favoritoDAO.delete(favorito);
+                        btnFav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
                     }
                 }
             });

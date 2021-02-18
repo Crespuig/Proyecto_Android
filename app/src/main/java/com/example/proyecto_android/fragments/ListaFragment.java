@@ -1,5 +1,6 @@
 package com.example.proyecto_android.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,7 +52,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ListaFragment extends Fragment implements SearchView.OnQueryTextListener {
     private ListView listaMonumentos;
     private MiAppOperacional mappo;
-    ListaFragment context = this;
     private ListaViewModel listaViewModel;
 
     private SearchView searchView;
@@ -70,7 +70,7 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
         monumentos = this.getAllMonumentos();
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        mLayoutManager = new LinearLayoutManager(context.getContext());
+        mLayoutManager = new LinearLayoutManager(getContext());
 
         searchView = (SearchView) view.findViewById(R.id.searchViewLista);
         initListener();
@@ -78,17 +78,16 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
        // getMonumentos();
         //mRecyclerView.setHasFixedSize(true);
         //mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        Usuario u = ((MainActivity)context.getActivity()).getUsuario();
+        Usuario u = ((MainActivity) getActivity()).getUsuario();
         mAdapter = new ListaMonumentosAdapter(monumentos, u,  R.layout.recycler_view_item, new ListaMonumentosAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Monumento monumento, int position) {
-                Toast.makeText(context.getContext(), monumento + "-" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), monumento + "-" + position, Toast.LENGTH_SHORT).show();
             }
         });
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        listaViewModel = ViewModelProviders.of(this).get(ListaViewModel.class);
 
 
         FloatingActionButton btnCalcularRuta = view.findViewById(R.id.btnCalcularRuta);
