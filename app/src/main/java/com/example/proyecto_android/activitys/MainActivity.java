@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -122,10 +123,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 reg.put(MonumentoDAO.C_COLUMNA_CODVIA, m.getCodVia());
                 reg.put(MonumentoDAO.C_COLUMNA_TELEFONO, m.getTelefono());
                 reg.put(MonumentoDAO.C_COLUMNA_RUTA, m.getRuta());
-                double lat = m.getLatitud() * Math.PI / 180.0;
-                reg.put(MonumentoDAO.C_COLUMNA_LATITUD,lat);
-                double lon = m.getLatitud() * Math.PI / 180.0;
-                reg.put(MonumentoDAO.C_COLUMNA_LONGITUD,lon);
+
+                double [] coordenadas = Utils.UTM2Deg(4372272.0,725455.0, 30);
+                Log.d("COORDENADAS", coordenadas[0] + ", "+coordenadas[1]);
+                reg.put(MonumentoDAO.C_COLUMNA_LATITUD,coordenadas[0]);
+                reg.put(MonumentoDAO.C_COLUMNA_LONGITUD,coordenadas[1]);
 
                 monumentoDAO.insert(reg);
             }
