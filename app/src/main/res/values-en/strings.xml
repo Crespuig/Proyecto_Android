@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Visita\'m</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_titulo">Username</string>
+    <string name="nav_header_subtitulo">email_user@android.com</string>
+    <string name="nav_header_foto_usuario">User photo</string>
+    <string name="action_configuracion">Settings</string>
+
+    <string name="menu_inicio">Home</string>
+    <string name="menu_lista">List</string>
+    <string name="menu_mapa">Map</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_crear">New</string>
+    <string name="label_nombre">Monument name:</string>
+    <string name="label_numPol">NumPol:</string>
+    <string name="label_codVia">CodVia:</string>
+    <string name="label_telefono">Teléfono:</string>
+    <string name="label_ruta">Ruta:</string>
+    <string name="label_coodenada">Coordenadas:</string>
+    <string name="boton_cancelar">Cancel</string>
+    <string name="boton_guardar">Save</string>
+    <string name="monumento_crear_titulo">New monument</string>
+    <string name="monumento_editar_titulo">Edit monument</string>
+    <string name="monumento_crear_confirmacion">Confirmation</string>
+    <string name="monumento_editar_confirmacion">Modified monument</string>
+    <string name="menu_eliminar">Delete</string>
+    <string name="menu_editar">Edit</string>
+    <string name="menu_guardar">Save</string>
+    <string name="menu_cancelar">Cancel</string>
+    <string name="monumento_eliminar_titulo">Delete monument</string>
+    <string name="monumento_eliminar_mensaje">Are you sure you want to remove the monument?</string>
+    <string name="monumento_eliminar_confirmacion">Monumento removed</string>
+    <string name="action_gestion_monumentos">Manage monuments</string>
+    <string name="titulo">Visita\'m</string>
+    <string name="menu_favoritos">Favorites</string>
+    <string name="menu_clima">Climate</string>
+    <string name="menu_transporte">Transport</string>
+    <string name="menu_estadiscitas">Estadísticas</string>
+    <string name="menu_configuracion">Settings</string>
+    <string name="menu_cerrar_sesion">Sign off</string>
+    <string name="label_latitud">Latitude:</string>
+    <string name="label_longitud">Longitude:</string>
+    <string name="label_img">Image:</string>
+
+    <string name="facebook_application_id" translatable="false">322503412532826</string>
+    <string name="facebook_login_protocol_schema" translatable="false">fb322503412532826</string>
+    <string name="title_activity_mapa">Map</string>
+
+</resources>
