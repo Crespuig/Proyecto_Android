@@ -12,7 +12,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
+        android:layout_gravity="start|bottom"
         android:src="@android:drawable/ic_menu_compass"
         android:backgroundTint="@color/colorPrimary"
         android:layout_margin="16dp" />
