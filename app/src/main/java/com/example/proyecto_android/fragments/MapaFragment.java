@@ -127,13 +127,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
             //marker.icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on));
         //}
 
-
-
-        /*MarkerOptions mo = new MarkerOptions();
-        mo.position(palMarquesMalf);
-        mo.title("PALACIO DE LOS MARQUESES DE MALFERIT,O, DE LOS CONDES DE BRIZUELA").draggable(true);
-        mMap.addMarker(mo);*/
-
         CameraPosition camera = new CameraPosition.Builder()
                 .target(new LatLng(39.46975, -0.37739))
                 .zoom(13)    // limite 21

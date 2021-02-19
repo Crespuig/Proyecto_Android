@@ -112,19 +112,15 @@ public class LoginActivity extends AppCompatActivity {
         };*/
 
 
-    TextView olvidar = (TextView) findViewById(R.id.olvidar);
-        olvidar.setOnClickListener(new View.OnClickListener()
-
-    {
+        TextView olvidar = (TextView) findViewById(R.id.olvidar);
+        olvidar.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick (View view){
         Toast.makeText(LoginActivity.this, "Los datos no coinciden con ningún usuario", Toast.LENGTH_SHORT).show();
     }
     });
 
-    prefs =
-
-    getSharedPreferences("preferenciasUsuario",Context.MODE_PRIVATE);
+    prefs = getSharedPreferences("preferenciasUsuario",Context.MODE_PRIVATE);
 
 }
 
@@ -135,8 +131,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
-
                             UsuarioDAO usuarioDAO = new UsuarioDAO();
                             Usuario u = new Usuario();
                             u.setEmail(usuario.getText().toString());
