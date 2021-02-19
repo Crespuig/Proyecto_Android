@@ -100,6 +100,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
         mMap = googleMap;
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
+        anyadirMarcadores(googleMap);
+
         // MI LOCALIZACION
         /*if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -119,16 +121,10 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
         });*/
 
         //for (Monumento m: monumentoList) {
-            LatLng pos = new LatLng(39.4723377,-0.3645571);
-
-            marker = new MarkerOptions();
-            marker.position(pos);
-            marker.title("Mi marcador");
-            marker.draggable(true);
-            marker.snippet("Esto es una caja de texto dond modificar los datos");
-            marker.icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on));
-
-            mMap.addMarker(marker);
+            //marker.title("Mi marcador");
+            //marker.draggable(true);
+            //marker.snippet("Esto es una caja de texto dond modificar los datos");
+            //marker.icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on));
         //}
 
 
@@ -140,7 +136,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
 
         CameraPosition camera = new CameraPosition.Builder()
                 .target(new LatLng(39.46975, -0.37739))
-                .zoom(12)    // limite 21
+                .zoom(13)    // limite 21
                 .bearing(0)  // 0 - 365º
                 .tilt(45)    // efecto 3D limite 90
                 .build();
@@ -206,6 +202,51 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
                         Toast.LENGTH_LONG).show();*/
             }
         });
+    }
+
+    public void anyadirMarcadores(GoogleMap googleMap){
+        mMap = googleMap;
+
+        final LatLng archivoReino = new LatLng(39.4723377,-0.3645571);
+        final LatLng asiloIglesiaSantaMonica = new LatLng(39.4818788,-0.3748564);
+        final LatLng antHospGen = new LatLng(39.470492,-0.381345);
+        final LatLng bancajaFachada = new LatLng(39.4736277,-0.3708903);
+        final LatLng almudin = new LatLng(39.4765038,-0.3741034);
+        final LatLng asiloMarquesCampo = new LatLng(39.4759357,-0.3739955);
+        final LatLng asiloAncianosDesamp = new LatLng(39.4813114,-0.376185);
+        final LatLng nataliciaSantVFerr = new LatLng(39.4733214,-0.3709665);
+        final LatLng portalValldigna = new LatLng(39.4775334,-0.378749);
+        final LatLng csaVestuario = new LatLng(39.4759587,-0.3757966);
+
+        mMap.addMarker(new MarkerOptions().position(archivoReino).title("Archivo del Reino de Valencia").snippet("Passeig de l'Albereda, 22, 46010 Valencia")
+                .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+
+        mMap.addMarker(new MarkerOptions().position(asiloIglesiaSantaMonica).title("Asilo iglesia Santa Mónica").snippet("Plaça de Santa Mònica, 1, 46009 Valencia")
+                .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+
+        mMap.addMarker(new MarkerOptions().position(antHospGen).title("Antiguo hospital general").snippet("Carrer de l'Hospital, 11, 46001 València, Valencia")
+                .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+
+        mMap.addMarker(new MarkerOptions().position(bancajaFachada).title("Bancaja fachada").snippet("Plaça de Tetuan, 23, 46003 València, Valencia")
+                .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+
+        mMap.addMarker(new MarkerOptions().position(almudin).title("Almudin").snippet("Plaça de Sant Lluís Bertran, 2, 46003 València, Valencia")
+                .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+
+        mMap.addMarker(new MarkerOptions().position(asiloMarquesCampo).title("Asilo Marques de campo").snippet("Plaça de l´Arquebisbe, 3, 46003 València, Valencia")
+                .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+
+        mMap.addMarker(new MarkerOptions().position(asiloAncianosDesamp).title("Asilo ancianos desamparados").snippet("Carrer de la Mare Teresa Jornet, 1, 46009 València, Valencia")
+                .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+
+        mMap.addMarker(new MarkerOptions().position(nataliciaSantVFerr).title("Casa natalicia Sant Vicent Ferrer").snippet("Carrer del Pouet de Sant Vicent, 1, 46003 València, Valencia")
+                .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+
+        mMap.addMarker(new MarkerOptions().position(portalValldigna).title("Portal Valldigna").snippet("C/ del Portal de Valldigna, 46003 València, Valencia")
+                .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+
+        mMap.addMarker(new MarkerOptions().position(csaVestuario).title("Casa Vestuario").snippet("Plaça de la Verge, 1, 46001 València, Valencia")
+                .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
     }
 
     private boolean isGpsEnabled(){
