@@ -35,6 +35,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
     private Context context;
     private TextView textCardViewFav;
     private ImageView imageViewFav;
+    private TextView calleCardViewFav;
 
     private List<Monumento> monumentosList;
 
@@ -75,11 +76,13 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textCardViewFav = (TextView) itemView.findViewById(R.id.textCardViewFav);
+            calleCardViewFav = (TextView) itemView.findViewById(R.id.calleCardViewFav);
             imageViewFav = (ImageView) itemView.findViewById(R.id.imageCardViewFav);
         }
 
         public void bind(final Monumento monumento, final FavoritosAdapter.OnItemClickListener listener) {
             textCardViewFav.setText(monumento.getName());
+            calleCardViewFav.setText("Tel: " + monumento.getTelefono());
             if (monumento.getImagen() != null) {
                 int resId = context.getResources().getIdentifier(monumento.getImagen(), "drawable", context.getPackageName());
                 imageViewFav.setImageResource(resId);

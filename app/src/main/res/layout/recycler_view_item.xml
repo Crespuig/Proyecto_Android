@@ -9,7 +9,7 @@
     android:focusable="true"
     android:layout_margin="16dp"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="#E2E2E2"
+    app:cardBackgroundColor="#FFE0B2"
     app:cardCornerRadius="5dp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
