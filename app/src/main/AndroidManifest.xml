@@ -32,7 +32,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activitys.RegistroActivity" />
+        <activity android:name=".activitys.RegistroActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".activitys.MostrarMonumentoActivity" />
         <activity
             android:name=".activitys.GestionMonumentosActivity"
@@ -42,10 +44,12 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activitys.LoginActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activitys.InicioActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
