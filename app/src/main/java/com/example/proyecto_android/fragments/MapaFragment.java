@@ -1,11 +1,9 @@
 package com.example.proyecto_android.fragments;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -20,25 +18,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.proyecto_android.R;
-import com.example.proyecto_android.bbdd.MiBD;
-import com.example.proyecto_android.model.MapaViewModel;
 import com.example.proyecto_android.model.Monumento;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -47,7 +39,6 @@ import java.util.Locale;
 
 public class MapaFragment extends Fragment implements OnMapReadyCallback, View.OnClickListener, LocationListener {
 
-    private MapaViewModel slideshowViewModel;
     MapaFragment context = this;
     private GoogleMap mMap;
 
@@ -71,7 +62,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
 
         fab.setOnClickListener(this);
 
-        monumentoList = this.getAllMonumentos();
+        //TODO: GET MONUMENTOS API
+        //monumentoList = this.getAllMonumentos();
 
         return view;
     }
@@ -305,9 +297,5 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
     @Override
     public void onProviderDisabled(@NonNull String provider) {
 
-    }
-
-    private List<Monumento> getAllMonumentos(){
-        return MiBD.getInstance(getContext()).recuperarMonumentos();
     }
 }

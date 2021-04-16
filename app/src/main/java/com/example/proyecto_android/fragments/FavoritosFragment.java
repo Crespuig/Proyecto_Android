@@ -1,24 +1,18 @@
 package com.example.proyecto_android.fragments;
 
-import android.database.Cursor;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.proyecto_android.R;
 import com.example.proyecto_android.activitys.MainActivity;
 import com.example.proyecto_android.adapters.FavoritosAdapter;
-import com.example.proyecto_android.adapters.ListaMonumentosAdapter;
-import com.example.proyecto_android.bbdd.MiBD;
-import com.example.proyecto_android.dao.FavoritoDAO;
-import com.example.proyecto_android.dao.MonumentoDAO;
 import com.example.proyecto_android.model.Favorito;
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
@@ -55,22 +49,6 @@ public class FavoritosFragment extends Fragment {
         List<Favorito> favoritos = getFavoritosUsuario();
         List<Monumento> monumentosList = new ArrayList<>();
 
-        for (Favorito f: favoritos) {
-            MonumentoDAO monumentoDAO = new MonumentoDAO(getContext());
-            monumentoDAO = monumentoDAO.abrir();
-            Cursor c = monumentoDAO.getRegistro(f.getIdMonumento());
-            String nombre = c.getString(1);
-            String numPol = c.getString(2);
-            int codVia = c.getInt(3);
-            String telefono = c.getString(4);
-            int ruta = c.getInt(5);
-            float latitud = c.getFloat(6);
-            float longitud = c.getFloat(7);
-            String imagen = c.getString(8);
-
-            Monumento m = new Monumento(f.getIdMonumento(),nombre, numPol, codVia, telefono, ruta, latitud, longitud, imagen);
-            monumentosList.add(m);
-        }
         Usuario u = ((MainActivity) getActivity()).getUsuario();
         favoritosAdapter = new FavoritosAdapter(monumentosList, u, R.layout.recycler_view_item_fav, new FavoritosAdapter.OnItemClickListener() {
             @Override
@@ -85,9 +63,8 @@ public class FavoritosFragment extends Fragment {
         return view;
     }
 
+    //TODO: get favoritos api by id usuario
     private List<Favorito> getFavoritosUsuario(){
-        Usuario u = ((MainActivity) getActivity()).getUsuario();
-        FavoritoDAO favoritoDAO = new FavoritoDAO();
-        return favoritoDAO.getAllByUsuario(u.getId());
+    return null;
     }
 }

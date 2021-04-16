@@ -1,32 +1,25 @@
 package com.example.proyecto_android.activitys;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyecto_android.R;
 import com.example.proyecto_android.adapters.GestionMonumentoAdapter;
-import com.example.proyecto_android.bbdd.Constantes;
-import com.example.proyecto_android.dao.MonumentoDAO;
+import com.example.proyecto_android.model.Constantes;
 import com.example.proyecto_android.model.Usuario;
 
 public class MonumentosActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     Usuario usuario;
-    MonumentoDAO monumentoDAO;
-    private Cursor cursor;
     private ListView lista;
     GestionMonumentoAdapter gestionMonumentoAdapter;
     private TextView v_txtSinDatos;
@@ -39,37 +32,21 @@ public class MonumentosActivity extends AppCompatActivity implements AdapterView
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
         lista = (ListView) findViewById(R.id.lista);
-        monumentoDAO = new MonumentoDAO(this);
         lista.setOnItemClickListener(this);
 
-        lista = (ListView) findViewById(R.id.lista);
-        // Creamos la clase que nos permitira acceder a las operaciones de la db
-        monumentoDAO = new MonumentoDAO(this);
+        //TODO: Get Monumentos
+        // crear adapter pasando la lista de monumentos
 
-        lista.setOnItemClickListener(this);
-
-        try {
-            monumentoDAO.abrir();
-
-            cursor = monumentoDAO.getCursor();
-
-            startManagingCursor(cursor);
-
-            gestionMonumentoAdapter = new GestionMonumentoAdapter(this, cursor);
+        //gestionMonumentoAdapter = new GestionMonumentoAdapter(this, lista);
 
             lista.setAdapter(gestionMonumentoAdapter);
-            // Si hay datos no se muestra la etiqueta de Sin Datos
-            if (cursor.getCount() > 0) {
-                v_txtSinDatos = (TextView) findViewById(R.id.txtSinDatos);
-                v_txtSinDatos.setVisibility(View.INVISIBLE);
-                v_txtSinDatos.invalidate();
-            }
-        } catch (Exception e) {
-            Toast.makeText(getBaseContext(), "Se ha producido un error al abrir la base de datos.",
-                    Toast.LENGTH_LONG).show();
-            e.printStackTrace();
+            //RELLENAR CAMPOS CON DATOS JSON
 
-        }
+            //SI ES VACIO
+            v_txtSinDatos = (TextView) findViewById(R.id.txtSinDatos);
+            v_txtSinDatos.setVisibility(View.INVISIBLE);
+            v_txtSinDatos.invalidate();
+
     }
 
     @Override
@@ -80,8 +57,8 @@ public class MonumentosActivity extends AppCompatActivity implements AdapterView
         // Le pasamos que el modo en que lo vamos a abrir es solo de visualizacion
         i.putExtra(Constantes.C_MODO, Constantes.C_VISUALIZAR);
 
-        // Le pasamos el valor del identificador de la hipoteca
-        i.putExtra(MonumentoDAO.C_COLUMNA_MONUMENTOS_IDNOTES, id);
+        // Le pasamos el Monumento
+        //i.putExtra(MonumentoDAO.C_COLUMNA_MONUMENTOS_IDNOTES, id);
 
         i.putExtra("usuario", usuario);
 
@@ -118,19 +95,21 @@ public class MonumentosActivity extends AppCompatActivity implements AdapterView
         switch(requestCode) {
             case Constantes.C_CREAR:
                 if (resultCode == RESULT_OK)
-                    recargar_lista();
+                    //recargar_lista();
+                    break;
             case Constantes.C_VISUALIZAR:
                 if (resultCode == RESULT_OK)
-                    recargar_lista();
+                    //recargar_lista();
+                    break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    private void recargar_lista() {
+    /*private void recargar_lista() {
         MonumentoDAO monumentoDAO = new MonumentoDAO(getBaseContext());
         monumentoDAO.abrir();
         GestionMonumentoAdapter gestionMonumentoAdapter = new GestionMonumentoAdapter(this, monumentoDAO.getCursor());
         lista.setAdapter(gestionMonumentoAdapter);
-    }
+    }*/
 }

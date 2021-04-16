@@ -6,18 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
-import android.widget.TextView;
-
-import com.example.proyecto_android.dao.MonumentoDAO;
 
 public class GestionMonumentoAdapter extends CursorAdapter {
 
-    private MonumentoDAO monumentoDAO = null;
+    //private MonumentoDAO monumentoDAO = null;
 
     public GestionMonumentoAdapter(Context context, Cursor cursor) {
         super(context, cursor, 0);
-        monumentoDAO = new MonumentoDAO(context);
-        monumentoDAO.abrir();
+        //monumentoDAO = new MonumentoDAO(context);
+        //monumentoDAO.abrir();
     }
 
     @Override
@@ -33,11 +30,11 @@ public class GestionMonumentoAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         // Como hemos inflado simple_dropdown_item_1line solo tenemos un TextView que lo obtenemos
-        TextView tv = (TextView) view;
+        //TextView tv = (TextView) view;
         // Obtenemos el indice de la columna
-        int i = cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_NOMBRE);
+        //int i = cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_NOMBRE);
         // Asignamos el valor
-        tv.setText(cursor.getString(i));
+        //tv.setText(cursor.getString(i));
     }
 
 }

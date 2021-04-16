@@ -23,62 +23,29 @@ public class Monumento {
     @SerializedName("ruta")
     @Expose
     private int ruta;
-    @SerializedName("latitud")
+    @SerializedName("X")
     @Expose
-    private float latitud;
-    @SerializedName("longitud")
+    private float X;
+    @SerializedName("Y")
     @Expose
-    private float longitud;
-    @SerializedName("img")
+    private float Y;
+    /*@SerializedName("img")
     @Expose
-    private String imagen;
+    private String imagen;*/
 
     public Monumento() {
     }
 
 
-    public Monumento(int idNotes, String name, String numPol, int codVia, String telefono, int ruta, float latitud, float longitud, String imagen) {
+    public Monumento(int idNotes, String name, String numPol, int codVia, String telefono, int ruta, float x, float y) {
         this.idNotes = idNotes;
         this.name = name;
         this.numPol = numPol;
         this.codVia = codVia;
         this.telefono = telefono;
         this.ruta = ruta;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.imagen = imagen;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public float getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(float latitud) {
-        this.latitud = latitud;
-    }
-
-    public float getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(float longitud) {
-        this.longitud = longitud;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+        X = x;
+        Y = y;
     }
 
     public int getIdNotes() {
@@ -87,6 +54,14 @@ public class Monumento {
 
     public void setIdNotes(int idNotes) {
         this.idNotes = idNotes;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getNumPol() {
@@ -121,18 +96,19 @@ public class Monumento {
         this.ruta = ruta;
     }
 
-    @Override
-    public String toString() {
-        return "Monumento{" +
-                "idNotes=" + idNotes +
-                ", name='" + name + '\'' +
-                ", numPol='" + numPol + '\'' +
-                ", codVia=" + codVia +
-                ", telefono='" + telefono + '\'' +
-                ", ruta=" + ruta +
-                ", latitud=" + latitud +
-                ", longitud=" + longitud +
-                ", imagen='" + imagen + '\'' +
-                '}';
+    public float getX() {
+        return X;
+    }
+
+    public void setX(float x) {
+        X = x;
+    }
+
+    public float getY() {
+        return Y;
+    }
+
+    public void setY(float y) {
+        Y = y;
     }
 }

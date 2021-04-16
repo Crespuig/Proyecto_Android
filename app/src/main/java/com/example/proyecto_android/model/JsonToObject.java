@@ -50,15 +50,15 @@ public class JsonToObject {
                 monumento.setRuta(Integer.parseInt(properties.getString(MONUMENTOS_RUTA)));
             }
             if (properties.has(MONUMENTOS_IMG)){
-                monumento.setImagen(properties.getString(MONUMENTOS_IMG));
+                //monumento.setImagen(properties.getString(MONUMENTOS_IMG));
             }
         }
         if (object.has((MONUMENTOS_GEOMETRY))){
             JSONObject geometry = object.getJSONObject(MONUMENTOS_GEOMETRY);
             if (geometry.has(MONUMENTOS_COORDINATES)){
                 JSONArray coordinates = geometry.getJSONArray(MONUMENTOS_COORDINATES);
-                monumento.setLatitud(coordinates.getLong(0));
-                monumento.setLongitud(coordinates.getLong(1));
+                //monumento.setLatitud(coordinates.getLong(0));
+                //monumento.setLongitud(coordinates.getLong(1));
             }
         }
         return monumento;

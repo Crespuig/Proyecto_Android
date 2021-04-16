@@ -1,15 +1,10 @@
 package com.example.proyecto_android.activitys;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,15 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.proyecto_android.R;
-import com.example.proyecto_android.bbdd.Constantes;
-import com.example.proyecto_android.dao.MonumentoDAO;
+import com.example.proyecto_android.model.Constantes;
+import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
 
 public class GestionMonumentosActivity extends AppCompatActivity {
 
     private Cursor cursor;
-    private MonumentoDAO monumentoDAO;
     private int modo;
     private long id;
     private EditText nombre;
@@ -41,6 +38,7 @@ public class GestionMonumentosActivity extends AppCompatActivity {
     private Button boton_guardar;
     private Button boton_cancelar;
     private Usuario usuario;
+    private Monumento monumento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +59,7 @@ public class GestionMonumentosActivity extends AppCompatActivity {
         boton_guardar = (Button) findViewById(R.id.boton_guardar);
         boton_cancelar = (Button) findViewById(R.id.boton_cancelar);
 
-        monumentoDAO = new MonumentoDAO(this);
-        try {
-            monumentoDAO.abrir();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        if (extra.containsKey(MonumentoDAO.C_COLUMNA_MONUMENTOS_IDNOTES)) {
-            id = extra.getLong(MonumentoDAO.C_COLUMNA_MONUMENTOS_IDNOTES);
-            consultar(id);
-        }
+        //TODO: GET Monumento que le pasamos del Intent anterior
 
         establecerModo(extra.getInt(Constantes.C_MODO));
 
@@ -104,13 +92,13 @@ public class GestionMonumentosActivity extends AppCompatActivity {
         }
     }
 
-    private void consultar(long id) {
-        cursor = monumentoDAO.getRegistro(id);
-        nombre.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_NOMBRE)));
-        numPol.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_NUMPOL)));
-        codVia.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_CODVIA)));
-        telefono.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_TELEFONO)));
-        ruta.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_RUTA)));
+    //TODO: RELLENAR TEXTOS A PARTIR DEL MONUMENTO
+    private void rellenaDatos(long id) {
+        nombre.setText(monumento.getName());
+        //numPol.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_NUMPOL)));
+        //codVia.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_CODVIA)));
+        //telefono.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_TELEFONO)));
+        //ruta.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_RUTA)));
         //coordenadas.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_COORDENADAS)));
 
     }
@@ -124,28 +112,25 @@ public class GestionMonumentosActivity extends AppCompatActivity {
         img.setEnabled(opcion);
     }
 
+    //TODO: POST con el Monumento a guardar
     private void guardar() {
-        ContentValues reg = new ContentValues();
+        Monumento m;
 
-        if (modo == Constantes.C_EDITAR) {
-            reg.put(MonumentoDAO.C_COLUMNA_MONUMENTOS_IDNOTES, id);
-        }
-
-        reg.put(MonumentoDAO.C_COLUMNA_NOMBRE, nombre.getText().toString());
-        reg.put(MonumentoDAO.C_COLUMNA_NUMPOL, numPol.getText().toString());
-        reg.put(MonumentoDAO.C_COLUMNA_CODVIA, codVia.getText().toString());
-        reg.put(MonumentoDAO.C_COLUMNA_TELEFONO, telefono.getText().toString());
-        reg.put(MonumentoDAO.C_COLUMNA_RUTA, ruta.getText().toString());
-        reg.put(MonumentoDAO.C_COLUMNA_IMAGEN, img.getText().toString());
+        //m.setName( nombre.getText().toString());
+        //reg.put(MonumentoDAO.C_COLUMNA_NUMPOL, numPol.getText().toString());
+        //reg.put(MonumentoDAO.C_COLUMNA_CODVIA, codVia.getText().toString());
+        //reg.put(MonumentoDAO.C_COLUMNA_TELEFONO, telefono.getText().toString());
+        //reg.put(MonumentoDAO.C_COLUMNA_RUTA, ruta.getText().toString());
+        //reg.put(MonumentoDAO.C_COLUMNA_IMAGEN, img.getText().toString());
 
         if (modo == Constantes.C_CREAR) {
-            monumentoDAO.insert(reg);
+            //POST
             Toast.makeText(GestionMonumentosActivity.this, R.string.monumento_crear_confirmacion,
                     Toast.LENGTH_SHORT).show();
         }else if (modo == Constantes.C_EDITAR) {
+            //PUT
             Toast.makeText(GestionMonumentosActivity.this, R.string.monumento_editar_confirmacion,
                     Toast.LENGTH_SHORT).show();
-            monumentoDAO.update(reg);
         }
 
         //
@@ -190,31 +175,10 @@ public class GestionMonumentosActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //TODO: DELETE a la api con id monumento
     private void borrar(final long id)
     {
-        /**
-         * Borramos el registro con confirmación
-         */
-        AlertDialog.Builder dialogEliminar = new AlertDialog.Builder(this);
-        dialogEliminar.setIcon(android.R.drawable.ic_dialog_alert);
-        dialogEliminar.setTitle(getResources().getString(R.string.monumento_eliminar_titulo));
-        dialogEliminar.setMessage(getResources().getString(R.string.monumento_eliminar_mensaje));
-        dialogEliminar.setCancelable(false);
-        dialogEliminar.setPositiveButton(getResources().getString(android.R.string.ok), new
-                DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int boton) {
-                        monumentoDAO.delete(id);
-                        Toast.makeText(GestionMonumentosActivity.this, R.string.monumento_eliminar_confirmacion,
-                                Toast.LENGTH_SHORT).show();
-                        /**
-                         * Devolvemos el control
-                         */
-                        setResult(RESULT_OK);
-                        finish();
-                    }
-                });
-        dialogEliminar.setNegativeButton(android.R.string.no, null);
-        dialogEliminar.show();
+
     }
 
 }

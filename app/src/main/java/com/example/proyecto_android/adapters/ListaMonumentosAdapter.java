@@ -2,41 +2,23 @@ package com.example.proyecto_android.adapters;
 
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyecto_android.R;
-import com.example.proyecto_android.dao.FavoritoDAO;
-import com.example.proyecto_android.dao.VisitamService;
-import com.example.proyecto_android.fragments.ListaFragment;
-import com.example.proyecto_android.model.Favorito;
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
-import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.actions.ItemListIntents;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.squareup.picasso.Picasso;
 
-import java.security.Provider;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentosAdapter.ViewHolder> {
 
@@ -70,11 +52,11 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
 
         public void bind(final Monumento monumento, final OnItemClickListener listener) {
             textViewName.setText(monumento.getName());
-            Picasso.with(context).load(monumento.getImagen()).fit().into(imageViewMonumento);
+            /*Picasso.with(context).load(monumento.getImagen()).fit().into(imageViewMonumento);
             if (monumento.getImagen() != null) {
                 int resId = context.getResources().getIdentifier(monumento.getImagen(), "drawable", context.getPackageName());
                 imageViewMonumento.setImageResource(resId);
-            }
+            }*/
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,20 +73,9 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
                 public void onClick(View view) {
                     int idUsuario = usuario.getId();
                     int idMonumentos = monumento.getIdNotes();
-                    Favorito favorito = new Favorito();
-                    favorito.setIdUsuario(idUsuario);
-                    favorito.setIdMonumento(idMonumentos);
-
-                    FavoritoDAO favoritoDAO = new FavoritoDAO();
-                    Favorito existeFav = (Favorito) favoritoDAO.search(favorito);
-                    if (existeFav == null) {
-                        favoritoDAO.add(favorito);
-                        btnFav.setImageResource(R.drawable.ic_baseline_favorite_24);
-                    } else {
-                        Toast.makeText(context, "El monumento ya está en tus favoritos.", Toast.LENGTH_SHORT).show();
-                        favoritoDAO.delete(favorito);
-                        btnFav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-                    }
+                    //TODO: Comprobar si existe favorito
+                    //EXISTE = TRUE -> Borra favorito
+                    //EXISTE = FALSE -> Agrega favorito
                 }
             });
         }

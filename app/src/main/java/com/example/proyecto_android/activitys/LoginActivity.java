@@ -1,8 +1,5 @@
 package com.example.proyecto_android.activitys;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -11,42 +8,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.proyecto_android.R;
-import com.example.proyecto_android.bbdd.MiAppOperacional;
-import com.example.proyecto_android.dao.UsuarioDAO;
-import com.example.proyecto_android.model.Usuario;
-import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Arrays;
-import java.util.List;
+import com.example.proyecto_android.R;
+import com.example.proyecto_android.model.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
-    FirebaseAuth mfirebaseAuth;
-    FirebaseAuth.AuthStateListener mAuthStateListener;
+
+
     Button btnRegistrase;
     Button btnLogin;
-    public static final int REQUEST_CODE = 54654;
     CheckBox checkRegistro;
-
-    List<AuthUI.IdpConfig> provider = Arrays.asList(
-            new AuthUI.IdpConfig.FacebookBuilder().build()
-            //new AuthUI.IdpConfig.GoogleBuilder().build()
-    );
-
     EditText usuario;
     EditText password;
-    MiAppOperacional api;
     Button btnAcceder;
+
     private SharedPreferences prefs;
     private TextView texRegistro;
 
@@ -67,15 +47,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        mfirebaseAuth = FirebaseAuth.getInstance();
+
 
         usuario = (EditText) findViewById(R.id.loginEmail);
         password = (EditText) findViewById(R.id.loginPaswword);
 
-        api = MiAppOperacional.getInstance(getApplicationContext());
-
-        usuario.setText("manolo@cabesa.com");
-        password.setText("123456");
+        usuario.setText("admin@admin.com");
+        password.setText("admin");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,26 +70,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-        /*mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-
-                if (user != null){
-                    Toast.makeText(LoginActivity.this, "Inicio sesion OK", Toast.LENGTH_SHORT).show();
-                }else{
-                    startActivityForResult(AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setAvailableProviders(provider)
-                            .setIsSmartLockEnabled(false)
-                            .build(), REQUEST_CODE
-                    );
-                }
-            }
-        };*/
-
-
         TextView olvidar = (TextView) findViewById(R.id.olvidar);
         olvidar.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -125,29 +83,19 @@ public class LoginActivity extends AppCompatActivity {
 }
 
 
+    //TODO: Conectar POST A API PARA HACER LOGIN
     private void login(String email, String pass) {
-        mfirebaseAuth.signInWithEmailAndPassword(email, pass)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            UsuarioDAO usuarioDAO = new UsuarioDAO();
-                            Usuario u = new Usuario();
-                            u.setEmail(usuario.getText().toString());
-                            Usuario existeUsuario = (Usuario) usuarioDAO.search(u);
-                            if (existeUsuario == null){
-                                usuarioDAO.add(u);
-                            }
+       // HACER LLAMADA API
 
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("usuario", u);
-                            saveOnPreferences(u.getEmail(), password.getText().toString());
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Login fallido", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        // SI LOGIN OK
+        Usuario u = new Usuario();
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("usuario", u);
+            saveOnPreferences(u.getEmail(), password.getText().toString());
+            startActivity(intent);
+        // SI LOGIN KO
+            Toast.makeText(LoginActivity.this, "Login fallido", Toast.LENGTH_SHORT).show();
+
     }
 
     private void saveOnPreferences(String usuario, String password) {
@@ -156,37 +104,5 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("password", password);
         editor.apply();
     }
-
-    /*@Override
-    public void onClick(View view) {
-        String email = usuario.getText().toString();
-        String pass = password.getText().toString();
-
-        Usuario u = new Usuario();
-        u.setEmail(usuario.getText().toString());
-        u.setClaveSeguridad(password.getText().toString());
-        u = api.login(u);
-
-        if (u == null) {
-            Toast.makeText(LoginActivity.this, "Los datos no coinciden con ningún usuario", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra("usuario", u);
-            startActivity(intent);
-            saveOnPreferences(usuario.getText().toString(), password.getText().toString());
-        }
-    }*/
-
-    /*@Override
-    protected void onResume() {
-        super.onResume();
-        mfirebaseAuth.addAuthStateListener(mAuthStateListener);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mfirebaseAuth.removeAuthStateListener(mAuthStateListener);
-    }*/
 
 }

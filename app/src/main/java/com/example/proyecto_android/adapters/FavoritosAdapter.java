@@ -1,28 +1,20 @@
 package com.example.proyecto_android.adapters;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyecto_android.R;
-import com.example.proyecto_android.dao.FavoritoDAO;
-import com.example.proyecto_android.dao.MonumentoDAO;
 import com.example.proyecto_android.model.Favorito;
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.ViewHolder>{
@@ -83,10 +75,10 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
         public void bind(final Monumento monumento, final FavoritosAdapter.OnItemClickListener listener) {
             textCardViewFav.setText(monumento.getName());
             calleCardViewFav.setText("Tel: " + monumento.getTelefono());
-            if (monumento.getImagen() != null) {
+            /*if (monumento.getImagen() != null) {
                 int resId = context.getResources().getIdentifier(monumento.getImagen(), "drawable", context.getPackageName());
                 imageViewFav.setImageResource(resId);
-            }
+            }*/
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

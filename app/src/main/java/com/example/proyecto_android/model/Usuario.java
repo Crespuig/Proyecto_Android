@@ -2,41 +2,45 @@ package com.example.proyecto_android.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Usuario implements Serializable{
 
     private int id;
-    private String nif;
+    private String email;
     private String nombre;
     private String apellidos;
-    private String claveSeguridad;
-    private String email;
-    private boolean admin;
+    private String password;
+    private String avatar;
+    private Date fechaAlta;
 
-    public Usuario(int id, String nif, String nombre, String apellidos, String claveSeguridad, String email) {
+    public Usuario() {
+    }
+
+    public Usuario(int id, String email, String nombre, String apellidos, String password, String avatar, Date fechaAlta) {
         this.id = id;
+        this.email = email;
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.claveSeguridad = claveSeguridad;
-        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.fechaAlta = fechaAlta;
     }
 
-    public Usuario(int id, String nif, String nombre, String apellidos, String claveSeguridad, String email, boolean admin) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
-        this.nif = nif;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.claveSeguridad = claveSeguridad;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
-        this.admin = admin;
-    }
-
-    public String getNif() {
-        return nif;
-    }
-
-    public void setNif(String nif) {
-        this.nif = nif;
     }
 
     public String getNombre() {
@@ -55,52 +59,27 @@ public class Usuario implements Serializable{
         this.apellidos = apellidos;
     }
 
-    public String getClaveSeguridad() {
-        return claveSeguridad;
+    public String getPassword() {
+        return password;
     }
 
-    public void setClaveSeguridad(String claveSeguridad) {
-        this.claveSeguridad = claveSeguridad;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public int getId() {
-        return id;
+    public Date getFechaAlta() {
+        return fechaAlta;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
-    public Usuario(){
-        super();
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nif='" + nif + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", claveSeguridad='" + claveSeguridad + '\'' +
-                ", email='" + email + '\'' +
-                ", admin=" + admin +
-                '}';
+    public void setFechaAlta(Date fechaAlta) {
+        this.fechaAlta = fechaAlta;
     }
 }

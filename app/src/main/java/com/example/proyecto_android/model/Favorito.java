@@ -2,50 +2,40 @@ package com.example.proyecto_android.model;
 
 public class Favorito {
     
-    private int idUsuario = -1;
-    private int idMonumento = -1;
-    private int idFavoritos = -1;
+    private int id;
+    private Monumento monumento;
+    private Usuario usuario;
 
     public Favorito() {
-        
     }
 
-    public Favorito(int idUsuario, int idMonumento, int idFavoritos) {
-        this.idUsuario = idUsuario;
-        this.idMonumento = idMonumento;
-        this.idFavoritos = idFavoritos;
+    public Favorito(int id, Monumento monumento, Usuario usuario) {
+        this.id = id;
+        this.monumento = monumento;
+        this.usuario = usuario;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public int getId() {
+        return id;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getIdMonumento() {
-        return idMonumento;
+    public Monumento getMonumento() {
+        return monumento;
     }
 
-    public void setIdMonumento(int idMonumento) {
-        this.idMonumento = idMonumento;
+    public void setMonumento(Monumento monumento) {
+        this.monumento = monumento;
     }
 
-    public int getIdFavoritos() {
-        return idFavoritos;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdFavoritos(int idFavoritos) {
-        this.idFavoritos = idFavoritos;
-    }
-
-    @Override
-    public String toString() {
-        return "Favorito{" +
-                "idUsuario=" + idUsuario +
-                ", idMonumento=" + idMonumento +
-                ", idFavoritos=" + idFavoritos +
-                '}';
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
