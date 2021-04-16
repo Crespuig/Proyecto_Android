@@ -109,7 +109,7 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder().
-                baseUrl("http://mapas.valencia.es/").
+                baseUrl("http://192.168.0.10:8081/").
                 addConverterFactory(GsonConverterFactory.create(gson)).
                 build();
 
