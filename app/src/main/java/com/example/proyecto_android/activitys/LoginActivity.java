@@ -17,6 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.proyecto_android.R;
 import com.example.proyecto_android.model.Usuario;
 
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class LoginActivity extends AppCompatActivity {
 
 
@@ -86,6 +90,12 @@ public class LoginActivity extends AppCompatActivity {
     //TODO: Conectar POST A API PARA HACER LOGIN
     private void login(String email, String pass) {
        // HACER LLAMADA API
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("192.168.0.10:8081/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Usuario usuarioService = retrofit.create(Usuario.class);
+        //Call<Usuario> userCall = usuarioService.getEmail();
 
         // SI LOGIN OK
         Usuario u = new Usuario();
