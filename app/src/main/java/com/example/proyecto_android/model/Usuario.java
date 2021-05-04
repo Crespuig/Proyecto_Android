@@ -1,17 +1,34 @@
 package com.example.proyecto_android.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Usuario implements Serializable{
 
+    @SerializedName("id")
+    @Expose
     private int id;
+    @SerializedName("email")
+    @Expose
     private String email;
+    @SerializedName("nombre")
+    @Expose
     private String nombre;
+    @SerializedName("apellidos")
+    @Expose
     private String apellidos;
+    @SerializedName("password")
+    @Expose
     private String password;
+    @SerializedName("avatar")
+    @Expose
     private String avatar;
+    @SerializedName("fecha_alta")
+    @Expose
     private Date fechaAlta;
 
     public Usuario() {

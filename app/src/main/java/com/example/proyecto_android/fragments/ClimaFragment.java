@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.proyecto_android.R;
-import com.example.proyecto_android.interfaces.WeatherService;
+import com.example.proyecto_android.api.tiempo.WeatherService;
 import com.example.proyecto_android.model.City;
 
 import retrofit2.Call;

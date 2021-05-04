@@ -29,15 +29,15 @@ public class Monumento {
     @SerializedName("Y")
     @Expose
     private float Y;
-    /*@SerializedName("img")
+    @SerializedName("img")
     @Expose
-    private String imagen;*/
+    private String imagen;
 
     public Monumento() {
     }
 
 
-    public Monumento(int idNotes, String name, String numPol, int codVia, String telefono, int ruta, float x, float y) {
+    public Monumento(int idNotes, String name, String numPol, int codVia, String telefono, int ruta, float x, float y, String imagen) {
         this.idNotes = idNotes;
         this.name = name;
         this.numPol = numPol;
@@ -46,6 +46,7 @@ public class Monumento {
         this.ruta = ruta;
         X = x;
         Y = y;
+        this.imagen = imagen;
     }
 
     public int getIdNotes() {
@@ -110,5 +111,20 @@ public class Monumento {
 
     public void setY(float y) {
         Y = y;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    @Override
+    public String toString() {
+        return "Monumento{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

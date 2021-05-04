@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,9 +16,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.api.moumentos.ApiMonumentosUtils;
+import com.example.proyecto_android.api.moumentos.ApiMonumetosService;
+import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
 
+import java.util.List;
+
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -33,8 +41,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
     private TextView texRegistro;
+    private ApiMonumetosService apiMonumetosService;
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        apiMonumetosService = ApiMonumentosUtils.getClient();
 
         usuario = (EditText) findViewById(R.id.loginEmail);
         password = (EditText) findViewById(R.id.loginPaswword);
@@ -90,22 +99,26 @@ public class LoginActivity extends AppCompatActivity {
     //TODO: Conectar POST A API PARA HACER LOGIN
     private void login(String email, String pass) {
        // HACER LLAMADA API
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("192.168.0.10:8081/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Usuario usuarioService = retrofit.create(Usuario.class);
-        //Call<Usuario> userCall = usuarioService.getEmail();
-
-        // SI LOGIN OK
         Usuario u = new Usuario();
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra("usuario", u);
-            saveOnPreferences(u.getEmail(), password.getText().toString());
-            startActivity(intent);
-        // SI LOGIN KO
-            Toast.makeText(LoginActivity.this, "Login fallido", Toast.LENGTH_SHORT).show();
+        u.setEmail(email);
+        u.setPassword(pass);
+        apiMonumetosService.login(u).enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                Log.d("LOg", response.body().toString());
+                Usuario u = response.body();
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("usuario", u);
+                saveOnPreferences(u.getEmail(), u.getPassword());
+                startActivity(intent);
+            }
 
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Log.d("LOg", t.toString());
+                Toast.makeText(LoginActivity.this, "Login fallido", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void saveOnPreferences(String usuario, String password) {

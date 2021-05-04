@@ -1,4 +1,4 @@
-package com.example.proyecto_android.interfaces;
+package com.example.proyecto_android.api.tiempo;
 
 import com.example.proyecto_android.model.City;
 

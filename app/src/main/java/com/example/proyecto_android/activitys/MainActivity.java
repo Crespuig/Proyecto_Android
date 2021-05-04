@@ -3,6 +3,7 @@ package com.example.proyecto_android.activitys;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,14 +23,24 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.adapters.ListaMonumentosAdapter;
+import com.example.proyecto_android.api.moumentos.ApiMonumentosUtils;
+import com.example.proyecto_android.api.moumentos.ApiMonumetosService;
 import com.example.proyecto_android.fragments.FavoritosFragment;
 import com.example.proyecto_android.fragments.ListaFragment;
 import com.example.proyecto_android.fragments.MapaFragment;
+import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, NavigationView.OnNavigationItemSelectedListener{
 
@@ -38,8 +49,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private ListaFragment listaFragment;
     private MapaFragment mapaFragment;
     private FavoritosFragment favoritosFragment;
-    Usuario usuario;
+    private Usuario usuario;
+    private List<Monumento> monumentos;
     private DrawerLayout drawer;
+    private ApiMonumetosService apiMonumetosService;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -65,7 +78,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        cambiaFragment(R.id.nav_host_fragment, listaFragment);
+        apiMonumetosService = ApiMonumentosUtils.getClient();
+        apiMonumetosService.getMonumentos().enqueue(new Callback<List<Monumento>>() {
+            @Override
+            public void onResponse(Call<List<Monumento>> call, Response<List<Monumento>> response) {
+                monumentos = response.body();
+                cambiaFragment(R.id.nav_host_fragment, listaFragment);
+            }
+
+            @Override
+            public void onFailure(Call<List<Monumento>> call, Throwable t) {
+                Log.d("LOg", t.toString());
+                Toast.makeText(getApplicationContext(), "fallido", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 
@@ -170,5 +197,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public List<Monumento> getMonumentos() {
+        return monumentos;
     }
 }
