@@ -10,6 +10,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.api.moumentos.ApiMonumetosService;
+import com.example.proyecto_android.model.Usuario;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegistroActivity extends AppCompatActivity {
 
@@ -20,6 +26,7 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText registerRepeatPassword;
     private Button registerButton;
     private Button goLoginButton;
+    private ApiMonumetosService apiMonumetosService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +73,19 @@ public class RegistroActivity extends AppCompatActivity {
 
     //TODO: POST CON LOS DATOS DEL NUEVO USUARIO
     private void register(String email, String password) {
+        Usuario u = new Usuario();
 
+        apiMonumetosService.registrar(u).enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+
+            }
+        });
     }
 
 

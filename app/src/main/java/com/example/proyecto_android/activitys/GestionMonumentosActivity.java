@@ -1,10 +1,7 @@
 package com.example.proyecto_android.activitys;
 
-import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyecto_android.R;
@@ -54,7 +50,7 @@ public class GestionMonumentosActivity extends AppCompatActivity {
         codVia = (EditText) findViewById(R.id.codVia);
         telefono = (EditText) findViewById(R.id.telefono);
         ruta = (EditText) findViewById(R.id.ruta);
-        img = (EditText) findViewById(R.id.img);
+        img = (EditText) findViewById(R.id.imgClima);
 
         boton_guardar = (Button) findViewById(R.id.boton_guardar);
         boton_cancelar = (Button) findViewById(R.id.boton_cancelar);

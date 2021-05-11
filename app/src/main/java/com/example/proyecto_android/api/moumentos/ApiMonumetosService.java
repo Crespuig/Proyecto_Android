@@ -18,4 +18,7 @@ public interface ApiMonumetosService {
 
     @POST("usuarios/login")
     Call<Usuario> login(@Body Usuario usuario);
+
+    @POST("usuarios/registro")
+    Call<Usuario> registrar(@Body Usuario usuario);
 }

@@ -26,6 +26,7 @@ import com.example.proyecto_android.R;
 import com.example.proyecto_android.adapters.ListaMonumentosAdapter;
 import com.example.proyecto_android.api.moumentos.ApiMonumentosUtils;
 import com.example.proyecto_android.api.moumentos.ApiMonumetosService;
+import com.example.proyecto_android.fragments.ClimaFragment;
 import com.example.proyecto_android.fragments.FavoritosFragment;
 import com.example.proyecto_android.fragments.ListaFragment;
 import com.example.proyecto_android.fragments.MapaFragment;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private ListaFragment listaFragment;
     private MapaFragment mapaFragment;
     private FavoritosFragment favoritosFragment;
+    private ClimaFragment climaFragment;
     private Usuario usuario;
     private List<Monumento> monumentos;
     private DrawerLayout drawer;
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         listaFragment = new ListaFragment();
         mapaFragment = new MapaFragment();
         favoritosFragment = new FavoritosFragment();
+        climaFragment = new ClimaFragment();
 
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
@@ -172,6 +175,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.nav_favoritos:
                 cambiaFragment(R.id.nav_host_fragment, favoritosFragment);
+                break;
+            case R.id.nav_clima:
+                cambiaFragment(R.id.nav_host_fragment, climaFragment);
                 break;
             case R.id.menu_opcion01:
                 Intent intent4 = new Intent(this, PreferenceActivity.class);
