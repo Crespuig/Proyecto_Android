@@ -39,12 +39,10 @@ public class ClimaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_clima, container, false);
 
-        editTextSearch = (EditText) view.findViewById(R.id.editTextSearch);
         textViewCity = (TextView) view.findViewById(R.id.textViewCity);
         textViewDescription = (TextView) view.findViewById(R.id.textViewDescription);
         textViewTemp = (TextView) view.findViewById(R.id.textViewTemp);
         img = (ImageView) view.findViewById(R.id.imgClima);
-        btn = (Button) view.findViewById(R.id.btnClima);
 
         WeatherService service = ApiClima.getApi().create(WeatherService.class);
         

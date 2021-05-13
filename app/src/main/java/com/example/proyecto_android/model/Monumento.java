@@ -36,6 +36,9 @@ public class Monumento {
     public Monumento() {
     }
 
+    public Monumento(int idNotes) {
+        this.idNotes = idNotes;
+    }
 
     public Monumento(int idNotes, String name, String numPol, int codVia, String telefono, int ruta, float x, float y, String imagen) {
         this.idNotes = idNotes;

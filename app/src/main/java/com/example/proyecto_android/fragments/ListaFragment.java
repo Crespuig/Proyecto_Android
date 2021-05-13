@@ -1,7 +1,11 @@
 package com.example.proyecto_android.fragments;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +60,12 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
         mAdapter = new ListaMonumentosAdapter(m, u,  R.layout.recycler_view_item, new ListaMonumentosAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Monumento monumento, int position) {
-                Toast.makeText(getContext(), monumento + "-" + position, Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(getContext())
+                        .setTitle(monumento.getName())
+                        .setMessage("CodVia - " + monumento.getCodVia()
+                                + "\nRuta - " + monumento.getRuta()
+                                + "\nTeléfono - " + monumento.getTelefono())
+                        .show();
             }
         });
         mRecyclerView.setLayoutManager(mLayoutManager);

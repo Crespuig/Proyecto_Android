@@ -21,6 +21,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.activitys.MainActivity;
+import com.example.proyecto_android.api.moumentos.ApiMonumentosUtils;
+import com.example.proyecto_android.api.moumentos.ApiMonumetosService;
 import com.example.proyecto_android.model.Monumento;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,8 +37,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MapaFragment extends Fragment implements OnMapReadyCallback, View.OnClickListener, LocationListener {
 
@@ -54,6 +62,9 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
 
     private LocationManager locationManager;
     private Location currebtLocation;
+
+    private ApiMonumetosService apiMonumetosService;
+    private Monumento monumento;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mapa, container, false);
@@ -90,9 +101,27 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        apiMonumetosService = ApiMonumentosUtils.getClient();
+        apiMonumetosService.getMonumentos().enqueue(new Callback<List<Monumento>>() {
+            @Override
+            public void onResponse(Call<List<Monumento>> call, Response<List<Monumento>> response) {
+                List<Monumento> monumentos = ((MainActivity) getActivity()).getMonumentos();
+
+                LatLng latLng = new LatLng(39.4723377,-0.3645571);
+                for (Monumento m : response.body()) {
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(m.getName()).icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Monumento>> call, Throwable t) {
+                Toast.makeText(getContext(), "No se han podido cargar los datos", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
-        anyadirMarcadores(googleMap);
+
 
         // MI LOCALIZACION
         /*if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -187,6 +216,18 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
                         Toast.LENGTH_LONG).show();*/
             }
         });
+    }
+
+    public void anyadirMarca(GoogleMap googleMap, List<Monumento> monumentos){
+        mMap = googleMap;
+
+        monumentos = new ArrayList<Monumento>();
+
+        for (Monumento m : monumentos) {
+            final LatLng latLng = new LatLng(m.getX(), m.getY());
+            mMap.addMarker(new MarkerOptions().position(latLng).title(m.getName()).icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+        }
+
     }
 
     public void anyadirMarcadores(GoogleMap googleMap){

@@ -21,4 +21,6 @@ public class MyDeserializer implements JsonDeserializer<City> {
         City city = new City(id, name, country, icon, description, temp);
         return city;
     }
+
+
 }

@@ -28,6 +28,7 @@ public class RegistroActivity extends AppCompatActivity {
     private Button goLoginButton;
     private ApiMonumetosService apiMonumetosService;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +45,14 @@ public class RegistroActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Usuario usuario = new Usuario();
                 String email = registerEmail.getText().toString();
                 String password = registerPassword.getText().toString();
                 String repeatPassword = registerRepeatPassword.getText().toString();
 
                 if (password.equals(repeatPassword) && !email.isEmpty() && !password.isEmpty() && !repeatPassword.isEmpty()) {
                     if (password.length() < 6) {
+                        register(email, password);
                         Toast.makeText(RegistroActivity.this, "La contraseña debe contener al menos 6 carácteres", Toast.LENGTH_SHORT).show();
                     }
                     register(email, password);
@@ -78,12 +81,20 @@ public class RegistroActivity extends AppCompatActivity {
         apiMonumetosService.registrar(u).enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if (response.isSuccessful()){
+
+                    Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
+                    Toast.makeText(RegistroActivity.this, "Registro finalizado", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(RegistroActivity.this, "Registro fallido", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
-
+                Toast.makeText(RegistroActivity.this, "Error" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

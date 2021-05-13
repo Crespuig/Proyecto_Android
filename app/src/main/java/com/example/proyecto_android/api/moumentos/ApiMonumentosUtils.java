@@ -1,5 +1,9 @@
 package com.example.proyecto_android.api.moumentos;
 
+import com.example.proyecto_android.api.deserialized.DeserializaMonumento;
+import com.example.proyecto_android.model.Monumento;
+import com.google.gson.GsonBuilder;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -11,6 +15,9 @@ public class ApiMonumentosUtils {
 
     public static ApiMonumetosService getClient() {
         if(apiMonumetosService == null) {
+            GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeAdapter(Monumento.class, new DeserializaMonumento());
+
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(URL)
                     .addConverterFactory(GsonConverterFactory.create())

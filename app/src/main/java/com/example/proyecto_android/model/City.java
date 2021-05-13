@@ -74,9 +74,4 @@ public class City {
         this.temperature = temperature;
     }
 
-    public static Temperature parseJSON(String response){
-        Gson gson = new GsonBuilder().create();
-        Temperature temperature = gson.fromJson(response, Temperature.class);
-        return temperature;
-    }
 }
