@@ -110,6 +110,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
                     mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(m.getX(), m.getY()))
                             .title(m.getName())
+                            .snippet("Teléfono: " + m.getTelefono())
                             .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
                 }
             }

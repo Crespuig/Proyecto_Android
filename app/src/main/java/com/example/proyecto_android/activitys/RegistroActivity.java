@@ -10,8 +10,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.api.moumentos.ApiMonumentosUtils;
 import com.example.proyecto_android.api.moumentos.ApiMonumetosService;
 import com.example.proyecto_android.model.Usuario;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,16 +30,18 @@ public class RegistroActivity extends AppCompatActivity {
     private Button registerButton;
     private Button goLoginButton;
     private ApiMonumetosService apiMonumetosService;
-
+    private List<Usuario> usuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        apiMonumetosService = ApiMonumentosUtils.getClient();
+
         registerEmail = findViewById(R.id.registerEmail);
-        //registerNombre = findViewById(R.id.registerNombre);
-        //registerApellidos = findViewById(R.id.registerApellidos);
+        registerNombre = findViewById(R.id.registerNombre);
+        registerApellidos = findViewById(R.id.registerApellidos);
         registerPassword = findViewById(R.id.registerPassword);
         registerRepeatPassword = findViewById(R.id.repeatPassword);
         registerButton = findViewById(R.id.registerButton);
@@ -45,17 +50,18 @@ public class RegistroActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Usuario usuario = new Usuario();
+                String nombre = registerNombre.getText().toString();
+                String apellidos = registerApellidos.getText().toString();
                 String email = registerEmail.getText().toString();
                 String password = registerPassword.getText().toString();
                 String repeatPassword = registerRepeatPassword.getText().toString();
 
                 if (password.equals(repeatPassword) && !email.isEmpty() && !password.isEmpty() && !repeatPassword.isEmpty()) {
                     if (password.length() < 6) {
-                        register(email, password);
+                        register(email, nombre, apellidos, password);
                         Toast.makeText(RegistroActivity.this, "La contraseña debe contener al menos 6 carácteres", Toast.LENGTH_SHORT).show();
                     }
-                    register(email, password);
+                    register(email, nombre, apellidos, password);
                 } else {
                     Toast.makeText(RegistroActivity.this, "Rellena todos los campos para poder registrarte", Toast.LENGTH_SHORT).show();
 
@@ -75,14 +81,16 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     //TODO: POST CON LOS DATOS DEL NUEVO USUARIO
-    private void register(String email, String password) {
+    private void register(String email, String nombre, String apellidos, String password) {
         Usuario u = new Usuario();
-
+        u.setNombre(nombre);
+        u.setApellidos(apellidos);
+        u.setEmail(email);
+        u.setPassword(password);
         apiMonumetosService.registrar(u).enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if (response.isSuccessful()){
-
                     Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
                     Toast.makeText(RegistroActivity.this, "Registro finalizado", Toast.LENGTH_SHORT).show();
                     startActivity(intent);

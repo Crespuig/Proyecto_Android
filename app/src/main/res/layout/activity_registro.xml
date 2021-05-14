@@ -20,7 +20,7 @@
         android:layout_height="56dp"
         android:hint="email"
         android:inputType="textEmailAddress"/>
-<!--
+
     <EditText
         android:id="@+id/registerNombre"
         android:layout_width="match_parent"
@@ -32,7 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:hint="Apellidos"/>
-        -->
 
     <EditText
         android:id="@+id/registerPassword"
@@ -47,11 +46,12 @@
         android:layout_height="56dp"
         android:hint="Repite contraseña"
         android:inputType="textPassword"/>
+
     <Button
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="Registrarse"/>
+        android:text="Registrarse" />
 
     <Button
         android:id="@+id/registerGoLoginButton"
