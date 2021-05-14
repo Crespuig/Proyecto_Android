@@ -2,6 +2,7 @@ package com.example.proyecto_android.api.moumentos;
 
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
+import com.google.gson.annotations.Expose;
 
 import java.util.List;
 

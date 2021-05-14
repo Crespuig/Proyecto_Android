@@ -30,15 +30,6 @@
         android:layout_marginBottom="10dp" />
 
 
-    <Switch
-        android:id="@+id/switchCardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:hint="Añadir"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="10dp"/>
-
     <ImageButton
         android:id="@+id/btnFav"
         android:layout_width="wrap_content"

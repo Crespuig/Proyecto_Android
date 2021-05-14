@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiMonumentosUtils {
 
@@ -21,6 +22,7 @@ public class ApiMonumentosUtils {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(URL)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .build();
             apiMonumetosService = retrofit.create(ApiMonumetosService.class);
         }

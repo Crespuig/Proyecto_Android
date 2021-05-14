@@ -105,11 +105,12 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
         apiMonumetosService.getMonumentos().enqueue(new Callback<List<Monumento>>() {
             @Override
             public void onResponse(Call<List<Monumento>> call, Response<List<Monumento>> response) {
-                List<Monumento> monumentos = ((MainActivity) getActivity()).getMonumentos();
-
-                LatLng latLng = new LatLng(39.4723377,-0.3645571);
-                for (Monumento m : response.body()) {
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(m.getName()).icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+                List<Monumento> monumentos = response.body();
+                for (Monumento m : monumentos) {
+                    mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(m.getX(), m.getY()))
+                            .title(m.getName())
+                            .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
                 }
             }
 
@@ -224,8 +225,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
         monumentos = new ArrayList<Monumento>();
 
         for (Monumento m : monumentos) {
-            final LatLng latLng = new LatLng(m.getX(), m.getY());
-            mMap.addMarker(new MarkerOptions().position(latLng).title(m.getName()).icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+
         }
 
     }
