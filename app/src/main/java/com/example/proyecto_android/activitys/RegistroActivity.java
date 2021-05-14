@@ -30,7 +30,6 @@ public class RegistroActivity extends AppCompatActivity {
     private Button registerButton;
     private Button goLoginButton;
     private ApiMonumetosService apiMonumetosService;
-    private List<Usuario> usuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
