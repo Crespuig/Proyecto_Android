@@ -102,6 +102,14 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         apiMonumetosService = ApiMonumentosUtils.getClient();
+        /*List<Monumento> monumentos = ((MainActivity) getActivity()).getMonumentos();
+        for (Monumento m : monumentos) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(m.getX(), m.getY()))
+                    .title(m.getName())
+                    .snippet("Teléfono: " + m.getTelefono())
+                    .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.star_big_on)));
+        }*/
         apiMonumetosService.getMonumentos().enqueue(new Callback<List<Monumento>>() {
             @Override
             public void onResponse(Call<List<Monumento>> call, Response<List<Monumento>> response) {

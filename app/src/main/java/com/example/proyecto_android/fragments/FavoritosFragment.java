@@ -46,11 +46,11 @@ public class FavoritosFragment extends Fragment {
         fRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewFav);
         fLayoutManager = new LinearLayoutManager(getContext());
 
-        List<Favorito> favoritos = getFavoritosUsuario();
-        List<Monumento> monumentosList = new ArrayList<>();
+        List<Favorito> favoritos = ((MainActivity) getActivity()).getFavoritos();
+
 
         Usuario u = ((MainActivity) getActivity()).getUsuario();
-        favoritosAdapter = new FavoritosAdapter(monumentosList, u, R.layout.recycler_view_item_fav, new FavoritosAdapter.OnItemClickListener() {
+        favoritosAdapter = new FavoritosAdapter(favoritos, u, R.layout.recycler_view_item_fav, new FavoritosAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Monumento monumento, int position) {
                 Toast.makeText(getContext(), monumento + "-" + position, Toast.LENGTH_SHORT).show();

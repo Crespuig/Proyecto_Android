@@ -33,6 +33,8 @@ public class Monumento {
     @Expose
     private String imagen;
 
+    private boolean favorito = false;
+
     public Monumento() {
     }
 
@@ -122,6 +124,14 @@ public class Monumento {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public boolean isFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
     }
 
     @Override

@@ -3,11 +3,14 @@ package com.example.proyecto_android.activitys;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +33,7 @@ import com.example.proyecto_android.fragments.ClimaFragment;
 import com.example.proyecto_android.fragments.FavoritosFragment;
 import com.example.proyecto_android.fragments.ListaFragment;
 import com.example.proyecto_android.fragments.MapaFragment;
+import com.example.proyecto_android.model.Favorito;
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
 import com.firebase.ui.auth.AuthUI;
@@ -53,8 +57,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private ClimaFragment climaFragment;
     private Usuario usuario;
     private List<Monumento> monumentos;
+    private List<Favorito> favoritos;
     private DrawerLayout drawer;
     private ApiMonumetosService apiMonumetosService;
+    private ImageView imagenUsuario;
+    private TextView nombreUsuario;
+    private TextView emailUsuario;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -76,6 +84,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+        
+        imagenUsuario = findViewById(R.id.imagenUsuario);
+        nombreUsuario = findViewById(R.id.nombreUsuario);
+        emailUsuario = findViewById(R.id.emailUsuario);
+
+        /*imagenUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("/image");
+                startActivityForResult(intent.createChooser(intent, "Seleccione la Aplicación"), 10);
+            }
+        });*/
+
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.app_name, R.string.app_name);
         drawer.setDrawerListener(toggle);
@@ -87,6 +110,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onResponse(Call<List<Monumento>> call, Response<List<Monumento>> response) {
                 monumentos = response.body();
                 cambiaFragment(R.id.nav_host_fragment, listaFragment);
+                apiMonumetosService.getFavoritos(usuario.getId()).enqueue(new Callback<List<Favorito>>() {
+                    @Override
+                    public void onResponse(Call<List<Favorito>> call, Response<List<Favorito>> response) {
+                        favoritos = response.body();
+                        if (favoritos != null){
+                            for (Monumento m : monumentos) {
+                                for (Favorito f : favoritos) {
+                                    if (m.getIdNotes() == f.getMonumento().getIdNotes()){
+                                        m.setFavorito(true);
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Favorito>> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "fallido", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -168,13 +212,55 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 break;
             case R.id.nav_lista:
-                cambiaFragment(R.id.nav_host_fragment, listaFragment);
+                apiMonumetosService.getFavoritos(usuario.getId()).enqueue(new Callback<List<Favorito>>() {
+                    @Override
+                    public void onResponse(Call<List<Favorito>> call, Response<List<Favorito>> response) {
+                        favoritos = response.body();
+                        if (favoritos != null){
+                            for (Monumento m : monumentos) {
+                                for (Favorito f : favoritos) {
+                                    if (m.getIdNotes() == f.getMonumento().getIdNotes()){
+                                        m.setFavorito(true);
+                                    }
+                                }
+                            }
+                        }
+                        cambiaFragment(R.id.nav_host_fragment, listaFragment);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Favorito>> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "fallido", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 break;
             case R.id.nav_mapa:
                 cambiaFragment(R.id.nav_host_fragment, mapaFragment);
                 break;
             case R.id.nav_favoritos:
-                cambiaFragment(R.id.nav_host_fragment, favoritosFragment);
+                apiMonumetosService.getFavoritos(usuario.getId()).enqueue(new Callback<List<Favorito>>() {
+                    @Override
+                    public void onResponse(Call<List<Favorito>> call, Response<List<Favorito>> response) {
+                        favoritos = response.body();
+                        if (favoritos != null){
+                            for (Monumento m : monumentos) {
+                                for (Favorito f : favoritos) {
+                                    if (m.getIdNotes() == f.getMonumento().getIdNotes()){
+                                        m.setFavorito(true);
+                                    }
+                                }
+                            }
+                        }
+                        cambiaFragment(R.id.nav_host_fragment, favoritosFragment);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Favorito>> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "fallido", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 break;
             case R.id.nav_clima:
                 cambiaFragment(R.id.nav_host_fragment, climaFragment);
@@ -207,5 +293,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public List<Monumento> getMonumentos() {
         return monumentos;
+    }
+
+    public List<Favorito> getFavoritos() {
+        return favoritos;
     }
 }

@@ -8,11 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyecto_android.R;
+import com.example.proyecto_android.api.moumentos.ApiMonumentosUtils;
+import com.example.proyecto_android.api.moumentos.ApiMonumetosService;
+import com.example.proyecto_android.model.Favorito;
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
 import com.squareup.picasso.Picasso;
@@ -20,6 +24,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentosAdapter.ViewHolder> {
 
@@ -32,6 +40,8 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
     private TextView textViewName;
 
     private List<Monumento> originalMonuments;
+    private ApiMonumetosService apiMonumetosService;
+
 
     public ListaMonumentosAdapter(List<Monumento> monumentos, Usuario usuario, int layout, OnItemClickListener itemClickListener) {
         this.monumentos = monumentos;
@@ -49,6 +59,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
             super(itemView);
             textViewName = (TextView) itemView.findViewById(R.id.textCardView);
             imageViewMonumento = (ImageView) itemView.findViewById(R.id.imageCardView);
+            apiMonumetosService = ApiMonumentosUtils.getClient();
         }
 
         public void bind(final Monumento monumento, final OnItemClickListener listener) {
@@ -69,14 +80,51 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
             });
 
             final ImageButton btnFav = itemView.findViewById(R.id.btnFav);
+            if (monumento.isFavorito()){
+                btnFav.setImageResource(R.drawable.ic_baseline_favorite_24);
+            }else {
+                btnFav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+            }
             btnFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int idUsuario = usuario.getId();
                     int idMonumentos = monumento.getIdNotes();
+                    if(monumento.isFavorito()) {
+                        apiMonumetosService.borrarFavorito(idMonumentos, idUsuario).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                ((ImageButton) view).setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Toast.makeText(context, "fallido", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                    else {
+                        Favorito favorito = new Favorito();
+                        favorito.setMonumento(monumento);
+                        favorito.setUsuario(usuario);
+                        apiMonumetosService.anyadirFavoritoUsuario(favorito).enqueue(new Callback<Favorito>() {
+                            @Override
+                            public void onResponse(Call<Favorito> call, Response<Favorito> response) {
+                                ((ImageButton) view).setImageResource(R.drawable.ic_baseline_favorite_24);
+                            }
+
+                            @Override
+                            public void onFailure(Call<Favorito> call, Throwable t) {
+                                Toast.makeText(context, "fallido", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+
                     //TODO: Comprobar si existe favorito
                     //EXISTE = TRUE -> Borra favorito
                     //EXISTE = FALSE -> Agrega favorito
+
                 }
             });
         }

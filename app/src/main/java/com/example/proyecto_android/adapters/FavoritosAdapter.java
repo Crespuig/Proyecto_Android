@@ -19,7 +19,6 @@ import java.util.List;
 
 public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.ViewHolder>{
 
-    private List<Favorito> favoritos;
     private Usuario usuario;
     private int layout;
     private OnItemClickListener itemClickListener;
@@ -29,10 +28,10 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
     private ImageView imageViewFav;
     private TextView calleCardViewFav;
 
-    private List<Monumento> monumentosList;
+    private List<Favorito> favoritos;
 
-    public FavoritosAdapter(List<Monumento> monumentos, Usuario usuario, int layout, OnItemClickListener itemClickListener) {
-        this.monumentosList = monumentos;
+    public FavoritosAdapter(List<Favorito> favoritos, Usuario usuario, int layout, OnItemClickListener itemClickListener) {
+        this.favoritos = favoritos;
         this.usuario = usuario;
         this.layout = layout;
         this.itemClickListener = itemClickListener;
@@ -50,7 +49,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
 
     @Override
     public int getItemCount() {
-        return monumentosList.size();
+        return favoritos.size();
     }
 
     public interface OnItemClickListener {
@@ -59,7 +58,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull FavoritosAdapter.ViewHolder holder, int position) {
-        holder.bind(monumentosList.get(position), itemClickListener);
+        holder.bind(favoritos.get(position), itemClickListener);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -72,17 +71,17 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
             imageViewFav = (ImageView) itemView.findViewById(R.id.imageCardViewFav);
         }
 
-        public void bind(final Monumento monumento, final FavoritosAdapter.OnItemClickListener listener) {
-            textCardViewFav.setText(monumento.getName());
-            calleCardViewFav.setText("Tel: " + monumento.getTelefono());
-            /*if (monumento.getImagen() != null) {
-                int resId = context.getResources().getIdentifier(monumento.getImagen(), "drawable", context.getPackageName());
+        public void bind(final Favorito favorito, final FavoritosAdapter.OnItemClickListener listener) {
+            textCardViewFav.setText(favorito.getMonumento().getName());
+            calleCardViewFav.setText("Tel: " + favorito.getMonumento().getTelefono());
+            if (favorito.getMonumento().getImagen() != null) {
+                int resId = context.getResources().getIdentifier(favorito.getMonumento().getImagen(), "drawable", context.getPackageName());
                 imageViewFav.setImageResource(resId);
-            }*/
+            }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onItemClick(monumento, getAdapterPosition());
+                    listener.onItemClick(favorito.getMonumento(), getAdapterPosition());
                 }
             });
 

@@ -27,14 +27,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginLeft="5dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:padding="5dp"/>
 
 
     <ImageButton
         android:id="@+id/btnFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="bottom|right"
         android:background="@android:color/transparent"
         android:clickable="true"
         android:focusable="true"

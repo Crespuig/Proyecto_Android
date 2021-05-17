@@ -10,7 +10,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiMonumentosUtils {
 
-    private static final String URL = "http://192.168.0.19:8081/";
+    private static final String URL = "http://rpicrespuig.ddns.net:81/";
+    //private static final String URL = "http://192.168.0.19:8081/";
 
     private static ApiMonumetosService apiMonumetosService;
 
