@@ -7,12 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
+import com.example.proyecto_android.activitys.MainActivity;
+import com.example.proyecto_android.model.Monumento;
+
+import java.util.List;
+
 public class GestionMonumentoAdapter extends CursorAdapter {
 
     //private MonumentoDAO monumentoDAO = null;
+    List<Monumento> monumentos;
+    MainActivity mainActivity;
 
     public GestionMonumentoAdapter(Context context, Cursor cursor) {
         super(context, cursor, 0);
+        monumentos = mainActivity.getMonumentos();
         //monumentoDAO = new MonumentoDAO(context);
         //monumentoDAO.abrir();
     }

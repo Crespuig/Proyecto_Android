@@ -18,22 +18,22 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageCardView"
         android:layout_width="match_parent"
-        android:layout_height="192dp"
-        android:scaleType="centerCrop"/>
+        android:layout_height="189dp"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/textCardView"
-        android:layout_width="wrap_content"
+        android:layout_width="276dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginLeft="5dp"
         android:layout_marginBottom="10dp"
-        android:padding="5dp"/>
+        android:padding="5dp" />
 
 
     <ImageButton
         android:id="@+id/btnFav"
-        android:layout_width="wrap_content"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:background="@android:color/transparent"
