@@ -172,10 +172,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.action_configuracion:
+            /*case R.id.action_configuracion:
                 Intent intent4 = new Intent(this, PreferenceActivity.class);
                 intent4.putExtra("usuario", usuario);
-                startActivityForResult(intent4, 0);
+                startActivityForResult(intent4, 0);*/
             case R.id.action_gestion_monumentos:
                 Intent intent5 = new Intent(this, MonumentosActivity.class);
                 intent5.putExtra("usuario", usuario);

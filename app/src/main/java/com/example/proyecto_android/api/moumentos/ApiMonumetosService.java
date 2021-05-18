@@ -28,7 +28,7 @@ public interface ApiMonumetosService {
     Call<Usuario> registrar(@Body Usuario usuario);
 
     @GET("monumentos/{id}")
-    Monumento oneMonumment(@Query("idnotes") int id);
+    Monumento oneMonumment(@Path("idnotes") int id);
 
     @GET("usuarios")
     Call<List<Usuario>> getUsuarios();

@@ -64,7 +64,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
 
         public void bind(final Monumento monumento, final OnItemClickListener listener) {
             textViewName.setText(monumento.getName());
-            Picasso.with(context).load(monumento.getImagen()).fit().into(imageViewMonumento);
+            //Picasso.with(context).load(monumento.getImagen()).fit().into(imageViewMonumento);
             if (monumento.getImagen() != null) {
                 int resId = context.getResources().getIdentifier(monumento.getImagen(), "drawable", context.getPackageName());
                 imageViewMonumento.setImageResource(resId);
@@ -73,8 +73,6 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-
                     listener.onItemClick(monumento, getAdapterPosition());
                 }
             });
@@ -95,6 +93,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 ((ImageButton) view).setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                                Toast.makeText(context, monumento.getName() + " eliminado de favoritos", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -111,6 +110,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
                             @Override
                             public void onResponse(Call<Favorito> call, Response<Favorito> response) {
                                 ((ImageButton) view).setImageResource(R.drawable.ic_baseline_favorite_24);
+                                Toast.makeText(context, monumento.getName() + " agregado a favoritos", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
