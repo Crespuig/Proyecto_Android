@@ -37,7 +37,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
     private OnItemClickListener itemClickListener;
 
     private Context context;
-    private TextView textViewName;
+
 
     private List<Monumento> originalMonuments;
     private ApiMonumetosService apiMonumetosService;
@@ -54,6 +54,7 @@ public class ListaMonumentosAdapter extends RecyclerView.Adapter<ListaMonumentos
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageViewMonumento;
+        public TextView textViewName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

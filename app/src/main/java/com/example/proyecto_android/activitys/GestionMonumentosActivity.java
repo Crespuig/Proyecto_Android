@@ -17,6 +17,8 @@ import com.example.proyecto_android.model.Constantes;
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
 
+import java.util.List;
+
 public class GestionMonumentosActivity extends AppCompatActivity {
 
     private Cursor cursor;
@@ -35,6 +37,8 @@ public class GestionMonumentosActivity extends AppCompatActivity {
     private Button boton_cancelar;
     private Usuario usuario;
     private Monumento monumento;
+    List<Monumento> monumentos;
+    MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,7 @@ public class GestionMonumentosActivity extends AppCompatActivity {
         boton_cancelar = (Button) findViewById(R.id.boton_cancelar);
 
         //TODO: GET Monumento que le pasamos del Intent anterior
+        monumentos = mainActivity.getMonumentos();
 
         establecerModo(extra.getInt(Constantes.C_MODO));
 
@@ -89,14 +94,15 @@ public class GestionMonumentosActivity extends AppCompatActivity {
     }
 
     //TODO: RELLENAR TEXTOS A PARTIR DEL MONUMENTO
-    private void rellenaDatos(long id) {
-        nombre.setText(monumento.getName());
-        //numPol.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_NUMPOL)));
-        //codVia.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_CODVIA)));
-        //telefono.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_TELEFONO)));
-        //ruta.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_RUTA)));
-        //coordenadas.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_COORDENADAS)));
-
+    private void rellenaDatos() {
+        for (Monumento m : monumentos) {
+            nombre.setText(m.getName());
+            numPol.setText(m.getNumPol());
+            codVia.setText(m.getCodVia());
+            telefono.setText(m.getTelefono());
+            ruta.setText(m.getRuta());
+            //coordenadas.setText(cursor.getString(cursor.getColumnIndex(MonumentoDAO.C_COLUMNA_COORDENADAS)));
+        }
     }
 
     private void setEdicion(boolean opcion) {
