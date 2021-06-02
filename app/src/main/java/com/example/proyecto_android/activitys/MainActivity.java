@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        apiMonumetosService = ApiMonumentosUtils.getClient();
+
         listaFragment = new ListaFragment();
         mapaFragment = new MapaFragment();
         favoritosFragment = new FavoritosFragment();
@@ -88,6 +90,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         imagenUsuario = findViewById(R.id.imagenUsuario);
         nombreUsuario = findViewById(R.id.nombreUsuario);
         emailUsuario = findViewById(R.id.emailUsuario);
+
+        /*if(usuario != null){
+            nombreUsuario.setText(usuario.getNombre());
+            emailUsuario.setText(usuario.getEmail());
+        }*/
 
         /*imagenUsuario.setOnClickListener(new View.OnClickListener() {
             @Override

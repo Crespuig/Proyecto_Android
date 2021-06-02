@@ -74,11 +74,10 @@ public class LoginActivity extends AppCompatActivity {
                 String email = usuario.getText().toString();
                 String pass = password.getText().toString();
 
-                if (!email.isEmpty() && !pass.isEmpty()) {
+                if (!email.isEmpty() || !pass.isEmpty()) {
                     login(email, pass);
                 } else {
-                    Toast.makeText(LoginActivity.this, "Login fallido amigo", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(LoginActivity.this, "Login fallido", Toast.LENGTH_SHORT).show();
                 }
             }
         });

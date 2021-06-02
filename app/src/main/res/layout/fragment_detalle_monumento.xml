@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DetalleMonumentoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+
+
+        >
+
+        <ImageView
+            android:id="@+id/imgDetalle"
+            android:layout_width="412dp"
+            android:layout_height="291dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/idNotesDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="44dp"
+            android:text="IdNotes:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgDetalle" />
+
+        <TextView
+            android:id="@+id/nombreDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:text="Nombre:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idNotesDetalle" />
+
+        <TextView
+            android:id="@+id/latitudDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:text="Latitud:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nombreDetalle" />
+
+        <TextView
+            android:id="@+id/longitudDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:text="Longitud:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/latitudDetalle" />
+
+        <TextView
+            android:id="@+id/numpolDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:text="Numpol:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/longitudDetalle" />
+
+        <TextView
+            android:id="@+id/codviaDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:text="CodVia:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numpolDetalle" />
+
+        <TextView
+            android:id="@+id/telefonoDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:text="Teléfono:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/codviaDetalle" />
+
+        <TextView
+            android:id="@+id/rutaDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:text="Ruta:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/telefonoDetalle" />
+
+        <TextView
+            android:id="@+id/detalleIdNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintStart_toEndOf="@+id/idNotesDetalle"
+            app:layout_constraintTop_toBottomOf="@+id/imgDetalle" />
+
+        <TextView
+            android:id="@+id/detalleNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@+id/nombreDetalle"
+            app:layout_constraintTop_toBottomOf="@+id/detalleIdNotes" />
+
+        <TextView
+            android:id="@+id/detalleLatitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@+id/latitudDetalle"
+            app:layout_constraintTop_toBottomOf="@+id/detalleNombre" />
+
+        <TextView
+            android:id="@+id/detalleLongitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@+id/longitudDetalle"
+            app:layout_constraintTop_toBottomOf="@+id/detalleLatitud" />
+
+        <TextView
+            android:id="@+id/detalleNumPol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@+id/numpolDetalle"
+            app:layout_constraintTop_toBottomOf="@+id/detalleLongitud" />
+
+        <TextView
+            android:id="@+id/detalleCodvia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@+id/codviaDetalle"
+            app:layout_constraintTop_toBottomOf="@+id/detalleNumPol" />
+
+        <TextView
+            android:id="@+id/detalleTelefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@+id/telefonoDetalle"
+            app:layout_constraintTop_toBottomOf="@+id/detalleCodvia" />
+
+        <TextView
+            android:id="@+id/detalleRuta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@+id/rutaDetalle"
+            app:layout_constraintTop_toBottomOf="@+id/detalleTelefono" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

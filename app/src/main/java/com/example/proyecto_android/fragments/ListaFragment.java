@@ -1,6 +1,7 @@
 package com.example.proyecto_android.fragments;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,12 +63,12 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
         mAdapter = new ListaMonumentosAdapter(m, u,  R.layout.recycler_view_item, new ListaMonumentosAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Monumento monumento, int position) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle(monumento.getName())
-                        .setMessage("CodVia - " + monumento.getCodVia()
-                                + "\nRuta - " + monumento.getRuta()
-                                + "\nTeléfono - " + monumento.getTelefono())
-                        .show();
+                DetalleMonumentoFragment detalleMonumentoFragment = new DetalleMonumentoFragment();
+                FragmentTransaction transaction = getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction();
+                transaction.replace(R.id.nav_host_fragment, detalleMonumentoFragment).commit();
+
             }
         });
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -106,4 +109,6 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
         mAdapter.filter(s);
         return false;
     }
+
+
 }
