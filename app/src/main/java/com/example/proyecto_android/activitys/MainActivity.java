@@ -20,6 +20,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,9 +32,11 @@ import com.example.proyecto_android.adapters.ListaMonumentosAdapter;
 import com.example.proyecto_android.api.moumentos.ApiMonumentosUtils;
 import com.example.proyecto_android.api.moumentos.ApiMonumetosService;
 import com.example.proyecto_android.fragments.ClimaFragment;
+import com.example.proyecto_android.fragments.DetalleMonumentoFragment;
 import com.example.proyecto_android.fragments.FavoritosFragment;
 import com.example.proyecto_android.fragments.ListaFragment;
 import com.example.proyecto_android.fragments.MapaFragment;
+import com.example.proyecto_android.model.ComunicaFragments;
 import com.example.proyecto_android.model.Favorito;
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
@@ -47,7 +51,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, NavigationView.OnNavigationItemSelectedListener, ComunicaFragments {
 
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private ImageView imagenUsuario;
     private TextView nombreUsuario;
     private TextView emailUsuario;
+
+    DetalleMonumentoFragment detalleMonumentoFragment;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -303,5 +309,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public List<Favorito> getFavoritos() {
         return favoritos;
+    }
+
+    @Override
+    public void enviarMonumento(Monumento monumento) {
+        detalleMonumentoFragment = new DetalleMonumentoFragment();
+        //objeto bundle para transportar informacion
+        Bundle bundleEnvio = new Bundle();
+        //Enviar oibjetoi con serializable
+        bundleEnvio.putSerializable("objeto", monumento);
+        detalleMonumentoFragment.setArguments(bundleEnvio);
+        //abrir fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment, detalleMonumentoFragment);
+        fragmentTransaction.commit();
     }
 }

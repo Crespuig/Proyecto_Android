@@ -14,8 +14,6 @@ import com.example.proyecto_android.api.moumentos.ApiMonumentosUtils;
 import com.example.proyecto_android.api.moumentos.ApiMonumetosService;
 import com.example.proyecto_android.model.Usuario;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,7 +42,7 @@ public class RegistroActivity extends AppCompatActivity {
         registerPassword = findViewById(R.id.registerPassword);
         registerRepeatPassword = findViewById(R.id.repeatPassword);
         registerButton = findViewById(R.id.registerButton);
-        goLoginButton = findViewById(R.id.registerGoLoginButton);
+        goLoginButton = findViewById(R.id.btnDetalleVolver);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,5 +1,6 @@
 package com.example.proyecto_android.fragments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -27,6 +28,7 @@ import com.example.proyecto_android.activitys.MainActivity;
 import com.example.proyecto_android.adapters.ListaMonumentosAdapter;
 import com.example.proyecto_android.api.moumentos.ApiMonumentosUtils;
 import com.example.proyecto_android.api.moumentos.ApiMonumetosService;
+import com.example.proyecto_android.model.ComunicaFragments;
 import com.example.proyecto_android.model.Monumento;
 import com.example.proyecto_android.model.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,11 +45,14 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
 
     private SearchView searchView;
     private ApiMonumetosService apiMonumetosService;
-
     private RecyclerView mRecyclerView;
     // Puede ser declarado como 'RecyclerView.Adapter' o como la clase adaptador 'ListaMonumentosAdapter'
     private ListaMonumentosAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    //Referencias para comunicar fragments
+    Activity activity;
+    ComunicaFragments interfaceComunicaFragments;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_lista, container, false);
@@ -63,11 +68,20 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
         mAdapter = new ListaMonumentosAdapter(m, u,  R.layout.recycler_view_item, new ListaMonumentosAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Monumento monumento, int position) {
-                DetalleMonumentoFragment detalleMonumentoFragment = new DetalleMonumentoFragment();
+                /*new AlertDialog.Builder(getContext())
+                        .setTitle(monumento.getName())
+                        .setMessage("CodVia - " + monumento.getCodVia()
+                                + "\nRuta - " + monumento.getRuta()
+                                + "\nTeléfono - " + monumento.getTelefono())
+                        .show();*/
+
+                //interfaceComunicaFragments.enviarMonumento(m.get(mRecyclerView.getChildAdapterPosition(view)));
+
+                /*DetalleMonumentoFragment detalleMonumentoFragment = new DetalleMonumentoFragment();
                 FragmentTransaction transaction = getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction();
-                transaction.replace(R.id.nav_host_fragment, detalleMonumentoFragment).commit();
+                transaction.replace(R.id.nav_host_fragment, detalleMonumentoFragment).commit();*/
 
             }
         });
@@ -77,14 +91,14 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
         searchView = (SearchView) view.findViewById(R.id.searchViewLista);
         initListener();
 
-        FloatingActionButton btnCalcularRuta = view.findViewById(R.id.btnCalcularRuta);
+        /*FloatingActionButton btnCalcularRuta = view.findViewById(R.id.btnCalcularRuta);
         btnCalcularRuta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         return view;
     }
@@ -110,5 +124,17 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
         return false;
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof Activity){
+            this.activity = (Activity) context;
+            interfaceComunicaFragments = (ComunicaFragments) this.activity;
+        }
+    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
 }
