@@ -110,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                 intent.putExtra("usuario", u);
                 saveOnPreferences(u.getEmail(), u.getPassword());
                 startActivity(intent);
+                finish();
             }
 
             @Override

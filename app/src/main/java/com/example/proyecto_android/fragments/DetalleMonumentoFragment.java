@@ -41,7 +41,7 @@ public class DetalleMonumentoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        this.context = getContext();
     }
 
     @Override
@@ -70,14 +70,14 @@ public class DetalleMonumentoFragment extends Fragment {
                 int resId = context.getResources().getIdentifier(monumento.getImagen(), "drawable", context.getPackageName());
                 imgDetalle.setImageResource(resId);
             }
-            detalleIdNotes.setText(monumento.getIdNotes());
+            detalleIdNotes.setText(monumento.getIdNotes()+"");
             detalleNombre.setText(monumento.getName());
-            detalleLatitud.setText((int) monumento.getX());
-            detalleLongitud.setText((int) monumento.getY());
+            detalleLatitud.setText((int) monumento.getX()+"");
+            detalleLongitud.setText((int) monumento.getY()+"");
             detalleNumPol.setText(monumento.getNumPol());
-            detalleCodvia.setText(monumento.getCodVia());
+            detalleCodvia.setText(monumento.getCodVia()+"");
             detalleTelefono.setText(monumento.getTelefono());
-            detalleRuta.setText(monumento.getRuta());
+            detalleRuta.setText(monumento.getRuta()+"");
         }
 
         //btnVolver = view.findViewById(R.id.btnDetalleVolver);

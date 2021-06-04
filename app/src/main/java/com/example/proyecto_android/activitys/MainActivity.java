@@ -1,10 +1,15 @@
 package com.example.proyecto_android.activitys;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -93,14 +98,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
         
-        imagenUsuario = findViewById(R.id.imagenUsuario);
-        nombreUsuario = findViewById(R.id.nombreUsuario);
-        emailUsuario = findViewById(R.id.emailUsuario);
+        imagenUsuario = navigationView.getHeaderView(0).findViewById(R.id.imagenUsuario);
+        nombreUsuario = navigationView.getHeaderView(0).findViewById(R.id.nombreUsuario);
+        emailUsuario = navigationView.getHeaderView(0).findViewById(R.id.emailUsuario);
 
-        /*if(usuario != null){
+        if(usuario != null){
             nombreUsuario.setText(usuario.getNombre());
             emailUsuario.setText(usuario.getEmail());
-        }*/
+        }
 
         /*imagenUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onResponse(Call<List<Monumento>> call, Response<List<Monumento>> response) {
                 monumentos = response.body();
-                cambiaFragment(R.id.nav_host_fragment, listaFragment);
+                cambiaFragment(R.id.nav_host_fragment, listaFragment, false);
                 apiMonumetosService.getFavoritos(usuario.getId()).enqueue(new Callback<List<Favorito>>() {
                     @Override
                     public void onResponse(Call<List<Favorito>> call, Response<List<Favorito>> response) {
@@ -173,12 +178,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 || super.onSupportNavigateUp();
     }
 
-    public void cambiaFragment(int id, Fragment fragment){
+    public void cambiaFragment(int id, Fragment fragment, boolean pila){
         //Sustituye un fragment por otro
-        getSupportFragmentManager().beginTransaction()
-                .replace(id, fragment)
-                .addToBackStack(fragment.getTag())
-                .commit();
+        if(pila) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(id, fragment)
+                    .addToBackStack(fragment.getTag())
+                    .commit();
+        }
+        else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(id, fragment)
+                    .commit();
+        }
     }
 
     @Override
@@ -237,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 }
                             }
                         }
-                        cambiaFragment(R.id.nav_host_fragment, listaFragment);
+                        cambiaFragment(R.id.nav_host_fragment, listaFragment, false);
                     }
 
                     @Override
@@ -248,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 break;
             case R.id.nav_mapa:
-                cambiaFragment(R.id.nav_host_fragment, mapaFragment);
+                cambiaFragment(R.id.nav_host_fragment, mapaFragment, false);
                 break;
             case R.id.nav_favoritos:
                 apiMonumetosService.getFavoritos(usuario.getId()).enqueue(new Callback<List<Favorito>>() {
@@ -264,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 }
                             }
                         }
-                        cambiaFragment(R.id.nav_host_fragment, favoritosFragment);
+                        cambiaFragment(R.id.nav_host_fragment, favoritosFragment, false);
                     }
 
                     @Override
@@ -275,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 break;
             case R.id.nav_clima:
-                cambiaFragment(R.id.nav_host_fragment, climaFragment);
+                cambiaFragment(R.id.nav_host_fragment, climaFragment, false);
                 break;
             case R.id.menu_opcion01:
                 Intent intent4 = new Intent(this, PreferenceActivity.class);
@@ -319,10 +331,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //Enviar oibjetoi con serializable
         bundleEnvio.putSerializable("objeto", monumento);
         detalleMonumentoFragment.setArguments(bundleEnvio);
-        //abrir fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.nav_host_fragment, detalleMonumentoFragment);
-        fragmentTransaction.commit();
+        cambiaFragment(R.id.nav_host_fragment, detalleMonumentoFragment, true);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        if(!(f instanceof DetalleMonumentoFragment)) {
+            if (keyCode == event.KEYCODE_BACK) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Salir")
+                        .setMessage("¿Desea salir de la aplicaión?")
+                        .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("NO", null)
+                        .show();
+            }
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 }

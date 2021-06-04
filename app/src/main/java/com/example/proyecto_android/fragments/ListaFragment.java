@@ -75,7 +75,7 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
                                 + "\nTeléfono - " + monumento.getTelefono())
                         .show();*/
 
-                //interfaceComunicaFragments.enviarMonumento(m.get(mRecyclerView.getChildAdapterPosition(view)));
+                interfaceComunicaFragments.enviarMonumento(monumento);
 
                 /*DetalleMonumentoFragment detalleMonumentoFragment = new DetalleMonumentoFragment();
                 FragmentTransaction transaction = getActivity()
