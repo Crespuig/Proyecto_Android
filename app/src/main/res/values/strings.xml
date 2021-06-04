@@ -43,6 +43,21 @@
     <string name="label_latitud">Latitud:</string>
     <string name="label_longitud">Longitud:</string>
     <string name="label_img">Imagen:</string>
+    <string name="boton_acceder">Acceder</string>
+    <string name="registrarme">Registrarme</string>
+    <string name="buscar_monumento">Buscar monumento</string>
+    <string name="salir">Salir</string>
+    <string name="pregunta_salir">¿Desea salir de la aplicación?</string>
+    <string name="senyal_gps">Señal GPS</string>
+    <string name="mensage_senyal_gps">Su señal GPS no está activada. ¿Quiere activarla ahora?</string>
+    <string name="registro">Registro</string>
+    <string name="email_registro">Correo electrónico</string>
+    <string name="nombre_registro">Nombre</string>
+    <string name="apellidos_registro">Apellidos</string>
+    <string name="contrasenya_registro">Contraseña</string>
+    <string name="repite_contrasenya_registro">Repite contraseña</string>
+    <string name="btn_registrarse">REGISTRARSE</string>
+    <string name="btn_ya_tengo_una_cuenta">YA TENGO UNA CUENTA</string>
 
     <string name="facebook_application_id" translatable="false">322503412532826</string>
     <string name="facebook_login_protocol_schema" translatable="false">fb322503412532826</string>

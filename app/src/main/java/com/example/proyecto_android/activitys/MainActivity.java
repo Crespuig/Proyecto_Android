@@ -340,8 +340,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(!(f instanceof DetalleMonumentoFragment)) {
             if (keyCode == event.KEYCODE_BACK) {
                 new AlertDialog.Builder(this)
-                        .setTitle("Salir")
-                        .setMessage("¿Desea salir de la aplicaión?")
+                        .setTitle(R.string.salir)
+                        .setMessage(R.string.pregunta_salir)
                         .setPositiveButton("SI", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

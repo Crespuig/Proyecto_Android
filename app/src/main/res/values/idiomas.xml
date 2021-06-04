@@ -3,7 +3,7 @@
     <string-array name="idioma">
         <item>Español</item>
         <item>Inglés</item>
-        <item>Francés</item>
+        <item>Valencià</item>
     </string-array>
     <string-array name="codigoIdioma">
         <item>0</item>

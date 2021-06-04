@@ -68,21 +68,7 @@ public class ListaFragment extends Fragment implements SearchView.OnQueryTextLis
         mAdapter = new ListaMonumentosAdapter(m, u,  R.layout.recycler_view_item, new ListaMonumentosAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Monumento monumento, int position) {
-                /*new AlertDialog.Builder(getContext())
-                        .setTitle(monumento.getName())
-                        .setMessage("CodVia - " + monumento.getCodVia()
-                                + "\nRuta - " + monumento.getRuta()
-                                + "\nTeléfono - " + monumento.getTelefono())
-                        .show();*/
-
                 interfaceComunicaFragments.enviarMonumento(monumento);
-
-                /*DetalleMonumentoFragment detalleMonumentoFragment = new DetalleMonumentoFragment();
-                FragmentTransaction transaction = getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction();
-                transaction.replace(R.id.nav_host_fragment, detalleMonumentoFragment).commit();*/
-
             }
         });
         mRecyclerView.setLayoutManager(mLayoutManager);

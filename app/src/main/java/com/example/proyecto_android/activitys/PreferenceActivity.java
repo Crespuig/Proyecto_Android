@@ -65,11 +65,12 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
                             getResources().updateConfiguration(config_en, getResources().getDisplayMetrics());
                             break;
                         case "2":
-                            Toast.makeText(context.getActivity(), "FRENCH", Toast.LENGTH_SHORT).show();
-                            Locale frances = new Locale("fr", "FR");
-                            Locale.setDefault(frances);
-                            Configuration config_fr = new Configuration();
-                            config_fr.locale = frances;
+                            Toast.makeText(context.getActivity(), "VALENCIÀ", Toast.LENGTH_SHORT).show();
+                            Locale valencia = new Locale("ca", "ES");
+                            Locale.setDefault(valencia);
+                            Configuration config_ca = new Configuration();
+                            config_ca.locale = valencia;
+                            getResources().updateConfiguration(config_ca, getResources().getDisplayMetrics());
                             break;
                     }
                     return false;
@@ -77,7 +78,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 
             });
 
-            ListPreference fuente = (ListPreference) findPreference("fuente");
+            /*ListPreference fuente = (ListPreference) findPreference("fuente");
             fuente.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
@@ -106,7 +107,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 
                     return false;
                 }
-            });
+            });*/
 
         }
     }

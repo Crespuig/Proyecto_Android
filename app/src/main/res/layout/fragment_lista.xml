@@ -11,7 +11,7 @@
         android:id="@+id/searchViewLista"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:queryHint="Buscar monumento"
+        app:queryHint="@string/buscar_monumento"
         app:iconifiedByDefault="false"
         app:layout_constraintTop_toTopOf="parent"/>
 

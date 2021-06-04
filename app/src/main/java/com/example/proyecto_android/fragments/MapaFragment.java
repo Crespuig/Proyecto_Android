@@ -302,8 +302,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, View.O
 
     private void showInfoAlert(){
         new AlertDialog.Builder(getContext())
-                .setTitle("Señal GPS")
-                .setMessage("Su señal GPS no está activada. ¿Quiere activarla ahora?")
+                .setTitle(R.string.senyal_gps)
+                .setMessage(R.string.mensage_senyal_gps)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

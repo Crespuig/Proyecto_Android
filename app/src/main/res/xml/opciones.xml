@@ -8,6 +8,7 @@
         android:key="idioma"
         android:summary="Elige el idioma que quieras usar"
         android:title="Idioma" />
+    <!--
     <ListPreference
         android:dialogTitle="Indicar origen de datos"
         android:entries="@array/origen_datos"
@@ -47,6 +48,7 @@
         android:summary="Selecciona el color de los botones"
         android:title="Color de  los botones"
         android:icon="@drawable/ic_baseline_color_lens_24"/>
+        -->
 
 
 </PreferenceScreen>

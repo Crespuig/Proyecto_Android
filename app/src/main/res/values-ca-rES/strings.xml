@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Visita\'m</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_titulo">Nom usuari</string>
+    <string name="nav_header_subtitulo">correo_usuario@android.com</string>
+    <string name="nav_header_foto_usuario">Foto usuari</string>
+    <string name="action_configuracion">Configuració</string>
+
+    <string name="menu_inicio">Inici</string>
+    <string name="menu_lista">Llistat</string>
+    <string name="menu_mapa">Mapa</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_crear">Nou</string>
+    <string name="label_nombre">Nom monument:</string>
+    <string name="label_numPol">NumPol:</string>
+    <string name="label_codVia">CodVia:</string>
+    <string name="label_telefono">Telèfon:</string>
+    <string name="label_ruta">Ruta:</string>
+    <string name="label_coodenada">Coordenades:</string>
+    <string name="boton_cancelar">Cancel·lar</string>
+    <string name="boton_guardar">Guardar</string>
+    <string name="monumento_crear_titulo">Nou monument</string>
+    <string name="monumento_editar_titulo">Editar monument</string>
+    <string name="monumento_crear_confirmacion">Confirmació</string>
+    <string name="monumento_editar_confirmacion">Monument modificat</string>
+    <string name="menu_eliminar">Eliminar</string>
+    <string name="menu_editar">Editar</string>
+    <string name="menu_guardar">Guardar</string>
+    <string name="menu_cancelar">Cancel·lar</string>
+    <string name="monumento_eliminar_titulo">Eliminar monument</string>
+    <string name="monumento_eliminar_mensaje">Segur que vols eliminar el monument?</string>
+    <string name="monumento_eliminar_confirmacion">Monument eliminat</string>
+    <string name="action_gestion_monumentos">Gestionar monuments</string>
+    <string name="titulo">Visita\'m</string>
+    <string name="menu_favoritos">Favorits</string>
+    <string name="menu_clima">Clima</string>
+    <string name="menu_transporte">Transport</string>
+    <string name="menu_estadiscitas">Estadístiques</string>
+    <string name="menu_configuracion">Configuració</string>
+    <string name="menu_cerrar_sesion">Tancar sesió</string>
+    <string name="label_latitud">Latitud:</string>
+    <string name="label_longitud">Longitud:</string>
+    <string name="label_img">Imatge:</string>
+    <string name="boton_acceder">Accedir</string>
+    <string name="registrarme">Registrarme</string>
+    <string name="buscar_monumento">Buscar monument</string>
+    <string name="salir">Eixir</string>
+    <string name="pregunta_salir">Desitja eixir de l\'aplicació?</string>
+    <string name="senyal_gps">Senyal GPS</string>
+    <string name="mensage_senyal_gps">El seu senyal GPS no està activada. Vol activar-la ara?</string>
+    <string name="registro">Registre</string>
+    <string name="email_registro">Correu electrònic</string>
+    <string name="nombre_registro">Nom</string>
+    <string name="apellidos_registro">Cognoms</string>
+    <string name="contrasenya_registro">Contrasenya</string>
+    <string name="repite_contrasenya_registro">Repeteix contrasenya</string>
+    <string name="btn_registrarse">REGISTRAR-SE</string>
+    <string name="btn_ya_tengo_una_cuenta">JA TINC UN COMPTE</string>
+
+    <string name="facebook_application_id" translatable="false">322503412532826</string>
+    <string name="facebook_login_protocol_schema" translatable="false">fb322503412532826</string>
+    <string name="title_activity_mapa">Map</string>
+
+</resources>

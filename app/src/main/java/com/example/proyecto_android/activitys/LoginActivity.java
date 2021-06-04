@@ -82,13 +82,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView olvidar = (TextView) findViewById(R.id.olvidar);
+        /*TextView olvidar = (TextView) findViewById(R.id.olvidar);
         olvidar.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick (View view){
         Toast.makeText(LoginActivity.this, "Los datos no coinciden con ningún usuario", Toast.LENGTH_SHORT).show();
     }
-    });
+    });*/
 
     prefs = getSharedPreferences("preferenciasUsuario",Context.MODE_PRIVATE);
 

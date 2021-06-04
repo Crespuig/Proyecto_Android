@@ -48,7 +48,7 @@
         android:layout_marginRight="100dp"
         android:background="@drawable/ovalo"
         android:backgroundTint="@color/colorPrimary"
-        android:text="Acceder"
+        android:text="@string/boton_acceder"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.516" />
-
+<!--
     <TextView
         android:id="@+id/olvidar"
         android:layout_width="wrap_content"
@@ -72,6 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/loginPaswword"
         android:layout_marginLeft="148dp"
         android:textColor="#FFFFFF"/>
+        -->
 
     <TextView
         android:id="@+id/textRegistro"
@@ -80,12 +81,11 @@
         android:gravity="right"
         android:layout_marginRight="100dp"
         android:layout_marginLeft="100dp"
-        android:text="Registrarme"
+        android:text="@string/registrarme"
         app:layout_constraintBottom_toTopOf="@+id/btnAcceder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/olvidar"
         app:layout_constraintVertical_bias="0.836"
         android:textColor="@android:color/white"
         android:clickable="true"

@@ -72,8 +72,8 @@ public class DetalleMonumentoFragment extends Fragment {
             }
             detalleIdNotes.setText(monumento.getIdNotes()+"");
             detalleNombre.setText(monumento.getName());
-            detalleLatitud.setText((int) monumento.getX()+"");
-            detalleLongitud.setText((int) monumento.getY()+"");
+            detalleLatitud.setText((double) monumento.getX()+"º");
+            detalleLongitud.setText((double) monumento.getY()+"º");
             detalleNumPol.setText(monumento.getNumPol());
             detalleCodvia.setText(monumento.getCodVia()+"");
             detalleTelefono.setText(monumento.getTelefono());
