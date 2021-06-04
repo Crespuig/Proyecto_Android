@@ -65,8 +65,8 @@ public class LoginActivity extends AppCompatActivity {
         usuario = (EditText) findViewById(R.id.loginEmail);
         password = (EditText) findViewById(R.id.loginPaswword);
 
-        usuario.setText("admin@admin.com");
-        password.setText("admin");
+        //usuario.setText("admin@admin.com");
+        //password.setText("admin");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,11 +74,16 @@ public class LoginActivity extends AppCompatActivity {
                 String email = usuario.getText().toString();
                 String pass = password.getText().toString();
 
-                if (!email.isEmpty() || !pass.isEmpty()) {
-                    login(email, pass);
-                } else {
-                    Toast.makeText(LoginActivity.this, "Login fallido", Toast.LENGTH_SHORT).show();
+                try {
+                    if (!email.isEmpty() || !pass.isEmpty()) {
+                        login(email, pass);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Login fallido", Toast.LENGTH_SHORT).show();
+                    }
+                }catch (Exception e){
+                    Toast.makeText(LoginActivity.this, "Ups! algo ha fallado vuelve a intentarlo", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
@@ -104,13 +109,18 @@ public class LoginActivity extends AppCompatActivity {
         apiMonumetosService.login(u).enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                Log.d("LOg", response.body().toString());
-                Usuario u = response.body();
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("usuario", u);
-                saveOnPreferences(u.getEmail(), u.getPassword());
-                startActivity(intent);
-                finish();
+                try {
+                    Log.d("LOg", response.body().toString());
+                    Usuario u = response.body();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("usuario", u);
+                    saveOnPreferences(u.getEmail(), u.getPassword());
+                    startActivity(intent);
+                    finish();
+                }catch (Exception e){
+                    Toast.makeText(LoginActivity.this, "Ups! algo ha fallado vuelve a intentarlo", Toast.LENGTH_SHORT).show();
+                }
+
             }
 
             @Override
